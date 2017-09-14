@@ -1,0 +1,146 @@
+﻿  Timer.cpp
+  Primitive.cpp
+  PhysVehicle3D.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\physvehicle3d.cpp(41): warning C4018: '<': no coinciden signed/unsigned
+  PhysBody3D.cpp
+  ModuleWindow.cpp
+  ModuleSceneIntro.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(64): warning C4244: '=': conversión de 'Uint32' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(356): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(364): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(371): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(378): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(385): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(392): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(399): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(412): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(419): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(480): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(484): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(486): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(488): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(540): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(544): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(546): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(548): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(573): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulesceneintro.cpp(630): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  ModuleRenderer3D.cpp
+  ModulePlayer.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(35): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(36): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(37): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(38): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(81): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(82): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(86): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(87): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(90): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(91): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(93): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(94): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(100): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(101): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(102): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(103): warning C4305: 'argumento': truncamiento de 'double' a 'const btScalar'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(169): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(170): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(171): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(263): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\moduleplayer.cpp(270): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  ModulePhysics3D.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulephysics3d.cpp(281): warning C4018: '<': no coinciden signed/unsigned
+  ModuleInput.cpp
+  ModuleCamera3D.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulecamera3d.cpp(61): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  ModuleAudio.cpp
+  Main.cpp
+  log.cpp
+  Light.cpp
+  glmath.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(12): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(27): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(43): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(53): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(72): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(87): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(103): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(600): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(618): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(758): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\glmath.cpp(778): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+  Color.cpp
+  Application.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\application.cpp(10): warning C4316: 'ModuleCamera3D': puede que el objeto asignado en el montón no esté alineado 16
+  Generando código...
+BulletDynamics_debug.lib(btDiscreteDynamicsWorld.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btRigidBody.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btConeTwistConstraint.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btContactConstraint.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btGeneric6DofConstraint.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btHingeConstraint.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btPoint2PointConstraint.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btSequentialImpulseConstraintSolver.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btTypedConstraint.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btRaycastVehicle.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletDynamics_debug.lib(btWheelInfo.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btDbvt.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btDbvtBroadphase.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btDispatcher.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btOverlappingPairCache.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btQuantizedBvh.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btActivatingCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btBoxBoxCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btBoxBoxDetector.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCollisionDispatcher.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCollisionObject.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCollisionWorld.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCompoundCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCompoundCompoundCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConvexConcaveCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConvexConvexAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConvexPlaneCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btDefaultCollisionConfiguration.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btEmptyCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btHashedSimplePairCache.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btManifoldResult.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btSimulationIslandManager.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btSphereSphereCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btSphereTriangleCollisionAlgorithm.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btUnionFind.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(SphereTriangleDetector.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btBoxShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btBvhTriangleMeshShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCollisionShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCompoundShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConcaveShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConvexInternalShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConvexPolyhedron.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConvexShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btCylinderShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btOptimizedBvh.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btPolyhedralConvexShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btSphereShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btStaticPlaneShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btTriangleCallback.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btTriangleMeshShape.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btContinuousConvexCollision.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btConvexCast.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btGjkConvexCast.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btGjkEpa2.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btGjkEpaPenetrationDepthSolver.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btGjkPairDetector.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btMinkowskiPenetrationDepthSolver.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btPersistentManifold.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btPolyhedralContactClipping.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btRaycastCallback.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btSubSimplexConvexCast.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+BulletCollision_debug.lib(btVoronoiSimplexSolver.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_debug.lib(btAlignedAllocator.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_debug.lib(btConvexHullComputer.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_debug.lib(btGeometryUtil.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_debug.lib(btQuickprof.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+LinearMath_debug.lib(btVector3.obj) : warning LNK4204: falta información de depuración de 'C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\vc140.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\3D Physics - class6.exe
+  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\3D Physics - class6.pdb (Full PDB)
