@@ -16,18 +16,6 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
-	
-	CreateMap();
-
-	victory = App->audio->LoadFx("Victory.wav");
-	musicc = App->audio->LoadFx("Undertale_-_Bonetrousle_1_1_1_1_.wav");
-	wasted = App->audio->LoadFx("Wasted.wav");
-	checkpoint = App->audio->LoadFx("Sonic_Ring_Sound.wav");
-	App->audio->PlayFx(musicc, -1);
-	
-
 	return ret;
 }
 
