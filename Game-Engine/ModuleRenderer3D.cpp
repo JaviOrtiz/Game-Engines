@@ -1,11 +1,14 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+#include "Glew\include\glew.h"
+#include "ImGui\imgui.h"
+#include "Imgui/imgui_impl_sdl_gl3.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "ImGui\imgui.h"
-#include "ImGui/imgui_impl_sdl_gl3.h"
+
+
 
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
@@ -24,6 +27,8 @@ bool ModuleRenderer3D::Init()
 {
 	LOG("Creating 3D Renderer context");
 	bool ret = true;
+	
+
 	
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
@@ -99,8 +104,15 @@ bool ModuleRenderer3D::Init()
 		glEnable(GL_COLOR_MATERIAL);
 	}
 
+
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	// ImGui
+	glewInit();
+	ImGui_ImplSdlGL3_Init(App->window->window);
+	ImGuiIO& io = ImGui::GetIO();
+	io.IniFilename = "/Settings/imgui.ini";
 
 	return ret;
 }
@@ -114,11 +126,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetViewMatrix());
 
-	// light 0 on cam pos
-	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
-
-	for(uint i = 0; i < MAX_LIGHTS; ++i)
-		lights[i].Render();
+	
 
 	return UPDATE_CONTINUE;
 }
