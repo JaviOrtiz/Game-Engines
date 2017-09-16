@@ -17,7 +17,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-
+/*
 
 	VehicleInfo car;
 
@@ -114,7 +114,7 @@ bool ModulePlayer::Start()
 	Motor2->setLimit(0, 0);
 	Motor3->setLimit(0, 0);
 	Motor4->setLimit(0, 0);
-
+	*/
 	return true;
 
 }
@@ -129,6 +129,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
+	/*
 	btRigidBody* bodycito;
 	bodycito = vehicle->vehicle->getRigidBody();
 	turn = acceleration = brake = 0.0f;
@@ -156,7 +157,7 @@ update_status ModulePlayer::Update(float dt)
 	Motor4->enableAngularMotor(true, 10, 10);
 	h4->GetTransform(&Helix4.transform);
 	Helix4.Render();
-	if (App->scene_intro->lost == false) {
+	if (true) {
 
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 		{
@@ -346,6 +347,7 @@ update_status ModulePlayer::Update(float dt)
 		}
 	}
 	vehicle->Render();
+	*/
 	return UPDATE_CONTINUE;
 }
 

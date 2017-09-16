@@ -44,7 +44,7 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-	
+/*	
 	mat4x4 vehicle_array;
 
 	App->player->vehicle->GetTransform(&vehicle_array);
@@ -58,7 +58,7 @@ update_status ModuleCamera3D::Update(float dt)
 	VehicleLocation = vehicle_array.translation();
 
 
-	App->camera->Look((CameraLocation + VehicleLocation) - X * camera_dist, ViewVector + VehicleLocation, true);
+	App->camera->Look((CameraLocation + VehicleLocation) - X * camera_dist, ViewVector + VehicleLocation, true);*/
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
