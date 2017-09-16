@@ -109,10 +109,10 @@ bool ModuleRenderer3D::Init()
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	// ImGui
-	//glewInit();
-	//ImGui_ImplSdlGL3_Init(App->window->window);
-	//ImGuiIO& io = ImGui::GetIO();
-	//io.IniFilename = "/Settings/imgui.ini";
+	glewInit();
+	ImGui_ImplSdlGL3_Init(App->window->window);
+	ImGuiIO& io = ImGui::GetIO();
+	io.IniFilename = "/Settings/imgui.ini";
 
 	return ret;
 }
@@ -126,7 +126,15 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetViewMatrix());
 
-	//ImGui::ShowTestWindow();
+	ImGui_ImplSdlGL3_NewFrame(App->window->window);
+	ImGui::ShowTestWindow();
+
+	if (ImGui::BeginMainMenuBar())
+	{
+		ImGui::EndMainMenuBar();
+	}
+
+	ImGui::Render();
 
 	return UPDATE_CONTINUE;
 }
