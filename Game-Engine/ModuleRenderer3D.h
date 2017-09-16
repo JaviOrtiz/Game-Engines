@@ -20,7 +20,7 @@ public:
 	void OnResize(int width, int height);
 
 public:
-
+	bool showtest = false;
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;

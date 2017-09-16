@@ -112,7 +112,7 @@ bool ModuleRenderer3D::Init()
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
 	ImGuiIO& io = ImGui::GetIO();
-	io.IniFilename = "/Settings/imgui.ini";
+	io.IniFilename = "imgui.ini";
 
 	return ret;
 }
@@ -127,13 +127,17 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glLoadMatrixf(App->camera->GetViewMatrix());
 
 	ImGui_ImplSdlGL3_NewFrame(App->window->window);
-	ImGui::ShowTestWindow();
 
-	if (ImGui::BeginMainMenuBar())
+	if (ImGui::Button("Exitbutton"))
 	{
-		ImGui::EndMainMenuBar();
+		return UPDATE_STOP;
 	}
-
+	if (ImGui::Button("Show/Hide Test Window"))
+	{
+		showtest = !showtest;
+	
+	}
+	if(showtest) ImGui::ShowTestWindow();
 	ImGui::Render();
 
 	return UPDATE_CONTINUE;
@@ -150,7 +154,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
-
+	ImGui_ImplSdlGL3_Shutdown();
 	SDL_GL_DeleteContext(context);
 
 	return true;
