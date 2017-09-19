@@ -25,10 +25,12 @@ public:
 
 	bool CleanUp();
 private:
-	LCG Random_Num_1;
-	LCG Random_Num_2;
-	float Random_Num_Int = 0;
-	float Random_Num_Float = 0;
 
-	bool showtest = false;
+	int	First = 0;
+	int	Last = 100;
+	LCG		Random_Num_1;
+	LCG		Random_Num_2;
+	float	Random_Num_Int = 0;
+	float	Random_Num_Float = 0;
+	bool	 showtest = false;
 };

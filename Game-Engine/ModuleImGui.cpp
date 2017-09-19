@@ -57,16 +57,30 @@ update_status ModuleImGui::Update(float dt)
 
 	}
 
-	if (ImGui::Button("Random Number Generator"))
+
+	ImGui::DragIntRange2("Int Range", &First, &Last, 0.25f, 0.0f, 100.0f, "Min: %.1f ", "Max: %.1f ");
+	//ImGui::InputFloat("Int Range", &Test, 0.25f, 0.25f, -1, 0);    Input con ++/--
+	if (ImGui::Button("Random Number Generator / Int")) {
+
+		Random_Num_Int = Random_Num_2.Int(First, Last);
+
+	}
+
+	//ImGui::Text("%f", Test);
+
+	ImGui::Text("Random Float Number between %i And %i  Is: %0.f", First, Last, Random_Num_Int);
+
+	if (ImGui::Button("Random Number Generator / Float"))
 	{
 		Random_Num_Float = Random_Num_1.Float();
 	}
-	ImGui::Text("%f", Random_Num_Float);
+	ImGui::Text("Random Float Number between 0-1: %.3f", Random_Num_Float);
 	if (showtest) ImGui::ShowTestWindow();
 	ImGui::Render();
 
 	return UPDATE_CONTINUE;
-}
+};
+
 
 update_status ModuleImGui::PostUpdate(float dt)
 {
