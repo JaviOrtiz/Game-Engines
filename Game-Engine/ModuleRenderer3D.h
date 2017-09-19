@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
+#include "MathGeoLib.h"
 
 #define MAX_LIGHTS 8
 
@@ -25,4 +26,8 @@ public:
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+	LCG Random_Num_1;
+	LCG Random_Num_2;
+	float Random_Num_Int;
+	float Random_Num_Float;
 };

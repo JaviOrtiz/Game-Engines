@@ -137,6 +137,13 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 		showtest = !showtest;
 	
 	}
+
+	if (ImGui::Button("Random Number Generator"))
+	{
+		Random_Num_Float = Random_Num_1.Float();
+		ImGui::Text("%f", Random_Num_Float);
+	}
+
 	if(showtest) ImGui::ShowTestWindow();
 	ImGui::Render();
 

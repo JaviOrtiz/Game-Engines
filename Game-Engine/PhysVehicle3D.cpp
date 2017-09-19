@@ -22,7 +22,7 @@ PhysVehicle3D::~PhysVehicle3D()
 // ----------------------------------------------------------------------------
 void PhysVehicle3D::Render()
 {
-	Cylinder wheel;
+	Ccylinder wheel;
 
 	wheel.color = White;
 
@@ -37,7 +37,7 @@ void PhysVehicle3D::Render()
 		wheel.Render();
 	}
 
-	Cube chassis;
+	Ccube chassis;
 	for (int i = 0; i < info.num_chassis; ++i)
 	{
 		chassis.color.Set(info.chassis_color[i].x, info.chassis_color[i].y, info.chassis_color[i].z);
