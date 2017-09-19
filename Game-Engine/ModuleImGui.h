@@ -32,5 +32,6 @@ private:
 	LCG		Random_Num_2;
 	float	Random_Num_Int = 0;
 	float	Random_Num_Float = 0;
-	bool	 showtest = false;
+	bool	showtest = false;
+	bool	homework = false;
 };

@@ -47,34 +47,67 @@ update_status ModuleImGui::Update(float dt)
 {
 	ImGui_ImplSdlGL3_NewFrame(App->window->window);
 
-	if (ImGui::Button("Exitbutton"))
+	if (ImGui::BeginMainMenuBar())
 	{
-		return UPDATE_STOP;
+		if (ImGui::BeginMenu("Menu"))
+		{
+			if (ImGui::MenuItem("HomeWork"))
+			{
+				homework = !homework;
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Help"))
+		{
+			if (ImGui::MenuItem("Test Window"))
+			{
+				showtest = !showtest;
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::Button("Exit"))
+		{
+			return UPDATE_STOP;
+		}
 	}
-	if (ImGui::Button("Show/Hide Test Window"))
+	ImGui::EndMainMenuBar();
+
+	if (homework)
 	{
-		showtest = !showtest;
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove;
+		ImGui::SetNextWindowSize(ImVec2(300,300), ImGuiCond_FirstUseEver);
+		ImGui::Begin("Menu", (bool*)false, window_flags);
+		if (ImGui::Button("Exitbutton"))
+		{
+			return UPDATE_STOP;
+		}
+		if (ImGui::Button("Show/Hide Test Window"))
+		{
+			showtest = !showtest;
 
+		}
+
+
+		ImGui::DragIntRange2("Int Range", &First, &Last, 0.25f, 0.0f, 100.0f, "Min: %.1f ", "Max: %.1f ");
+		//ImGui::InputFloat("Int Range", &Test, 0.25f, 0.25f, -1, 0);    Input con ++/--
+		if (ImGui::Button("Random Number Generator / Int")) {
+
+			Random_Num_Int = Random_Num_2.Int(First, Last);
+
+		}
+
+		//ImGui::Text("%f", Test);
+
+		ImGui::Text("Random Float Number between %i And %i  Is: %0.f", First, Last, Random_Num_Int);
+
+		if (ImGui::Button("Random Number Generator / Float"))
+		{
+			Random_Num_Float = Random_Num_1.Float();
+		}
+		ImGui::Text("Random Float Number between 0-1: %.3f", Random_Num_Float);
+		ImGui::End();
 	}
 
-
-	ImGui::DragIntRange2("Int Range", &First, &Last, 0.25f, 0.0f, 100.0f, "Min: %.1f ", "Max: %.1f ");
-	//ImGui::InputFloat("Int Range", &Test, 0.25f, 0.25f, -1, 0);    Input con ++/--
-	if (ImGui::Button("Random Number Generator / Int")) {
-
-		Random_Num_Int = Random_Num_2.Int(First, Last);
-
-	}
-
-	//ImGui::Text("%f", Test);
-
-	ImGui::Text("Random Float Number between %i And %i  Is: %0.f", First, Last, Random_Num_Int);
-
-	if (ImGui::Button("Random Number Generator / Float"))
-	{
-		Random_Num_Float = Random_Num_1.Float();
-	}
-	ImGui::Text("Random Float Number between 0-1: %.3f", Random_Num_Float);
 	if (showtest) ImGui::ShowTestWindow();
 	ImGui::Render();
 
