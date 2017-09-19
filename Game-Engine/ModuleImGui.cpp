@@ -110,23 +110,23 @@ update_status ModuleImGui::Update(float dt)
 		ImGui::Separator();
 		ImGui::NewLine();
 
-		ImGui::Text("Sphere 1(0,0,0)   Sphere 2 (1,1,0)  Sphere 3 (10,0,0)");
+		ImGui::Text("Sphere 1(0,0,0)   Sphere 2 (1,0,0)  Sphere 3 (3,0,0)");
 
-		if (ImGui::Button("Sphere Intersect Check between 1 and 2")) {
-
+		if (ImGui::Button("Sphere Intersect Check between 1 and 2")) 
+		{
 		 SphereTest = S1Temp->Intersects(*S2Temp);
-
-		
 		}
 
-		ImGui::SameLine(300); if (ImGui::Button("Sphere Intersect Check between 1 and 3")) {
+		ImGui::SameLine(300); 
+		if (ImGui::Button("Sphere Intersect Check between 1 and 3")) 
+		{
 
 			SphereTest = S1Temp->Intersects(*S3Temp);
-
-
 		}
 
-		ImGui::SameLine(600); if (ImGui::Button("Sphere Intersect Check between 2 and 3")) {
+		ImGui::SameLine(600); 
+		if (ImGui::Button("Sphere Intersect Check between 2 and 3")) 
+		{
 
 			SphereTest = S2Temp->Intersects(*S3Temp);
 
