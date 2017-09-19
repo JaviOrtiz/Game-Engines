@@ -105,6 +105,39 @@ update_status ModuleImGui::Update(float dt)
 			Random_Num_Float = Random_Num_1.Float();
 		}
 		ImGui::Text("Random Float Number between 0-1: %.3f", Random_Num_Float);
+
+		ImGui::NewLine();
+		ImGui::Separator();
+		ImGui::NewLine();
+
+		ImGui::Text("Sphere 1(0,0,0)   Sphere 2 (1,1,0)  Sphere 3 (10,0,0)");
+
+		if (ImGui::Button("Sphere Intersect Check between 1 and 2")) {
+
+		 SphereTest = S1Temp->Intersects(*S2Temp);
+
+		
+		}
+
+		ImGui::SameLine(300); if (ImGui::Button("Sphere Intersect Check between 1 and 3")) {
+
+			SphereTest = S1Temp->Intersects(*S3Temp);
+
+
+		}
+
+		ImGui::SameLine(600); if (ImGui::Button("Sphere Intersect Check between 2 and 3")) {
+
+			SphereTest = S2Temp->Intersects(*S3Temp);
+
+
+		}
+
+
+		ImGui::Text("1 Means True/ 0 Means False:  %i", SphereTest);
+
+
+
 		ImGui::End();
 	}
 

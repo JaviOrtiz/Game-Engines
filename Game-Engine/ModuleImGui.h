@@ -34,4 +34,15 @@ private:
 	float	Random_Num_Float = 0;
 	bool	showtest = false;
 	bool	homework = false;
+
+	vec Temp = { 0,0,0 };
+	vec Temp1 = { 1,1,0 };
+	vec Temp2 = { 0,0,0 };
+	Sphere* S1Temp = new Sphere(Temp, 10);
+	Sphere* S2Temp = new Sphere(Temp1, 1);
+	Sphere* S3Temp = new Sphere(Temp2, 1);
+	bool SphereTest = false;
+
+
+
 };

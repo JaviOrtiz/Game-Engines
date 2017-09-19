@@ -1,7 +1,18 @@
-﻿  ModuleImGui.cpp
-c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
-c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(91): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(95): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\3D Physics - class6.exe
-  3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\3D Physics - class6.pdb (Full PDB)
+﻿  Application.cpp
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: vea la declaración de 'sprintf'
+c:\users\javi\desktop\citm\motores\game-engines\game-engine\application.cpp(10): warning C4316: 'ModuleCamera3D': puede que el objeto asignado en el montón no esté alineado 16
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  ModuleWindow.cpp
+  ModuleSceneIntro.cpp
+  ModuleRenderer3D.cpp
+  ModulePlayer.cpp
+  ModulePhysics3D.cpp
+  ModuleInput.cpp
+  ModuleImGui.cpp
+  ModuleCamera3D.cpp
+  ModuleAudio.cpp
+  Main.cpp
+  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\3D Physics - class6.exe
+  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\3D Physics - class6.pdb (Full PDB)
