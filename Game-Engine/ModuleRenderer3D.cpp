@@ -108,12 +108,7 @@ bool ModuleRenderer3D::Init()
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	// ImGui
-	glewInit();
-	ImGui_ImplSdlGL3_Init(App->window->window);
-	ImGuiIO& io = ImGui::GetIO();
-	io.IniFilename = "imgui.ini";
-
+	
 	return ret;
 }
 
@@ -126,26 +121,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetViewMatrix());
 
-	ImGui_ImplSdlGL3_NewFrame(App->window->window);
-
-	if (ImGui::Button("Exitbutton"))
-	{
-		return UPDATE_STOP;
-	}
-	if (ImGui::Button("Show/Hide Test Window"))
-	{
-		showtest = !showtest;
 	
-	}
-
-	if (ImGui::Button("Random Number Generator"))
-	{
-		Random_Num_Float = Random_Num_1.Float();
-		ImGui::Text("%f", Random_Num_Float);
-	}
-
-	if(showtest) ImGui::ShowTestWindow();
-	ImGui::Render();
 
 	return UPDATE_CONTINUE;
 }
@@ -153,7 +129,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-	SDL_GL_SwapWindow(App->window->window);
+	
 	return UPDATE_CONTINUE;
 }
 

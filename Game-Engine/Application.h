@@ -12,7 +12,7 @@
 #include "ModuleCamera3D.h"
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
-
+#include "ModuleImGui.h"
 class Application
 {
 public:
@@ -24,7 +24,7 @@ public:
 	ModuleCamera3D* camera;
 	ModulePhysics3D* physics;
 	ModulePlayer* player;
-
+	ModuleImGui* imgui;
 private:
 
 	Timer	ms_timer;
