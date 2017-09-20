@@ -30,6 +30,7 @@ bool ModuleImGui::Init()
 	ImGuiIO& io = ImGui::GetIO();
 	io.WantTextInput = true;
 	io.IniFilename = "imgui.ini";
+	Console.AddLog("hey");
 	return true;
 }
 
@@ -53,7 +54,8 @@ update_status ModuleImGui::Update(float dt)
 		{
 			if (ImGui::MenuItem("HomeWork"))
 			{
-				homework = !homework;
+				
+				Homework = !Homework;
 			}
 			ImGui::EndMenu();
 		}
@@ -61,7 +63,11 @@ update_status ModuleImGui::Update(float dt)
 		{
 			if (ImGui::MenuItem("Test Window"))
 			{
-				showtest = !showtest;
+				Showtest = !Showtest;
+			}
+			if (ImGui::MenuItem("Console"))
+			{
+				Showconsole = !Showconsole;
 			}
 			ImGui::EndMenu();
 		}
@@ -72,7 +78,7 @@ update_status ModuleImGui::Update(float dt)
 	}
 	ImGui::EndMainMenuBar();
 
-	if (homework)
+	if (Homework)
 	{
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove;
 		ImGui::SetNextWindowSize(ImVec2(300,300), ImGuiCond_FirstUseEver);
@@ -83,7 +89,7 @@ update_status ModuleImGui::Update(float dt)
 		}
 		if (ImGui::Button("Show/Hide Test Window"))
 		{
-			showtest = !showtest;
+			Showtest = !Showtest;
 
 		}
 
@@ -141,7 +147,8 @@ update_status ModuleImGui::Update(float dt)
 		ImGui::End();
 	}
 
-	if (showtest) ImGui::ShowTestWindow();
+	if (Showtest) ImGui::ShowTestWindow();
+	if (Showconsole) Console.Draw("Super Console", (bool*)false);
 	ImGui::Render();
 
 	return UPDATE_CONTINUE;

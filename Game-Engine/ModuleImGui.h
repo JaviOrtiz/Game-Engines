@@ -2,8 +2,7 @@
 
 #include "Module.h"
 #include "Globals.h"
-
-
+#include "imguiconsole.h"
 
 class ModuleImGui : public Module
 {
@@ -24,16 +23,19 @@ public:
 	update_status PostUpdate(float dt);
 
 	bool CleanUp();
-private:
 
+private:
 	int	First = 0;
 	int	Last = 100;
 	LCG		Random_Num_1;
 	LCG		Random_Num_2;
 	float	Random_Num_Int = 0;
 	float	Random_Num_Float = 0;
-	bool	showtest = false;
-	bool	homework = false;
+	bool	Showtest = false;
+	bool    Showconsole = false;
+	bool	Homework = false;
+
+
 
 	vec Temp = { 0,0,0 };
 	vec Temp1 = { 1,0,0 };
@@ -43,6 +45,9 @@ private:
 	Sphere* S3Temp = new Sphere(Temp2, 1);
 	bool SphereTest = false;
 
+public:
+	ExampleAppConsole Console;
 
 
 };
+
