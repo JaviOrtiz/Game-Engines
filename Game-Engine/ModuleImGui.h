@@ -34,6 +34,7 @@ private:
 	bool	Showtest = false;
 	bool    Showconsole = false;
 	bool	Homework = false;
+	bool	About = false;
 
 
 

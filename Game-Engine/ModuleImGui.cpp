@@ -69,6 +69,11 @@ update_status ModuleImGui::Update(float dt)
 			{
 				Showconsole = !Showconsole;
 			}
+			if (ImGui::MenuItem("About"))
+			{
+
+				About = !About;
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::Button("Exit"))
@@ -77,6 +82,23 @@ update_status ModuleImGui::Update(float dt)
 		}
 	}
 	ImGui::EndMainMenuBar();
+
+
+	if (About)
+	{
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove;
+		ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
+		ImGui::Begin("About", (bool*)false, window_flags);
+
+		ImGui::Text("Pochinki's Engine 0.1");
+		ImGui::Text("We are a pair of students who are working on a 3d Game Engine c++ based.");
+		ImGui::Text("Authors:		Daniel Lopez and Javier Ortiz");
+
+
+		ImGui::End();
+
+
+	}
 
 	if (Homework)
 	{
