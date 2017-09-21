@@ -3,6 +3,8 @@
 #include "Module.h"
 #include "Globals.h"
 #include "imguiconsole.h"
+#include "Application.h"
+#include "ModuleWindow.h"
 
 class ModuleImGui : public Module
 {
@@ -24,9 +26,19 @@ public:
 
 	bool CleanUp();
 
-private:
-	int	First = 0;
-	int	Last = 100;
+public:
+	float	Brightness;
+	int		Screen_Width=0;
+	int		Screen_Height=0;
+	bool	Fullscreen;
+	bool	Resizable;
+	bool	Borderless;
+	bool	Full_Desktop;
+	int		Pc_Ram;
+	int		Pc_Cache;
+	int		Pc_Cpu;
+	int		First = 0;
+	int		Last = 100;
 	LCG		Random_Num_1;
 	LCG		Random_Num_2;
 	float	Random_Num_Int = 0;

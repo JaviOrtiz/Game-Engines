@@ -3,6 +3,9 @@
 #include "Application.h"
 #include "ModuleImGui.h"
 
+#include "mmgr\mmgr.h"
+#include "mmgr\nommgr.h"
+
 #include "Glew\include\glew.h"
 #include "ImGui\imgui.h"
 #include "Imgui/imgui_impl_sdl_gl3.h"
@@ -31,6 +34,18 @@ bool ModuleImGui::Init()
 	io.WantTextInput = true;
 	io.IniFilename = "imgui.ini";
 	Console.AddLog("hey");
+	
+		Brightness = App->window->GetBrightness();
+		Screen_Width = 0;
+		Screen_Height = 0;
+		Fullscreen = App->window->IsFullscreen();
+		Resizable = App->window->IsResizable();
+		Borderless = App->window->IsBorderless();
+		Full_Desktop = App->window->IsFullscreenDesktop();
+
+
+
+
 	return true;
 }
 
@@ -54,7 +69,7 @@ update_status ModuleImGui::Update(float dt)
 		{
 			if (ImGui::MenuItem("HomeWork"))
 			{
-				
+
 				Homework = !Homework;
 			}
 			ImGui::EndMenu();
@@ -103,7 +118,7 @@ update_status ModuleImGui::Update(float dt)
 	if (Homework)
 	{
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoMove;
-		ImGui::SetNextWindowSize(ImVec2(300,300), ImGuiCond_FirstUseEver);
+		ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
 		ImGui::Begin("Menu", (bool*)false, window_flags);
 		if (ImGui::Button("Exitbutton"))
 		{
@@ -140,20 +155,20 @@ update_status ModuleImGui::Update(float dt)
 
 		ImGui::Text("Sphere 1(0,0,0)   Sphere 2 (1,0,0)  Sphere 3 (3,0,0)");
 
-		if (ImGui::Button("Sphere Intersect Check between 1 and 2")) 
+		if (ImGui::Button("Sphere Intersect Check between 1 and 2"))
 		{
-		 SphereTest = S1Temp->Intersects(*S2Temp);
+			SphereTest = S1Temp->Intersects(*S2Temp);
 		}
 
-		ImGui::SameLine(300); 
-		if (ImGui::Button("Sphere Intersect Check between 1 and 3")) 
+		ImGui::SameLine(300);
+		if (ImGui::Button("Sphere Intersect Check between 1 and 3"))
 		{
 
 			SphereTest = S1Temp->Intersects(*S3Temp);
 		}
 
-		ImGui::SameLine(600); 
-		if (ImGui::Button("Sphere Intersect Check between 2 and 3")) 
+		ImGui::SameLine(600);
+		if (ImGui::Button("Sphere Intersect Check between 2 and 3"))
 		{
 
 			SphereTest = S2Temp->Intersects(*S3Temp);
@@ -168,6 +183,48 @@ update_status ModuleImGui::Update(float dt)
 
 		ImGui::End();
 	}
+
+
+
+	if (ImGui::CollapsingHeader("Window Options"))
+	{
+		if (ImGui::SliderFloat("Brightness", &Brightness, 0.0f, 1.0f)) {
+			App->window->SetBrightness(Brightness);
+		}
+
+		ImGui::SliderInt("Screen Width", &Screen_Width, 0, 1920);
+		ImGui::SliderInt("Screen Height", &Screen_Height, 0, 1080);
+
+		if (ImGui::Checkbox("Fullscreen", &Fullscreen))
+			App->window->SetFullscreen(Fullscreen);
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Resizable", &Resizable))
+		{
+			App->window->SetResizable(Resizable);
+		}
+		if (ImGui::Checkbox("Borderless", &Borderless))
+		{
+			App->window->SetBorderless(Borderless);
+		}
+
+
+
+		if (ImGui::CollapsingHeader("Hardware"))
+		{
+
+			Pc_Cache = SDL_GetCPUCacheLineSize();
+			ImGui::Text("Cache: %i", Pc_Cache);
+
+			Pc_Cpu = SDL_GetCPUCount();
+			ImGui::Text("CPU: %i", Pc_Cpu);
+
+			Pc_Ram = SDL_GetSystemRAM();
+			ImGui::Text("RAM: %i MB", Pc_Ram);
+
+
+		}
+	}
+	
 
 	if (Showtest) ImGui::ShowTestWindow();
 	if (Showconsole) Console.Draw("Super Console", (bool*)false);

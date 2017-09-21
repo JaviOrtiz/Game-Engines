@@ -92,3 +92,91 @@ void ModuleWindow::SetTitle(const char* title)
 {
 	SDL_SetWindowTitle(window, title);
 }
+
+
+void ModuleWindow::SetFullscreen(bool set)
+{
+	if (set != Fullscreen)
+	{
+		Fullscreen = set;
+		if (Fullscreen == true)
+		{
+			if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN) != 0)
+				LOG("Could not switch to fullscreen: %s\n", SDL_GetError());
+			Fullscreen_Desktop = false;
+			SDL_Log("this is a test");
+		}
+		else
+		{
+			if (SDL_SetWindowFullscreen(window, 0) != 0)
+				LOG("Could not switch to windowed: %s\n", SDL_GetError());
+		}
+	}
+}
+
+void ModuleWindow::SetResizable(bool set)
+{
+	// cannot be changed while the program is running, but we can save the change
+	Resizable = set;
+}
+
+void ModuleWindow::SetBorderless(bool set)
+{
+	if (set != Borderless && Fullscreen == false && Fullscreen_Desktop == false)
+	{
+		Borderless = set;
+		SDL_SetWindowBordered(window, (SDL_bool)!Borderless);
+	}
+}
+
+void ModuleWindow::SetFullScreenDesktop(bool set)
+{
+	if (set != Fullscreen_Desktop)
+	{
+		Fullscreen_Desktop = set;
+		if (Fullscreen_Desktop == true)
+		{
+			if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
+				LOG("Could not switch to fullscreen desktop: %s\n", SDL_GetError());
+			Fullscreen = false;
+		}
+		else
+		{
+			if (SDL_SetWindowFullscreen(window, 0) != 0)
+				LOG("Could not switch to windowed: %s\n", SDL_GetError());
+		}
+	}
+}
+
+void ModuleWindow::SetBrightness(float set)
+{
+	CAP(set);
+	if (SDL_SetWindowBrightness(window, set) != 0)
+		LOG("Could not change window brightness: %s\n", SDL_GetError());
+}
+
+bool ModuleWindow::IsFullscreen()
+{
+	return Fullscreen;
+}
+
+bool ModuleWindow::IsResizable() 
+{
+
+	return Resizable;
+}
+
+bool ModuleWindow::IsBorderless() 
+{
+	return Borderless;
+}
+
+bool ModuleWindow::IsFullscreenDesktop() 
+{
+	return Fullscreen_Desktop;
+}
+
+float ModuleWindow::GetBrightness()
+{
+	return SDL_GetWindowBrightness(window);
+}

@@ -25,6 +25,9 @@
     <Filter Include="Sources\MathGeoLib">
       <UniqueIdentifier>{e2eb30cf-fcad-4a20-85bc-093d185114c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Mmgr">
+      <UniqueIdentifier>{311ab778-df2b-4f26-8c2a-09be8c875e87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -312,6 +315,12 @@
     <ClInclude Include="imguiconsole.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="mmgr\mmgr.h">
+      <Filter>Sources\Mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="mmgr\nommgr.h">
+      <Filter>Sources\Mmgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -490,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="ModuleImGui.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="mmgr\mmgr.cpp">
+      <Filter>Sources\Mmgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
