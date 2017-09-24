@@ -75,9 +75,19 @@ update_status ModuleImGui::Update(float dt)
 		}
 		if (ImGui::BeginMenu("Help"))
 		{
-			if (ImGui::MenuItem("Test Window"))
+			if (ImGui::MenuItem("Documentation"))
 			{
-				Showtest = !Showtest;
+				ShellExecuteA(NULL, "open", "https://github.com/JaviOrtiz/Game-Engines/wiki", NULL, NULL, SW_SHOWNORMAL);
+			}
+			if (ImGui::MenuItem("Download Latest"))
+			{
+				ShellExecuteA(NULL, "open", "https://github.com/JaviOrtiz/Game-Engines/releases", NULL, NULL, SW_SHOWNORMAL);
+
+			}
+			if (ImGui::MenuItem("Report a bug"))
+			{
+				ShellExecuteA(NULL, "open", "https://github.com/JaviOrtiz/Game-Engines/issues", NULL, NULL, SW_SHOWNORMAL);
+		
 			}
 			if (ImGui::MenuItem("Console"))
 			{
@@ -85,7 +95,6 @@ update_status ModuleImGui::Update(float dt)
 			}
 			if (ImGui::MenuItem("About"))
 			{
-
 				About = !About;
 			}
 			ImGui::EndMenu();
