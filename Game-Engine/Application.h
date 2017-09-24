@@ -15,6 +15,14 @@
 #include "ModuleImGui.h"
 #include "imguiconsole.h"
 
+struct Performance
+{
+	uint	Frame_Count = 0;
+	uint	Framerate = 0;
+	uint	Frames_Last_Second = 0;
+	uint	Miliseconds_Per_Frame = 0;
+};
+
 class Application
 {
 public:
@@ -30,8 +38,13 @@ public:
 private:
 
 	Timer	ms_timer;
+	Timer	startup_timer;
+	Timer	last_sec_frame_time;
 	float	dt;
+	uint	prev_last_sec_frame_count = 0;
+	uint	last_sec_frame_count = 0;
 	std::list<Module*> list_modules;
+	Performance	performance;
 
 public:
 
@@ -42,6 +55,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 	ExampleAppConsole Console;
+	Performance* GetPerformanceStruct();
 private:
 
 	void AddModule(Module* mod);

@@ -5,6 +5,8 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 
+#define FPS_AND_MS_PLOT_DATA_LENGTH 100
+
 class ModuleImGui : public Module
 {
 public:
@@ -22,6 +24,9 @@ public:
 
 	//PostUpdate
 	update_status PostUpdate(float dt);
+	
+	void PushFPSandMSPlot(uint fps, uint ms);
+
 
 	bool CleanUp();
 
@@ -56,8 +61,10 @@ public:
 	Sphere* S2Temp = new Sphere(Temp1, 1);
 	Sphere* S3Temp = new Sphere(Temp2, 1);
 	bool SphereTest = false;
+	std::vector<float> Fps_Plot_Data;
+	std::vector<float> Ms_Plot_Data;
 
-public:
+private:
 
 
 };

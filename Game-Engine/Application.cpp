@@ -71,12 +71,16 @@ bool Application::Init()
 	}
 
 	ms_timer.Start();
+	last_sec_frame_time.Start();
+	startup_timer.Start();
 	return ret;
 }
 
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
+	performance.Frame_Count++;
+	last_sec_frame_count++;
 	dt = (float)ms_timer.Read() / 1000.0f;
 	ms_timer.Start();
 }
@@ -84,6 +88,15 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (last_sec_frame_time.Read() > 1000)
+	{
+		last_sec_frame_time.Start();
+		prev_last_sec_frame_count = last_sec_frame_count;
+		last_sec_frame_count = 0;
+	}
+	performance.Frames_Last_Second = prev_last_sec_frame_count;
+	performance.Framerate = (float)performance.Frame_Count / ((float)startup_timer.Read() / 1000.0f);
+	performance.Miliseconds_Per_Frame = ms_timer.Read();
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -138,4 +151,9 @@ bool Application::CleanUp()
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);
+}
+
+Performance* Application::GetPerformanceStruct()
+{
+	return &performance;
 }

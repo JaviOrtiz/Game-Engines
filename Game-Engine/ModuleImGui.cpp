@@ -18,7 +18,8 @@
 
 
 
-ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled)
+ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled),
+Fps_Plot_Data(FPS_AND_MS_PLOT_DATA_LENGTH), Ms_Plot_Data(FPS_AND_MS_PLOT_DATA_LENGTH)
 {
 }
 
@@ -216,9 +217,12 @@ update_status ModuleImGui::Update(float dt)
 		}
 
 
-
+	}
 		if (ImGui::CollapsingHeader("Hardware"))
 		{
+
+			uint title_size = 50;
+			char title[50];
 
 			Pc_Cache = SDL_GetCPUCacheLineSize();
 			ImGui::Text("Cache: %i", Pc_Cache);
@@ -226,11 +230,67 @@ update_status ModuleImGui::Update(float dt)
 			Pc_Cpu = SDL_GetCPUCount();
 			ImGui::Text("CPU: %i", Pc_Cpu);
 
-			Pc_Ram = SDL_GetSystemRAM();
-			ImGui::Text("RAM: %i MB", Pc_Ram);
+			
+
+			sMStats MemoryStats = m_getMemoryStatistics();
+			sprintf_s(title, title_size, "totalReportedMemory: %i", MemoryStats.totalReportedMemory);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "totalActualMemory: %i", MemoryStats.totalActualMemory);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "peakReportedMemory: %i", MemoryStats.peakReportedMemory);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "peakActualMemory: %i", MemoryStats.peakActualMemory);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "accumulatedReportedMemory: %i", MemoryStats.accumulatedReportedMemory);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "accumulatedActualMemory: %i", MemoryStats.accumulatedActualMemory);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "accumulatedAllocUnitCount: %i", MemoryStats.accumulatedAllocUnitCount);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "totalAllocUnitCount: %i", MemoryStats.totalAllocUnitCount);
+			ImGui::Text(title);
+			sprintf_s(title, title_size, "peakAllocUnitCount: %i", MemoryStats.peakAllocUnitCount);
+			ImGui::Text(title);
 
 
-		}
+			sprintf_s(title, title_size, "RAM: %i", SDL_GetSystemRAM());
+			ImGui::Text(title);
+
+			ImGui::Separator();
+
+			const GLubyte* GPUData = nullptr;
+			GPUData = glGetString(GL_VENDOR);
+			sprintf_s(title, title_size, "GL_Vendor: %s", GPUData);
+			ImGui::Text(title);
+			GPUData = glGetString(GL_RENDERER);
+			sprintf_s(title, title_size, "GL_Renderer: %s", GPUData);
+			ImGui::Text(title);
+			GPUData = glGetString(GL_VERSION);
+			sprintf_s(title, title_size, "GL_Versions: %s", GPUData);
+			ImGui::Text(title);
+
+		
+	}
+
+	const Performance* PerformanceData = App->GetPerformanceStruct();
+	PushFPSandMSPlot(PerformanceData->Frames_Last_Second, PerformanceData->Miliseconds_Per_Frame);
+
+
+	if (ImGui::CollapsingHeader("Application"))
+	{
+		uint title_size = 50;
+		char title[50];
+		//Framerate PlotHistogram
+		sprintf_s(title, title_size, "Framerate: %i", PerformanceData->Frames_Last_Second);
+		ImGui::PlotHistogram("##Framerate", &Fps_Plot_Data[0], Fps_Plot_Data.size(), 0,title, 0.0f, 150.0f, ImVec2(310, 100));
+
+		//Miliseconds PlotHistogram
+		sprintf_s(title, title_size, "Frame Miliseconds: %i", PerformanceData->Miliseconds_Per_Frame);
+		ImGui::PlotHistogram("##Frame Miliseconds", &Ms_Plot_Data[0], Ms_Plot_Data.size(), 0, title, 0.0f, 50.0f, ImVec2(310, 100));
+
+
+
+
 	}
 	
 
@@ -251,4 +311,21 @@ update_status ModuleImGui::PostUpdate(float dt)
 bool ModuleImGui::CleanUp()
 {
 	return false;
+}
+
+void ModuleImGui::PushFPSandMSPlot(uint fps, uint ms)
+{
+	static uint count = 0;
+
+	if (count >= FPS_AND_MS_PLOT_DATA_LENGTH)
+		for (int i = 0; i < FPS_AND_MS_PLOT_DATA_LENGTH - 1; i++)
+		{
+			Fps_Plot_Data[i] = Fps_Plot_Data[i + 1];
+			Ms_Plot_Data[i] =  Ms_Plot_Data[i + 1];
+		}
+	else
+		count++;
+
+	Fps_Plot_Data[count - 1] = fps;
+	Ms_Plot_Data[count - 1] = ms;
 }
