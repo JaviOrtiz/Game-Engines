@@ -13,6 +13,7 @@
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
+#include "imguiconsole.h"
 class Application
 {
 public:
@@ -39,7 +40,7 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
-
+	ExampleAppConsole Console;
 private:
 
 	void AddModule(Module* mod);

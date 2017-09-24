@@ -33,7 +33,6 @@ bool ModuleImGui::Init()
 	ImGuiIO& io = ImGui::GetIO();
 	io.WantTextInput = true;
 	io.IniFilename = "imgui.ini";
-	Console.AddLog("hey");
 	
 		Brightness = App->window->GetBrightness();
 		Screen_Width = 0;
@@ -227,7 +226,7 @@ update_status ModuleImGui::Update(float dt)
 	
 
 	if (Showtest) ImGui::ShowTestWindow();
-	if (Showconsole) Console.Draw("Super Console", (bool*)false);
+	if (Showconsole) App->Console.Draw("Super Console", (bool*)false);
 	ImGui::Render();
 
 	return UPDATE_CONTINUE;

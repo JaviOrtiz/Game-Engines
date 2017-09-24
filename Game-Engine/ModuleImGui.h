@@ -2,7 +2,6 @@
 
 #include "Module.h"
 #include "Globals.h"
-#include "imguiconsole.h"
 #include "Application.h"
 #include "ModuleWindow.h"
 
@@ -59,7 +58,6 @@ public:
 	bool SphereTest = false;
 
 public:
-	ExampleAppConsole Console;
 
 
 };

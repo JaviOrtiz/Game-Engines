@@ -17,11 +17,13 @@ ModuleWindow::~ModuleWindow()
 bool ModuleWindow::Init()
 {
 	LOG("Init SDL window & surface");
+	App->Console.AddLog("Init SDL window & surface");
 	bool ret = true;
 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
+		App->Console.AddLog("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 	else
@@ -60,6 +62,7 @@ bool ModuleWindow::Init()
 		if(window == NULL)
 		{
 			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			App->Console.AddLog("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 			ret = false;
 		}
 		else
@@ -76,7 +79,7 @@ bool ModuleWindow::Init()
 bool ModuleWindow::CleanUp()
 {
 	LOG("Destroying SDL window and quitting all SDL systems");
-
+	App->Console.AddLog("Destroying SDL window and quitting all SDL systems");
 	//Destroy window
 	if(window != NULL)
 	{
@@ -102,14 +105,19 @@ void ModuleWindow::SetFullscreen(bool set)
 		if (Fullscreen == true)
 		{
 			if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN) != 0)
+			{
 				LOG("Could not switch to fullscreen: %s\n", SDL_GetError());
+				App->Console.AddLog("Could not switch to fullscreen: %s\n", SDL_GetError());
+			}
 			Fullscreen_Desktop = false;
-			SDL_Log("this is a test");
 		}
 		else
 		{
 			if (SDL_SetWindowFullscreen(window, 0) != 0)
+			{
 				LOG("Could not switch to windowed: %s\n", SDL_GetError());
+				App->Console.AddLog("Could not switch to windowed: %s\n", SDL_GetError());
+			}
 		}
 	}
 }
@@ -137,13 +145,19 @@ void ModuleWindow::SetFullScreenDesktop(bool set)
 		if (Fullscreen_Desktop == true)
 		{
 			if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
+			{
 				LOG("Could not switch to fullscreen desktop: %s\n", SDL_GetError());
+				App->Console.AddLog("Could not switch to fullscreen desktop: %s\n", SDL_GetError());
+			}
 			Fullscreen = false;
 		}
 		else
 		{
 			if (SDL_SetWindowFullscreen(window, 0) != 0)
+			{
 				LOG("Could not switch to windowed: %s\n", SDL_GetError());
+				App->Console.AddLog("Could not switch to windowed: %s\n", SDL_GetError());
+			}
 		}
 	}
 }
@@ -152,7 +166,10 @@ void ModuleWindow::SetBrightness(float set)
 {
 	CAP(set);
 	if (SDL_SetWindowBrightness(window, set) != 0)
+	{
 		LOG("Could not change window brightness: %s\n", SDL_GetError());
+		App->Console.AddLog("Could not change window brightness: %s\n", SDL_GetError());
+	}
 }
 
 bool ModuleWindow::IsFullscreen()
