@@ -14,7 +14,7 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
-	Position = vec3(0.0f, 0.0f, 5.0f);
+	Position = vec3(0.0f, 1.0f, 0.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 }
 
@@ -27,9 +27,9 @@ bool ModuleCamera3D::Start()
 	LOG("Setting up the camera");
 	bool ret = true;
 	Target = App->player->vehicle;
-	CameraLocation = vec3(0.0f, 15, 0.0f);
+	/*CameraLocation = vec3(0.0f, 15, 0.0f);
 	ViewVector = vec3(0.0f, 10.05f, 0.0f);
-	camera_dist = 27;
+	camera_dist = 27;*/
 	return ret;
 }
 
@@ -44,21 +44,65 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-/*	
-	mat4x4 vehicle_array;
 
-	App->player->vehicle->GetTransform(&vehicle_array);
+	vec3 New_Position(0, 0, 0);
+	float speed = 3.0f*dt;
+
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+		speed = 4.0f*dt;
+
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) New_Position.y += speed;
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) New_Position.y -= speed;
+
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) New_Position -= Z * speed;
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) New_Position += Z * speed;
 
 
-	X = vec3(vehicle_array[0], vehicle_array[1], vehicle_array[2]);
-	Y = vec3(vehicle_array[4], vehicle_array[5], vehicle_array[6]);
-	Z = vec3(vehicle_array[8], vehicle_array[9], vehicle_array[10]);
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) New_Position -= X * speed;
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) New_Position += X * speed;
+
+	Position += New_Position;
+	Reference += New_Position;
+
+	// Mouse motion ----------------
+
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+	{
+		int dx = -App->input->GetMouseXMotion();
+		int dy = -App->input->GetMouseYMotion();
+
+		float Sensitivity = 0.25f;
+
+		Position -= Reference;
+
+		if (dx != 0)
+		{
+			float DeltaX = (float)dx * Sensitivity;
+
+			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+		}
+
+		if (dy != 0)
+		{
+			float DeltaY = (float)dy * Sensitivity;
+
+			Y = rotate(Y, DeltaY, X);
+			Z = rotate(Z, DeltaY, X);
+
+			if (Y.y < 0.0f)
+			{
+				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+				Y = cross(X, Z);
+			}
+		}
+
+		Position = Reference + Z * length(Position);
+	}
 
 
-	VehicleLocation = vehicle_array.translation();
-
-
-	App->camera->Look((CameraLocation + VehicleLocation) - X * camera_dist, ViewVector + VehicleLocation, true);*/
+	
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 

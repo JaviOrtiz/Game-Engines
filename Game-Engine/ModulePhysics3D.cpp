@@ -112,6 +112,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 // ---------------------------------------------------------
 update_status ModulePhysics3D::Update(float dt)
 {
+	debug_draw->drawGrid(10);
 	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
 
@@ -403,4 +404,22 @@ void DebugDrawer::setDebugMode(int debugMode)
 int	 DebugDrawer::getDebugMode() const
 {
 	return mode;
+}
+
+
+void DebugDrawer::drawGrid(int grid_size)
+{
+
+	btVector3 line_color = { 1, 1 ,1 };
+	for (int i = -grid_size; i <= grid_size; i++)
+	{
+		btVector3 vect = { (float)i, 0 , (float)-grid_size };
+		btVector3 vect2 = { (float)i, 0 , (float)grid_size };
+		drawLine(vect, vect2, line_color);
+
+		vect = { (float)-grid_size, 0 , (float)i };
+		vect2 = { (float)grid_size, 0 , (float)i };
+		drawLine(vect, vect2, line_color);
+
+	}
 }
