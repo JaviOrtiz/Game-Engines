@@ -9,7 +9,12 @@ private :
 	bool enabled;
 
 public:
+
 	Application* App;
+	Timer* module_timer;
+	std::string name = "";
+	float performance[90] = { 0 };
+	int performance_offset = 0;
 
 	Module(Application* parent, bool start_enabled = true) : App(parent)
 	{}
@@ -47,6 +52,19 @@ public:
 		return true; 
 	}
 
+	virtual void StartTimer() {
+		this->module_timer->Start();
+	};
+	virtual void PauseTimer() {
+		this->module_timer->Pause();
+	};
+	virtual void ResumeTimer() {
+		this->module_timer->Resume();
+	};
+	virtual void StopTimer() {
+		this->module_timer->Stop();
+	}
 	virtual void OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	{}
+
 };

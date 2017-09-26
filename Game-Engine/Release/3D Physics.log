@@ -1,12 +1,24 @@
-﻿  ModuleCamera3D.cpp
-c:\users\javi\desktop\citm\motores\game-engines\game-engine\mathgeolib\geometry\AABB2D.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: vea la declaración de 'sprintf'
-c:\users\javi\desktop\citm\motores\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: vea la declaración de 'strcpy'
-  Generando código
-  1 of 2159 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Generación de código finalizada
-  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Release\3D Physics - class6.exe
-  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Release\3D Physics - class6.pdb (Full PDB)
+﻿  Application.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\AABB2D.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+Application.cpp(10): warning C4316: 'ModuleCamera3D': object allocated on the heap may not be aligned 16
+Application.cpp(102): warning C4244: '=': conversion from 'float' to 'uint', possible loss of data
+Application.cpp(184): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+  ModuleImGui.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\AABB2D.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+ModuleImGui.cpp(143): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+ModuleImGui.cpp(147): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+ModuleImGui.cpp(330): warning C4244: '=': conversion from 'uint' to 'float', possible loss of data
+ModuleImGui.cpp(331): warning C4244: '=': conversion from 'uint' to 'float', possible loss of data
+  Generating code
+  54 of 2169 functions ( 2.5%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    26 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Release\3D Physics - class6.exe
+  3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Release\3D Physics - class6.pdb (Full PDB)

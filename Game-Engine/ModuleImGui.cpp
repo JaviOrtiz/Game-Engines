@@ -292,6 +292,7 @@ update_status ModuleImGui::Update(float dt)
 
 
 	}
+	App->Options();
 	
 
 	if (Showtest) ImGui::ShowTestWindow();

@@ -20,15 +20,18 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(audio);
-	AddModule(physics);
 	
-	// Scenes
-	AddModule(scene_intro);
-	AddModule(player);
 
 	// Renderer last!
 	AddModule(renderer3D);
 	AddModule(imgui);
+
+	window->name = "Window";
+	camera->name = "Camera";
+	input->name = "Input";
+	audio->name = "Audio";
+	renderer3D->name = "Renderer 3D";
+	imgui->name = "ImGui";
 }
 
 Application::~Application()
@@ -55,6 +58,7 @@ bool Application::Init()
 	{
 
 		ret = (*item)->Init();
+		(*item)->module_timer = new Timer();
 		item++;
 	}
 
@@ -109,7 +113,9 @@ update_status Application::Update()
 	
 	while (item != list_modules.end() && ret == UPDATE_CONTINUE)
 	{
+		(*item)->StartTimer();
 		ret = (*item)->PreUpdate(dt);
+		(*item)->PauseTimer();
 		item++;
 	}
 
@@ -117,7 +123,9 @@ update_status Application::Update()
 
 	while (item != list_modules.end() && ret == UPDATE_CONTINUE)
 	{
+		(*item)->ResumeTimer();
 		ret = (*item)->Update(dt);
+		(*item)->PauseTimer();
 		item++;
 
 	}
@@ -125,7 +133,11 @@ update_status Application::Update()
 
 	while (item != list_modules.end() && ret == UPDATE_CONTINUE)
 	{
+		(*item)->ResumeTimer();
 		ret = (*item)->PostUpdate(dt);
+		LOG("%i", (*item)->module_timer->Read());
+		(*item)->StopTimer();
+
 		item++;
 	}
 
@@ -156,4 +168,25 @@ void Application::AddModule(Module* mod)
 Performance* Application::GetPerformanceStruct()
 {
 	return &performance;
+}
+
+bool Application::Options()
+{
+	if (ImGui::CollapsingHeader("ModulesPerformance"))
+	{
+		std::list<Module*>::iterator item = list_modules.begin();
+
+		while (item != list_modules.end())
+		{
+
+			const char* name = (*item)->name.c_str();
+
+			(*item)->performance[(*item)->performance_offset] = (*item)->module_timer->Read_ms();
+			(*item)->performance_offset = ((*item)->performance_offset + 1) % IM_ARRAYSIZE((*item)->performance);
+
+			ImGui::PlotHistogram((char*)name, (*item)->performance, IM_ARRAYSIZE((*item)->performance), 0, name, 0.0f, 30.f, ImVec2(0, 40));
+			item++;
+		}
+	}
+	return true;
 }

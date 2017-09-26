@@ -43,9 +43,9 @@ private:
 	float	dt;
 	uint	prev_last_sec_frame_count = 0;
 	uint	last_sec_frame_count = 0;
-	std::list<Module*> list_modules;
 	Performance	performance;
-
+public: 
+	std::list<Module*> list_modules;
 public:
 
 	Application();
@@ -56,6 +56,7 @@ public:
 	bool CleanUp();
 	ExampleAppConsole Console;
 	Performance* GetPerformanceStruct();
+	bool Options();
 private:
 
 	void AddModule(Module* mod);
