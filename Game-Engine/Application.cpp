@@ -20,13 +20,14 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(audio);
-	
+	AddModule(physics);
 
 	// Renderer last!
 	AddModule(renderer3D);
 	AddModule(imgui);
 
 	window->name = "Window";
+	physics->name = "Physics";
 	camera->name = "Camera";
 	input->name = "Input";
 	audio->name = "Audio";
