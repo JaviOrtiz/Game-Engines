@@ -290,6 +290,45 @@ update_status ModuleImGui::Update(float dt)
 		sprintf_s(title, title_size, "Frame Miliseconds: %i", PerformanceData->Miliseconds_Per_Frame);
 		ImGui::PlotHistogram("##Frame Miliseconds", &Ms_Plot_Data[0], Ms_Plot_Data.size(), 0, title, 0.0f, 50.0f, ImVec2(310, 100));
 	}
+
+
+	if (ImGui::CollapsingHeader("OpenGL Options"))
+	{
+		if (ImGui::Checkbox("Gl_Deepth_Test", &DeepTest))
+		{
+			App->renderer3D->Gl_State(DeepTest, GL_DEPTH_TEST);
+		}
+		if (ImGui::Checkbox("Gl_Cull_Face", &CullFace))
+		{
+			App->renderer3D->Gl_State(DeepTest, GL_CULL_FACE);
+		}
+		if (ImGui::Checkbox("Gl_Lighting", &GlLighting))
+		{
+			App->renderer3D->Gl_State(DeepTest, GL_LIGHTING);
+		}
+		if (ImGui::Checkbox("Gl_Color_Material", &ColorMaterial))
+		{
+			App->renderer3D->Gl_State(DeepTest, GL_COLOR_MATERIAL);
+		}
+		if (ImGui::Checkbox("Gl_Texture_2D", &Texture2D))
+		{
+			App->renderer3D->Gl_State(DeepTest, GL_TEXTURE_2D);
+		}
+		/*if (ImGui::Checkbox("Borderless", &Borderless))
+		{
+			App->window->SetBorderless(Borderless);
+		}
+		if (ImGui::Checkbox("Resizable", &Resizable))
+		{
+			App->window->SetResizable(Resizable);
+		}
+		*/
+
+
+
+
+
+	}
 	//End Application//
 	App->Options();
 

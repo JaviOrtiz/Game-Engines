@@ -4,6 +4,13 @@
 #include "glmath.h"
 #include "Light.h"
 #include "MathGeoLib.h"
+#include "Glew\include\glew.h"
+#include "ImGui\imgui.h"
+#include "Imgui/imgui_impl_sdl_gl3.h"
+#include "SDL\include\SDL_opengl.h"
+#include <gl/GL.h>
+#include <gl/GLU.h>
+
 
 #define MAX_LIGHTS 8
 
@@ -19,6 +26,8 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
+	void Gl_State(bool, GLenum);
+	
 
 public:
 

@@ -53,6 +53,13 @@ public:
 	bool    Showconsole = false;
 	bool	Homework = false;
 	bool	About = false;
+	//OpenGL//
+	bool	DeepTest;
+	bool	CullFace;
+	bool	GlLighting;
+	bool	ColorMaterial;
+	bool	Texture2D;
+
 
 
 

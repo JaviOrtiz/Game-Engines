@@ -1,12 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
-#include "Glew\include\glew.h"
-#include "ImGui\imgui.h"
-#include "Imgui/imgui_impl_sdl_gl3.h"
-#include "SDL\include\SDL_opengl.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
+
 
 
 
@@ -190,6 +185,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 // Called before quitting
 bool ModuleRenderer3D::CleanUp()
 {
+	
+
 	LOG("Destroying 3D Renderer");
 	App->Console.AddLog("Destroying 3D Renderer");
 	ImGui_ImplSdlGL3_Shutdown();
@@ -210,4 +207,21 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void ModuleRenderer3D::Gl_State(bool state, GLenum dummy) {
+
+
+	if (state) {
+
+		glEnable(dummy);
+	}
+
+	else {
+
+		glDisable(dummy);
+	}
+
+
+
 }
