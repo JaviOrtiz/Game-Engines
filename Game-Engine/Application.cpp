@@ -51,6 +51,9 @@ bool Application::Init()
 {
 	bool ret = true;
 
+	config = new JConfig();
+	config->Init();
+	config->Load();
 	// Call Init() in all modules
 	std::list<Module*>::iterator item = list_modules.begin();
 
@@ -157,6 +160,7 @@ bool Application::CleanUp()
 		item++;
 
 	}
+	config->Save();
 	return ret;
 }
 

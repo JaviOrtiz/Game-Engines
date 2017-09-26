@@ -29,8 +29,6 @@ bool ModuleWindow::Init()
 	else
 	{
 		//Create window
-		int width = SCREEN_WIDTH * SCREEN_SIZE;
-		int height = SCREEN_HEIGHT * SCREEN_SIZE;
 		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
 		//Use OpenGL 2.1
@@ -57,7 +55,7 @@ bool ModuleWindow::Init()
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 
-		window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		window = SDL_CreateWindow(EngineName, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Window_Width, Window_Height, flags);
 
 		if(window == NULL)
 		{
@@ -196,4 +194,48 @@ bool ModuleWindow::IsFullscreenDesktop()
 float ModuleWindow::GetBrightness()
 {
 	return SDL_GetWindowBrightness(window);
+}
+
+void ModuleWindow::SaveConfig(JSON_Object * root)
+{
+	json_object_set_number(root, "Width", Window_Width / SCREEN_SIZE);
+	json_object_set_number(root, "Height", Window_Height / SCREEN_SIZE);
+	json_object_set_string(root, "EngineName", EngineName);
+}
+
+void ModuleWindow::LoadConfig(JSON_Object * root)
+{
+
+	JSON_Value* value;
+
+	if (json_object_get_value(root, "Width") == NULL) {
+		json_object_set_value(root, "Width", json_value_init_object());
+		Window_Width = SCREEN_WIDTH * SCREEN_SIZE;
+		json_object_set_number(root, "Width", Window_Width);
+
+	}
+	else 
+	{
+		Window_Width = json_object_get_number(root, "Width")  * SCREEN_SIZE;
+
+	}
+
+	if (json_object_get_value(root, "Height") == NULL) {
+		json_object_set_value(root, "Height", json_value_init_object());
+		Window_Height = SCREEN_HEIGHT * SCREEN_SIZE;
+		json_object_set_number(root, "Height", Window_Height);
+	}
+	else 
+	{
+		Window_Height = json_object_get_number(root, "Height") * SCREEN_SIZE;
+
+	}
+	if (json_object_get_string(root, "EngineName") == NULL) {
+		json_object_set_string(root, "EngineName", "Pochinki's Engine");
+		EngineName = "Pockinki's Engine";
+	}
+	else 
+	{
+		EngineName = json_object_get_string(root, "EngineName");
+	}
 }

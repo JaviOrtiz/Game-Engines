@@ -14,7 +14,7 @@
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
 #include "imguiconsole.h"
-
+#include "JConfig.h"
 struct Performance
 {
 	uint	Frame_Count = 0;
@@ -35,6 +35,7 @@ public:
 	ModulePhysics3D* physics;
 	ModulePlayer* player;
 	ModuleImGui* imgui;
+	JConfig* config;
 private:
 
 	Timer	ms_timer;

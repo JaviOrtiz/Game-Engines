@@ -200,9 +200,14 @@ update_status ModuleImGui::Update(float dt)
 		if (ImGui::SliderFloat("Brightness", &Brightness, 0.0f, 1.0f)) {
 			App->window->SetBrightness(Brightness);
 		}
+		
+		ImGui::SliderInt("Screen Width", &App->window->Window_Width, 100, 1920);
+		ImGui::SliderInt("Screen Height", &App->window->Window_Height, 100, 1080);
 
-		ImGui::SliderInt("Screen Width", &Screen_Width, 0, 1920);
-		ImGui::SliderInt("Screen Height", &Screen_Height, 0, 1080);
+		if (ImGui::Button("Save Window Size"))
+		{
+			SDL_SetWindowSize(App->window->window, App->window->Window_Width, App->window->Window_Height);
+		}
 
 		if (ImGui::Checkbox("Fullscreen", &Fullscreen))
 			App->window->SetFullscreen(Fullscreen);

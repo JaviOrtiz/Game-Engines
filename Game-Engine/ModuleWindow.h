@@ -18,6 +18,7 @@ public:
 	bool	Resizable;
 	bool	Borderless;
 	float	Brightness;
+	const char* EngineName;
 
 
 
@@ -42,7 +43,8 @@ public:
 	bool IsFullscreenDesktop();
 	float GetBrightness();
 
-
+	void SaveConfig(JSON_Object* root);
+	void LoadConfig(JSON_Object* root);
 
 public:
 	//The window we'll be rendering to

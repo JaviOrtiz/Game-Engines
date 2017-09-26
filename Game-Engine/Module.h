@@ -2,7 +2,7 @@
 
 class Application;
 struct PhysBody3D;
-
+#include "JConfig.h"
 class Module
 {
 private :
@@ -50,6 +50,14 @@ public:
 	virtual bool CleanUp() 
 	{ 
 		return true; 
+	}
+
+
+	virtual void LoadConfig(JSON_Object *root) {
+
+	}
+	virtual void SaveConfig(JSON_Object *root) {
+
 	}
 
 	virtual void StartTimer() {
