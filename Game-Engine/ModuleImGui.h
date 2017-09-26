@@ -24,16 +24,18 @@ public:
 
 	//PostUpdate
 	update_status PostUpdate(float dt);
-	
+
 	void PushFPSandMSPlot(uint fps, uint ms);
+	void ChangeName(char*);
 
 
 	bool CleanUp();
 
 public:
+	char*	New_Name;
 	float	Brightness;
-	int		Screen_Width=0;
-	int		Screen_Height=0;
+	int		Screen_Width = 0;
+	int		Screen_Height = 0;
 	bool	Fullscreen;
 	bool	Resizable;
 	bool	Borderless;
