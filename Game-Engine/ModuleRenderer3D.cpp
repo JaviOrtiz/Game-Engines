@@ -30,7 +30,21 @@ bool ModuleRenderer3D::Init()
 	bool ret = true;
 	
 
-	
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+
+	GLenum err = glewInit();
+	App->Console.AddLog("Using Glew %s", glewGetString(GLEW_VERSION));
+	App->Console.AddLog("Vendor: %s", glewGetString(GL_VENDOR));
+	App->Console.AddLog("Renderer: %s", glewGetString(GL_RENDERER));
+	App->Console.AddLog("OpenGL version supported %s", glGetString(GL_VERSION));
+	App->Console.AddLog("GLSL: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
 	if(context == NULL)
@@ -78,7 +92,7 @@ bool ModuleRenderer3D::Init()
 		glClearDepth(1.0f);
 		
 		//Initialize clear color
-		glClearColor(0.f, 0.f, 0.f, 1.f);
+		glClearColor(0.14f, 0.41f, 0.75f, 1);
 
 		//Check for error
 		error = glGetError();
@@ -115,6 +129,7 @@ bool ModuleRenderer3D::Init()
 	// Projection matrix for
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
+
 	
 	return ret;
 }
@@ -128,15 +143,47 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetViewMatrix());
 
-	
-
 	return UPDATE_CONTINUE;
 }
 
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-	
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBegin(GL_POLYGON);
+	glVertex3f(0.14, 0.36, 0);
+	glVertex3f(0.42, 0.40, 0);
+	glVertex3f(0.75, 0.30, 0);
+	glVertex3f(0.88, 0.04, 0);
+	glVertex3f(0.94, 0.39, 0);
+	glVertex3f(1.11, 0.36, 0);
+	glVertex3f(1.04, .58, 0);
+	glVertex3f(1.07, .62, 0);
+	glVertex3f(1.09, .73, 0);
+	glVertex3f(1.10, .85, 0);
+	glVertex3f(1.06, .91, 0);
+	glVertex3f(1.09, .99, 0);
+	glVertex3f(1.03, 1.04, 0);
+	glVertex3f(1.00, 1.15, 0);
+	glVertex3f(1.06, 1.21, 0);
+	glVertex3f(1.03, 1.25, 0);
+	glVertex3f(.98, 1.26, 0);
+	glVertex3f(.95, 1.37, 0);
+	glVertex3f(.83, 1.47, 0);
+	glVertex3f(.67, 1.47, 0);
+	glVertex3f(.53, 1.40, 0);
+	glVertex3f(.46, 1.32, 0);
+	glVertex3f(.34, 1.36, 0);
+	glVertex3f(.38, 1.26, 0);
+	glVertex3f(.23, 1.23, 0);
+	glVertex3f(.30, 1.14, 0);
+	glVertex3f(.10, 1.02, 0);
+	glVertex3f(.29, .90, 0);
+	glVertex3f(0, .75, 0);
+	glVertex3f(.30, .62, 0);
+	glVertex3f(0.14, 0.36, 0);
+	glEnd();
+	glFlush();
 	return UPDATE_CONTINUE;
 }
 
