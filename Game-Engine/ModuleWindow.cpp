@@ -206,8 +206,6 @@ void ModuleWindow::SaveConfig(JSON_Object * root)
 void ModuleWindow::LoadConfig(JSON_Object * root)
 {
 
-	JSON_Value* value;
-
 	if (json_object_get_value(root, "Width") == NULL) {
 		json_object_set_value(root, "Width", json_value_init_object());
 		Window_Width = SCREEN_WIDTH * SCREEN_SIZE;

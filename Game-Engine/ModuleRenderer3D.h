@@ -28,11 +28,18 @@ public:
 	void OnResize(int width, int height);
 	void Gl_State(bool, GLenum);
 	
-
+	void SaveConfig(JSON_Object *root);
+	void LoadConfig(JSON_Object *root);
 public:
-
+	float red = 1.0f, green = 1.0f, blue = 1.0f, bred = 0.14f, bgreen = 0.41f, bblue = 0.75f;
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+	bool	DeepTest;
+	bool	CullFace;
+	bool	GlLighting;
+	bool	ColorMaterial;
+	bool	Texture2D;
+	bool	WireFrame = false;
 };

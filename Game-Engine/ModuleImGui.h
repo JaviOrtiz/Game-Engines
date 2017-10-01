@@ -19,9 +19,6 @@ public:
 	//PreUpdate
 	update_status PreUpdate(float dt);
 
-	//Update
-	update_status Update(float dt);
-
 	//PostUpdate
 	update_status PostUpdate(float dt);
 
@@ -54,11 +51,7 @@ public:
 	bool	Homework = false;
 	bool	About = false;
 	//OpenGL//
-	bool	DeepTest;
-	bool	CullFace;
-	bool	GlLighting;
-	bool	ColorMaterial;
-	bool	Texture2D;
+
 
 
 

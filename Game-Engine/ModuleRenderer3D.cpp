@@ -23,7 +23,7 @@ bool ModuleRenderer3D::Init()
 	LOG("Creating 3D Renderer context");
 	App->Console.AddLog("Creating 3D Renderer context");
 	bool ret = true;
-	
+
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -42,14 +42,14 @@ bool ModuleRenderer3D::Init()
 
 	//Create context
 	context = SDL_GL_CreateContext(App->window->window);
-	if(context == NULL)
+	if (context == NULL)
 	{
 		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
 		App->Console.AddLog("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-	
-	if(ret == true)
+
+	if (ret == true)
 	{
 		//Use Vsync
 		if (VSYNC && SDL_GL_SetSwapInterval(1) < 0)
@@ -63,7 +63,7 @@ bool ModuleRenderer3D::Init()
 
 		//Check for error
 		GLenum error = glGetError();
-		if(error != GL_NO_ERROR)
+		if (error != GL_NO_ERROR)
 		{
 			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
 			App->Console.AddLog("Error initializing OpenGL! %s\n", gluErrorString(error));
@@ -76,47 +76,47 @@ bool ModuleRenderer3D::Init()
 
 		//Check for error
 		error = glGetError();
-		if(error != GL_NO_ERROR)
+		if (error != GL_NO_ERROR)
 		{
 			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
 			App->Console.AddLog("Error initializing OpenGL! %s\n", gluErrorString(error));
 			ret = false;
 		}
-		
+
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		glClearDepth(1.0f);
-		
+
 		//Initialize clear color
 		glClearColor(0.14f, 0.41f, 0.75f, 1);
 
 		//Check for error
 		error = glGetError();
-		if(error != GL_NO_ERROR)
+		if (error != GL_NO_ERROR)
 		{
 			LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
 			App->Console.AddLog("Error initializing OpenGL! %s\n", gluErrorString(error));
 			ret = false;
 		}
-		
-		GLfloat LightModelAmbient[] = {0.0f, 0.0f, 0.0f, 1.0f};
+
+		GLfloat LightModelAmbient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
-		
+
 		lights[0].ref = GL_LIGHT0;
 		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
 		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
 		lights[0].SetPos(0.0f, 0.0f, 2.5f);
 		lights[0].Init();
-		
-		GLfloat MaterialAmbient[] = {1.0f, 1.0f, 1.0f, 1.0f};
+
+		GLfloat MaterialAmbient[] = { 1.0f, 0.5f, 0.0f, 0.7f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, MaterialAmbient);
 
-		GLfloat MaterialDiffuse[] = {1.0f, 1.0f, 1.0f, 1.0f};
+		GLfloat MaterialDiffuse[] = { 1.0f, 0.5f, 0.0f, 0.7f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
-		
+
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		lights[0].Active(true);
-		glEnable(GL_LIGHTING);
+		//glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
 	}
 
@@ -125,7 +125,7 @@ bool ModuleRenderer3D::Init()
 	OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 
-	
+
 	return ret;
 }
 
@@ -144,7 +144,9 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	if(WireFrame)	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(red, green, blue);
+	glClearColor(bred, bgreen, bblue, 1);
 	glBegin(GL_POLYGON);
 	glVertex3f(0.14, 0.36, 0);
 	glVertex3f(0.42, 0.40, 0);
@@ -185,8 +187,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 // Called before quitting
 bool ModuleRenderer3D::CleanUp()
 {
-	
-
 	LOG("Destroying 3D Renderer");
 	App->Console.AddLog("Destroying 3D Renderer");
 	ImGui_ImplSdlGL3_Shutdown();
@@ -223,5 +223,150 @@ void ModuleRenderer3D::Gl_State(bool state, GLenum dummy) {
 	}
 
 
+
+}
+
+void ModuleRenderer3D::SaveConfig(JSON_Object * root)
+{
+	json_object_set_number(root, "Red", red);
+	json_object_set_number(root, "Green",green);
+	json_object_set_number(root, "Blue",blue);
+
+	json_object_set_number(root, "BackGroundRed", bred);
+	json_object_set_number(root, "BackGroundGreen", bgreen);
+	json_object_set_number(root, "BackGroundBlue", bblue);
+
+	json_object_set_boolean(root, "GL_DEPTH_TEST", DeepTest);
+	json_object_set_boolean(root, "GL_CULL_FACE", CullFace);
+	json_object_set_boolean(root, "GL_LIGHTNING", GlLighting);
+	json_object_set_boolean(root, "GL_COLOuR_MATERIAL", ColorMaterial);
+	json_object_set_boolean(root, "GL_TEXTURE_2D", Texture2D);
+	json_object_set_boolean(root, "WIREFRAME", WireFrame);
+}
+
+void ModuleRenderer3D::LoadConfig(JSON_Object* root)
+{
+	if (json_object_get_value(root, "Red") == NULL) {
+		json_object_set_value(root, "Red", json_value_init_object());
+		red = 1;
+		json_object_set_number(root, "Red", red);
+
+	}
+	else
+	{
+		red = json_object_get_number(root, "Red");
+	}
+	if (json_object_get_value(root, "Green") == NULL) {
+		json_object_set_value(root, "Green", json_value_init_object());
+		green = 1;
+		json_object_set_number(root, "Green", green);
+
+	}
+	else
+	{
+		blue = json_object_get_number(root, "Blue");
+	}
+	if (json_object_get_value(root, "Blue") == NULL) {
+		json_object_set_value(root, "Blue", json_value_init_object());
+		blue = 1;
+		json_object_set_number(root, "Blue", blue);
+
+	}
+	else
+	{
+		blue = json_object_get_number(root, "Blue");
+	}
+	if (json_object_get_value(root, "BackGroundRed") == NULL) {
+		json_object_set_value(root, "BackGroundRed", json_value_init_object());
+		bred = 1;
+		json_object_set_number(root, "BackGroundRed", bred);
+
+	}
+	else
+	{
+		bred = json_object_get_number(root, "BackGroundGreen");
+	}
+	if (json_object_get_value(root, "BackGroundGreen") == NULL) {
+		json_object_set_value(root, "BackGroundGreen", json_value_init_object());
+		bgreen = 1;
+		json_object_set_number(root, "BackGroundGreen", bgreen);
+
+	}
+	else
+	{
+		bgreen = json_object_get_number(root, "BackGroundGreen");
+	}
+	if (json_object_get_value(root, "BackGroundBlue") == NULL) {
+		json_object_set_value(root, "BackGroundBlue", json_value_init_object());
+		bblue = 1;
+		json_object_set_number(root, "BackGroundBlue", bblue);
+
+	}
+	else
+	{
+		bblue = json_object_get_number(root, "BackGroundBlue");
+	}
+
+	if (json_object_get_boolean(root, "GL_DEPTH_TEST") == NULL) {
+		json_object_set_boolean(root, "GL_DEPTH_TEST", true);
+		DeepTest = true;
+		json_object_set_number(root, "GL_DEPTH_TEST", DeepTest);
+
+	}
+	else
+	{
+		CullFace = json_object_get_number(root, "GL_DEPTH_TEST");
+	}
+	if (json_object_get_boolean(root, "GL_CULL_FACE") == NULL) {
+		json_object_set_boolean(root, "GL_CULL_FACE", true);
+		CullFace = true;
+		json_object_set_number(root, "GL_CULL_FACE", CullFace);
+
+	}
+	else
+	{
+		CullFace = json_object_get_number(root, "GL_CULL_FACE");
+	}
+
+	if (json_object_get_boolean(root, "GL_LIGHTNING") == NULL) {
+		json_object_set_boolean(root, "GL_LIGHTNING", true);
+		GlLighting = true;
+		json_object_set_number(root, "GL_LIGHTNING", GlLighting);
+
+	}
+	else
+	{
+		GlLighting = json_object_get_number(root, "GL_LIGHTNING");
+	}
+	if (json_object_get_boolean(root, "GL_COLOuR_MATERIAL") == NULL) {
+		json_object_set_boolean(root, "GL_COLOuR_MATERIAL", true);
+		ColorMaterial = true;
+		json_object_set_number(root, "GL_COLOuR_MATERIAL", ColorMaterial);
+
+	}
+	else
+	{
+		ColorMaterial = json_object_get_number(root, "GL_COLOuR_MATERIAL");
+	}
+	if (json_object_get_boolean(root, "GL_TEXTURE_2D") == NULL) {
+		json_object_set_boolean(root, "GL_TEXTURE_2D", true);
+		Texture2D = true;
+		json_object_set_number(root, "GL_TEXTURE_2D", Texture2D);
+
+	}
+	else
+	{
+		Texture2D = json_object_get_number(root, "GL_TEXTURE_2D");
+	}
+	if (json_object_get_boolean(root, "WIREFRAME") == NULL) {
+		json_object_set_boolean(root, "WIREFRAME", true);
+		WireFrame = false;
+		json_object_set_number(root, "WIREFRAME", WireFrame);
+
+	}
+	else
+	{
+		WireFrame = json_object_get_number(root, "WIREFRAME");
+	}
 
 }
