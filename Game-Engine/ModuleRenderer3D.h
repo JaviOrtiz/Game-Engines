@@ -41,5 +41,9 @@ public:
 	bool	GlLighting;
 	bool	ColorMaterial;
 	bool	Texture2D;
+	GLuint CubeDataID;
 	bool	WireFrame = false;
+	bool directDraw = false;
+	bool ArrayDraw = false;
+	bool IndexDraw = false;
 };

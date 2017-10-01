@@ -408,6 +408,12 @@ update_status ModuleImGui::PostUpdate(float dt)
 		}
 		if (ImGui::Checkbox("WireFrame", &App->renderer3D->WireFrame))
 		{}
+		if (ImGui::Checkbox("Cube - Direct Drawing", &App->renderer3D->directDraw))
+		{}
+		if (ImGui::Checkbox("Cube - GlDrawElements", &App->renderer3D->ArrayDraw))
+		{}
+		if (ImGui::Checkbox("Cube - Index Drawing", &App->renderer3D->IndexDraw))
+		{}
 		/*if (ImGui::Checkbox("Borderless", &Borderless))
 		{
 			App->window->SetBorderless(Borderless);
