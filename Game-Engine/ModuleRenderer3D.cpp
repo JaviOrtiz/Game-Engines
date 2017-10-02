@@ -341,6 +341,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		glDisableClientState(GL_VERTEX_ARRAY);
 	}
 
+	
+
 	return UPDATE_CONTINUE;
 }
 

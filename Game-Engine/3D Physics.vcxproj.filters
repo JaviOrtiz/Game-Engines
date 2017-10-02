@@ -330,6 +330,9 @@
     <ClInclude Include="JConfig.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleWorld.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -516,6 +519,9 @@
       <Filter>Sources\Json</Filter>
     </ClCompile>
     <ClCompile Include="JConfig.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWorld.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
