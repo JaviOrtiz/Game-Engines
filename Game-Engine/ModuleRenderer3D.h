@@ -13,6 +13,16 @@
 #include "GeometryLoader.h"
 
 #define MAX_LIGHTS 8
+ struct Mesh
+ {		
+	uint idVertices = 0; // id in VRAM 
+	uint numVertices = 0;
+	float* vertices = nullptr;
+
+	uint idIndices = 0; // id in VRAM 
+	uint numIndices = 0;
+	unsigned short* indices = nullptr;
+};
 
 class ModuleRenderer3D : public Module
 {

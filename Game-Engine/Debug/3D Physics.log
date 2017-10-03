@@ -1,8 +1,162 @@
-﻿  GeometryLoader.cpp
+﻿  ModuleWindow.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\modulewindow.cpp(217): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\modulewindow.cpp(228): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  ModuleSceneIntro.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+  ModuleRenderer3D.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(252): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(262): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(272): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(282): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(292): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(302): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(313): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(323): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(334): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(344): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(354): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(364): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+  ModulePlayer.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+  ModulePhysics3D.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\modulephysics3d.cpp(282): warning C4018: '<': signed/unsigned mismatch
+  ModuleInput.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+  ModuleImGui.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(134): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(138): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(462): warning C4244: '=': conversion from 'uint' to 'float', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(463): warning C4244: '=': conversion from 'uint' to 'float', possible loss of data
+  ModuleEditor.cpp
+  ModuleCamera3D.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+  ModuleAudio.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+  Main.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+  JConfig.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+  GeometryLoader.cpp
 c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
 c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
 c:\users\danii\desktop\game-engines\game-engine\geometryloader.cpp(58): warning C4018: '<': signed/unsigned mismatch
+  Application.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: see declaration of 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\application.cpp(10): warning C4316: 'ModuleCamera3D': object allocated on the heap may not be aligned 16
+c:\users\danii\desktop\game-engines\game-engine\application.cpp(108): warning C4244: '=': conversion from 'float' to 'uint', possible loss of data
+c:\users\danii\desktop\game-engines\game-engine\application.cpp(190): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+  Generating Code...
+  LINK : C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\3D Physics - class6.exe not found or not built by the last incremental link; performing full link
+BulletDynamics_debug.lib(btDiscreteDynamicsWorld.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btRigidBody.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btConeTwistConstraint.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btContactConstraint.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btGeneric6DofConstraint.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btHingeConstraint.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btPoint2PointConstraint.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btSequentialImpulseConstraintSolver.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btTypedConstraint.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btRaycastVehicle.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletDynamics_debug.lib(btWheelInfo.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btDbvt.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btDbvtBroadphase.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btDispatcher.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btOverlappingPairCache.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btQuantizedBvh.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btActivatingCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btBoxBoxCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btBoxBoxDetector.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCollisionDispatcher.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCollisionObject.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCollisionWorld.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCompoundCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCompoundCompoundCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConvexConcaveCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConvexConvexAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConvexPlaneCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btDefaultCollisionConfiguration.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btEmptyCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btHashedSimplePairCache.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btManifoldResult.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btSimulationIslandManager.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btSphereSphereCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btSphereTriangleCollisionAlgorithm.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btUnionFind.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(SphereTriangleDetector.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btBoxShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btBvhTriangleMeshShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCollisionShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCompoundShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConcaveShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConvexInternalShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConvexPolyhedron.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConvexShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btCylinderShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btOptimizedBvh.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btPolyhedralConvexShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btSphereShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btStaticPlaneShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btTriangleCallback.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btTriangleMeshShape.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btContinuousConvexCollision.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btConvexCast.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btGjkConvexCast.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btGjkEpa2.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btGjkEpaPenetrationDepthSolver.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btGjkPairDetector.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btMinkowskiPenetrationDepthSolver.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btPersistentManifold.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btPolyhedralContactClipping.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btRaycastCallback.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btSubSimplexConvexCast.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+BulletCollision_debug.lib(btVoronoiSimplexSolver.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+LinearMath_debug.lib(btAlignedAllocator.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+LinearMath_debug.lib(btConvexHullComputer.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+LinearMath_debug.lib(btGeometryUtil.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+LinearMath_debug.lib(btQuickprof.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
+LinearMath_debug.lib(btVector3.obj) : warning LNK4204: 'C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\vc140.pdb' is missing debugging information for referencing module; linking object as if no debug info
   3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\3D Physics - class6.exe
   3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\3D Physics - class6.pdb (Full PDB)
