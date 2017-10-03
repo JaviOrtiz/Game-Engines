@@ -11,6 +11,7 @@ Application::Application()
 	physics = new ModulePhysics3D(this);
 	player = new ModulePlayer(this);
 	imgui = new ModuleImGui(this);
+	geometryloader = new GeometryLoader(this);
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -20,6 +21,7 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(audio);
+	AddModule(geometryloader);
 	AddModule(physics);
 
 	// Renderer last!
@@ -139,7 +141,6 @@ update_status Application::Update()
 	{
 		(*item)->ResumeTimer();
 		ret = (*item)->PostUpdate(dt);
-		LOG("%i", (*item)->module_timer->Read());
 		(*item)->StopTimer();
 
 		item++;

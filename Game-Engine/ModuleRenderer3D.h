@@ -10,7 +10,7 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-
+#include "GeometryLoader.h"
 
 #define MAX_LIGHTS 8
 
@@ -30,6 +30,11 @@ public:
 	
 	void SaveConfig(JSON_Object *root);
 	void LoadConfig(JSON_Object *root);
+
+	void Render(Geometry toDraw);
+
+
+
 public:
 	float red = 1.0f, green = 1.0f, blue = 1.0f, bred = 0.14f, bgreen = 0.41f, bblue = 0.75f;
 	Light lights[MAX_LIGHTS];

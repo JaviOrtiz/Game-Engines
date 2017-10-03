@@ -14,6 +14,7 @@
 #include "ModulePlayer.h"
 #include "ModuleImGui.h"
 #include "imguiconsole.h"
+#include "GeometryLoader.h"
 #include "JConfig.h"
 struct Performance
 {
@@ -35,6 +36,7 @@ public:
 	ModulePhysics3D* physics;
 	ModulePlayer* player;
 	ModuleImGui* imgui;
+	GeometryLoader* geometryloader;
 	JConfig* config;
 private:
 

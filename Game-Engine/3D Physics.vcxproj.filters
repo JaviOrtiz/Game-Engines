@@ -31,6 +31,9 @@
     <Filter Include="Sources\Json">
       <UniqueIdentifier>{e35a3401-96e5-42ba-8c2d-023005eabab1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Assimp">
+      <UniqueIdentifier>{37066598-ed2b-4b25-8d48-c2d04f0c06ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -330,7 +333,25 @@
     <ClInclude Include="JConfig.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleWorld.h">
+    <ClInclude Include="Assimp\include\cexport.h">
+      <Filter>Sources\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Assimp\include\cfileio.h">
+      <Filter>Sources\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Assimp\include\cimport.h">
+      <Filter>Sources\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Assimp\include\postprocess.h">
+      <Filter>Sources\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Assimp\include\scene.h">
+      <Filter>Sources\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryLoader.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -521,7 +542,10 @@
     <ClCompile Include="JConfig.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleWorld.cpp">
+    <ClCompile Include="GeometryLoader.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
