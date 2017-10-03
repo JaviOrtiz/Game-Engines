@@ -152,6 +152,11 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 void ModuleRenderer3D::Render(Geometry toDraw)
 {
+	if (WireFrame)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 	glPushMatrix();
 
 	if (toDraw.idNormals > 0)
