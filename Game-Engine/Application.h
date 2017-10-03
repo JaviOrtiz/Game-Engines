@@ -15,6 +15,9 @@
 #include "ModuleImGui.h"
 #include "imguiconsole.h"
 #include "JConfig.h"
+#include "Assimp\include\ai_assert.h"
+#include"Assimp\include\anim.h"
+
 struct Performance
 {
 	uint	Frame_Count = 0;
