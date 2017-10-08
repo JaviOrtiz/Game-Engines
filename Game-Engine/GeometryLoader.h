@@ -16,6 +16,12 @@ struct Geometry
 	uint idNormals = 0; // id in VRAM
 	float* normals = nullptr;
 
+	uint num_textcoord = 0;
+	uint idTexture = 0; // id in VRAM
+	uint idDevilImage = 0;
+	float* textures = nullptr;
+	char* tex_name;
+
 };
 
 class GeometryLoader : public Module

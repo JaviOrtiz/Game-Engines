@@ -34,6 +34,9 @@
     <Filter Include="Sources\Assimp">
       <UniqueIdentifier>{37066598-ed2b-4b25-8d48-c2d04f0c06ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Devil">
+      <UniqueIdentifier>{29c04405-0208-486a-886a-b80f6ca296d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -348,6 +351,30 @@
     <ClInclude Include="ModuleEditor.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Devil\include\config.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\devil_internal_exports.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\il.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\il_wrap.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilu.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilu_region.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilut.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilut_config.h">
+      <Filter>Sources\Devil</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -564,6 +591,9 @@
     </None>
     <None Include="MathGeoLib\Math\Matrix.inl">
       <Filter>Sources\MathGeoLib</Filter>
+    </None>
+    <None Include="Devil\include\config.h.win">
+      <Filter>Sources\Devil</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

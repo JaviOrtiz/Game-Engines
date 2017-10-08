@@ -5,10 +5,14 @@
 #include "Assimp\include\postprocess.h"
 #include "Assimp\include\cfileio.h"
 #include "GeometryLoader.h"
-
+#include"Devil\include\ilut.h"
 #include "SDL\include\SDL_opengl.h"
 
 #pragma comment (lib,"Assimp/libx86/assimp.lib")
+#pragma comment (lib, "Devil/libx86/DevIL.lib")
+#pragma comment (lib, "Devil/libx86/ILU.lib")
+#pragma comment (lib, "Devil/libx86/ILUT.lib")
+
 
 GeometryLoader::GeometryLoader(Application * app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -21,6 +25,23 @@ GeometryLoader::~GeometryLoader()
 
 bool GeometryLoader::Start()
 {
+
+	ilutRenderer(ILUT_OPENGL);
+	ilInit();
+	iluInit();
+	ilutInit();
+	ilutRenderer(ILUT_OPENGL);
+
+	ilClearColour(255, 255, 255, 000);
+
+	//Check for error
+	ILenum ilError = ilGetError();
+	if (ilError != IL_NO_ERROR)
+	{
+		LOG("IlInit error!!");
+	}
+
+
 	struct aiLogStream stream;
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
@@ -84,6 +105,7 @@ bool GeometryLoader::LoadFile(const char* full_path)
 					}
 				}
 
+
 				glGenBuffers(1, (GLuint*)&m->idIndices);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->idIndices);
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * m->numIndices, m->indices, GL_STATIC_DRAW);
@@ -97,6 +119,18 @@ bool GeometryLoader::LoadFile(const char* full_path)
 				glBindBuffer(GL_ARRAY_BUFFER, m->idNormals);
 				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->normals, GL_STATIC_DRAW);
 			}
+			if (scene->mMeshes[i]->HasTextureCoords(0))
+			{
+				m->textures = new float[m->numVertices * 2];
+
+				for (int x = 0; x < scene->mMeshes[i]->mNumVertices; ++x) {
+
+					m->textures[x * 2] = scene->mMeshes[i]->mTextureCoords[0][x].x;
+					m->textures[x * 2 + 1] = scene->mMeshes[i]->mTextureCoords[0][x].y;
+				}
+
+				//memcpy(m->mesh.textures_coord, scene->mMeshes[i]->mTextureCoords[0], sizeof(float) * m->mesh.num_vertices * 2);
+			}
 			geometryvector.push_back(m);
 		}
 		
@@ -107,59 +141,4 @@ bool GeometryLoader::LoadFile(const char* full_path)
 		LOG("Error loading scene %s", full_path);
 		return false;
 	}
-	/*
-	const aiScene* scene = aiImportFile(full_path, aiProcessPreset_TargetRealtime_MaxQuality);
-	if (scene != nullptr && scene->HasMeshes())
-	{
-		for (int i = 0; i < scene->mNumMeshes; i++)
-		{
-			Geometry new_geo;
-
-			const aiMesh* new_mesh = scene->mMeshes[i];
-			new_geo.num_vertices = new_mesh->mNumVertices;
-			new_geo.vertices = new float[new_geo.num_vertices * 3];
-			memcpy(new_geo.vertices, new_mesh->mVertices, sizeof(float) * new_geo.num_vertices * 3);
-			App->Console.AddLog("New mesh with %d vertices", new_geo.num_vertices);
-
-			new_geo.id_vertices = vertices_id;
-			new_geo.id_indices = index_id;
-			// Use scene->mNumMeshes to iterate on scene->mMeshes array
-			if (new_mesh->HasFaces())
-			{
-				new_geo.num_indices = new_mesh->mNumFaces * 3;
-				new_geo.indices = new uint[new_geo.num_indices]; // assume each face is a triangle
-				for (uint i = 0; i < new_mesh->mNumFaces; ++i)
-				{
-					if (new_mesh->mFaces[i].mNumIndices != 3)
-					{
-						App->Console.AddLog("WARNING, geometry face with != 3 indices!");
-					}
-					else
-					{
-						memcpy(&new_geo.indices[i * 3], new_mesh->mFaces[i].mIndices, 3 * sizeof(uint));
-					}
-				}
-			}
-			geometryvector.push_back(new_geo);
-
-		}
-		BindMeshToBuffer();
-
-
-		aiReleaseImport(scene);
-	}
-	else
-		App->Console.AddLog("Error loading scene %s", full_path);
-		*/
-}
-
-void GeometryLoader::BindMeshToBuffer()
-{
-	/*for (std::vector<Geometry>::iterator it = geometryvector.begin(); it != geometryvector.end(); it++)
-	{
-		glGenBuffers(1, &it->id_vertices);
-		App->Console.AddLog("the mesh id is %d",it->id_vertices);
-		glBindBuffer(GL_ARRAY_BUFFER, it->id_vertices);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * it->numVertices * 3, it->vertices, GL_STATIC_DRAW);
-	}*/
 }
