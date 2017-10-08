@@ -8,7 +8,6 @@ Application::Application()
 	scene_intro = new ModuleSceneIntro(this);
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
-	physics = new ModulePhysics3D(this);
 	player = new ModulePlayer(this);
 	imgui = new ModuleImGui(this);
 	geometryloader = new GeometryLoader(this);
@@ -22,14 +21,12 @@ Application::Application()
 	AddModule(input);
 	AddModule(audio);
 	AddModule(geometryloader);
-	AddModule(physics);
 
 	// Renderer last!
 	AddModule(renderer3D);
 	AddModule(imgui);
 
 	window->name = "Window";
-	physics->name = "Physics";
 	camera->name = "Camera";
 	input->name = "Input";
 	audio->name = "Audio";
