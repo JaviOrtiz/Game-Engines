@@ -47,7 +47,7 @@ bool GeometryLoader::Start()
 	aiAttachLogStream(&stream);
 
 	//LoadFile("warrior.FBX");
-	LoadFile("Soraka.obj");
+	//LoadFile("Sorakilla.obj");
 	return true;
 }
 
@@ -119,7 +119,8 @@ bool GeometryLoader::LoadFile(const char* full_path)
 				glBindBuffer(GL_ARRAY_BUFFER, m->idNormals);
 				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->normals, GL_STATIC_DRAW);
 			}
-			if (scene->mMeshes[i]->HasTextureCoords(0))
+		
+			if (newMesh->HasTextureCoords(0))
 			{
 				m->textures = new float[m->numVertices * 2];
 
@@ -128,9 +129,14 @@ bool GeometryLoader::LoadFile(const char* full_path)
 					m->textures[x * 2] = scene->mMeshes[i]->mTextureCoords[0][x].x;
 					m->textures[x * 2 + 1] = scene->mMeshes[i]->mTextureCoords[0][x].y;
 				}
+				m->tex_name = "Challenger Ahri.png";
 
-				//memcpy(m->mesh.textures_coord, scene->mMeshes[i]->mTextureCoords[0], sizeof(float) * m->mesh.num_vertices * 2);
-			}
+				LoadImage_devil(m->tex_name, &m->idDevilImage);
+
+				glGenBuffers(1, (GLuint*)&(m->idTexture));
+				glBindBuffer(GL_ARRAY_BUFFER, m->idTexture);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(float) *m->numVertices * 2, &m->textures[0], GL_STATIC_DRAW);
+				}
 			geometryvector.push_back(m);
 		}
 		
@@ -141,4 +147,81 @@ bool GeometryLoader::LoadFile(const char* full_path)
 		LOG("Error loading scene %s", full_path);
 		return false;
 	}
+}
+
+GLuint GeometryLoader::LoadImage_devil(const char * theFileName, GLuint *buff)
+{
+
+	//Texture loading success
+	bool textureLoaded = false;
+
+	//Generate and set current image ID
+	uint imgID = 0;
+	ilGenImages(1, &imgID);
+	ilBindImage(imgID);
+
+	//Load image
+	ILboolean success = ilLoadImage(theFileName);
+
+	//Image loaded successfully
+	if (success == IL_TRUE)
+	{
+		ILinfo ImageInfo;
+		iluGetImageInfo(&ImageInfo);
+		if (ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+		{
+			iluFlipImage();
+		}
+
+		//Convert image to RGBA
+		success = ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+
+		if (success == IL_TRUE)
+		{
+			textureLoaded = loadTextureFromPixels32((GLuint*)ilGetData(), (GLuint)ilGetInteger(IL_IMAGE_WIDTH), (GLuint)ilGetInteger(IL_IMAGE_HEIGHT), buff);
+			//Create texture from file pixels
+			textureLoaded = true;
+		}
+
+		//Delete file from memory
+		ilDeleteImages(1, &imgID);
+	}
+
+	//Report error
+	if (!textureLoaded)
+	{
+
+	}
+	return textureLoaded;
+
+}
+
+bool GeometryLoader::loadTextureFromPixels32(GLuint * id_pixels, GLuint width_img, GLuint height_img, GLuint *buff)
+{
+
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, buff);
+	glBindTexture(GL_TEXTURE_2D, *buff);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_img, height_img,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, id_pixels);
+	glBindTexture(GL_TEXTURE_2D, NULL);
+	//Check for error
+	GLenum error = glGetError();
+	if (error != GL_NO_ERROR)
+	{
+		printf("Error loading texture from %p pixels! %s\n", id_pixels, gluErrorString(error));
+		return false;
+	}
+
+	return true;
+}
+
+void GeometryLoader::ClearGeometryvector()
+{
+	geometryvector.clear();
 }

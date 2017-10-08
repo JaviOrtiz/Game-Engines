@@ -42,7 +42,12 @@ public:
 	bool CleanUp();
 
 	bool LoadFile(const char* full_path);
-	void BindMeshToBuffer();
+	//void BindMeshToBuffer();
+
+	GLuint LoadImage_devil(const char* theFileName, GLuint *buff);
+	bool loadTextureFromPixels32(GLuint * id_pixels, GLuint width, GLuint height, GLuint *buff);
+
+	void ClearGeometryvector();
 public:
 
 	std::vector<Geometry*> geometryvector;

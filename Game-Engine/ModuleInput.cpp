@@ -116,6 +116,7 @@ update_status ModuleInput::PreUpdate(float dt)
 			case (SDL_DROPFILE): {      // In case if dropped file
 				dropped_filedir = e.drop.file;
 				// Shows directory of dropped file
+				App->geometryloader->ClearGeometryvector();
 				App->geometryloader->LoadFile(dropped_filedir);
 				SDL_ShowSimpleMessageBox(
 					SDL_MESSAGEBOX_INFORMATION,

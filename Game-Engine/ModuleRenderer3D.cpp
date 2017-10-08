@@ -163,6 +163,10 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 void ModuleRenderer3D::Render(Geometry toDraw)
 {
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, toDraw.idDevilImage);
+
 	if (WireFrame)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
@@ -184,6 +188,14 @@ void ModuleRenderer3D::Render(Geometry toDraw)
 			glLineWidth(1.0f);
 			glColor3f(1.0f, 1.0f, 1.0f);
 		}
+	}
+
+	if (toDraw.textures != nullptr) {
+
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, toDraw.idTexture);
+		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+
 	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);

@@ -66,7 +66,7 @@ public:
 	bool directDraw = false;
 	bool ArrayDraw = false;
 	bool IndexDraw = false;
-	bool drawnormals = true;
+	bool drawnormals = false;
 	PPlane* grid;
 	PSphere* circle;
 	PCylinder* cyl;
