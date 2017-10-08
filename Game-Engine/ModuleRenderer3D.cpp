@@ -170,13 +170,20 @@ void ModuleRenderer3D::Render(Geometry toDraw)
 
 	glPushMatrix();
 
-	if (toDraw.idNormals > 0)
-	{
-		glEnable(GL_LIGHTING);
-		glEnableClientState(GL_NORMAL_ARRAY);
+	if (drawnormals && toDraw.normals != nullptr) {
+		for (uint i = 0; i < toDraw.numVertices * 3; i += 3)
+		{
+			glLineWidth(2.0f);
+			glColor3f(1.0f, 0.0f, 0.0f);
 
-		glBindBuffer(GL_ARRAY_BUFFER, toDraw.idNormals);
-		glNormalPointer(GL_FLOAT, 0, NULL);
+			glBegin(GL_LINES);
+			glVertex3f(toDraw.vertices[i], toDraw.vertices[i + 1], toDraw.vertices[i + 2]);
+			glVertex3f(toDraw.vertices[i] + toDraw.normals[i], toDraw.vertices[i + 1] + toDraw.normals[i + 1], toDraw.vertices[i + 2] + toDraw.normals[i + 2]);
+			glEnd();
+
+			glLineWidth(1.0f);
+			glColor3f(1.0f, 1.0f, 1.0f);
+		}
 	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);

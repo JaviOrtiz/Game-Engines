@@ -56,18 +56,18 @@ c:\users\danii\documents\github\game-engines\game-engine\mathgeolib\geometry\AAB
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
 c:\users\danii\documents\github\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\string.h(136): note: see declaration of 'strcpy'
-ModuleRenderer3D.cpp(268): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-ModuleRenderer3D.cpp(278): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-ModuleRenderer3D.cpp(288): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-ModuleRenderer3D.cpp(298): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-ModuleRenderer3D.cpp(308): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-ModuleRenderer3D.cpp(318): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-ModuleRenderer3D.cpp(329): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
-ModuleRenderer3D.cpp(339): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
-ModuleRenderer3D.cpp(350): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
-ModuleRenderer3D.cpp(360): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
-ModuleRenderer3D.cpp(370): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
-ModuleRenderer3D.cpp(380): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+ModuleRenderer3D.cpp(275): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ModuleRenderer3D.cpp(285): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ModuleRenderer3D.cpp(295): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ModuleRenderer3D.cpp(305): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ModuleRenderer3D.cpp(315): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ModuleRenderer3D.cpp(325): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+ModuleRenderer3D.cpp(336): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+ModuleRenderer3D.cpp(346): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+ModuleRenderer3D.cpp(357): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+ModuleRenderer3D.cpp(367): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+ModuleRenderer3D.cpp(377): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
+ModuleRenderer3D.cpp(387): warning C4800: 'double': forcing value to bool 'true' or 'false' (performance warning)
   ModuleSceneIntro.cpp
 c:\users\danii\documents\github\game-engines\game-engine\mathgeolib\geometry\AABB2D.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\stdio.h(1772): note: see declaration of 'sprintf'
@@ -80,11 +80,10 @@ c:\users\danii\documents\github\game-engines\game-engine\imguiconsole.h(135): wa
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\string.h(136): note: see declaration of 'strcpy'
 ModuleWindow.cpp(217): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 ModuleWindow.cpp(228): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Primitive.cpp
   Generating code
-  15 of 2117 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
-    12 functions had inline decision re-evaluated but remain unchanged
+  7 of 2117 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   3D Physics.vcxproj -> C:\Users\Danii\Documents\GitHub\Game-Engines\Game-Engine\Release\3D Physics - class6.exe
   3D Physics.vcxproj -> C:\Users\Danii\Documents\GitHub\Game-Engines\Game-Engine\Release\3D Physics - class6.pdb (Full PDB)
