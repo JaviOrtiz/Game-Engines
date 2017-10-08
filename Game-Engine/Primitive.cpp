@@ -1,7 +1,6 @@
 
 #include "Globals.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
+
 #include "Primitive.h"
 #include "glut/glut.h"
 
@@ -23,7 +22,7 @@ void Primitive::Render() const
 	glPushMatrix();
 	glMultMatrixf(transform.M);
 
-	if(axis == true)
+	if (axis == true)
 	{
 		// Draw Axis Grid
 		glLineWidth(2.0f);
@@ -57,7 +56,7 @@ void Primitive::Render() const
 
 	glColor3f(color.r, color.g, color.b);
 
-	if(wire)
+	if (wire)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -100,18 +99,18 @@ void Primitive::Scale(float x, float y, float z)
 }
 
 // CUBE ============================================
-Ccube::Ccube() : Primitive(), size(1.0f, 1.0f, 1.0f)
+Cube::Cube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 {
 	type = PrimitiveTypes::Primitive_Cube;
 }
 
-Ccube::Ccube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
+Cube::Cube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
 {
 	type = PrimitiveTypes::Primitive_Cube;
 }
 
-void Ccube::InnerRender() const
-{	
+void Cube::InnerRender() const
+{
 	float sx = size.x * 0.5f;
 	float sy = size.y * 0.5f;
 	float sz = size.z * 0.5f;
@@ -120,79 +119,79 @@ void Ccube::InnerRender() const
 
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f(-sx, -sy, sz);
-	glVertex3f( sx, -sy, sz);
-	glVertex3f( sx,  sy, sz);
-	glVertex3f(-sx,  sy, sz);
+	glVertex3f(sx, -sy, sz);
+	glVertex3f(sx, sy, sz);
+	glVertex3f(-sx, sy, sz);
 
 	glNormal3f(0.0f, 0.0f, -1.0f);
-	glVertex3f( sx, -sy, -sz);
+	glVertex3f(sx, -sy, -sz);
 	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(-sx,  sy, -sz);
-	glVertex3f( sx,  sy, -sz);
+	glVertex3f(-sx, sy, -sz);
+	glVertex3f(sx, sy, -sz);
 
 	glNormal3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(sx, -sy,  sz);
+	glVertex3f(sx, -sy, sz);
 	glVertex3f(sx, -sy, -sz);
-	glVertex3f(sx,  sy, -sz);
-	glVertex3f(sx,  sy,  sz);
+	glVertex3f(sx, sy, -sz);
+	glVertex3f(sx, sy, sz);
 
 	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(-sx, -sy,  sz);
-	glVertex3f(-sx,  sy,  sz);
-	glVertex3f(-sx,  sy, -sz);
+	glVertex3f(-sx, -sy, sz);
+	glVertex3f(-sx, sy, sz);
+	glVertex3f(-sx, sy, -sz);
 
 	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-sx, sy,  sz);
-	glVertex3f( sx, sy,  sz);
-	glVertex3f( sx, sy, -sz);
+	glVertex3f(-sx, sy, sz);
+	glVertex3f(sx, sy, sz);
+	glVertex3f(sx, sy, -sz);
 	glVertex3f(-sx, sy, -sz);
 
 	glNormal3f(0.0f, -1.0f, 0.0f);
 	glVertex3f(-sx, -sy, -sz);
-	glVertex3f( sx, -sy, -sz);
-	glVertex3f( sx, -sy,  sz);
-	glVertex3f(-sx, -sy,  sz);
+	glVertex3f(sx, -sy, -sz);
+	glVertex3f(sx, -sy, sz);
+	glVertex3f(-sx, -sy, sz);
 
 	glEnd();
 }
 
 // SPHERE ============================================
-Ssphere::Ssphere() : Primitive(), radius(1.0f)
+PSphere::PSphere() : Primitive(), radius(1.0f)
 {
 	type = PrimitiveTypes::Primitive_Sphere;
 }
 
-Ssphere::Ssphere(float radius) : Primitive(), radius(radius)
+PSphere::PSphere(float radius) : Primitive(), radius(radius)
 {
 	type = PrimitiveTypes::Primitive_Sphere;
 }
 
-void Ssphere::InnerRender() const
+void PSphere::InnerRender() const
 {
 	glutSolidSphere(radius, 25, 25);
 }
 
 
 // CYLINDER ============================================
-Ccylinder::Ccylinder() : Primitive(), radius(1.0f), height(1.0f)
+PCylinder::PCylinder() : Primitive(), radius(1.0f), height(1.0f)
 {
 	type = PrimitiveTypes::Primitive_Cylinder;
 }
 
-Ccylinder::Ccylinder(float radius, float height) : Primitive(), radius(radius), height(height)
+PCylinder::PCylinder(float radius, float height) : Primitive(), radius(radius), height(height)
 {
 	type = PrimitiveTypes::Primitive_Cylinder;
 }
 
-void Ccylinder::InnerRender() const
+void PCylinder::InnerRender() const
 {
 	int n = 30;
 
 	// Cylinder Bottom
-	glBegin(GL_POLYGON);
-	
-	for(int i = 360; i >= 0; i -= (360 / n))
+	glBegin(GL_QUADS);
+
+	for (int i = 360; i >= 0; i -= (360 / n))
 	{
 		float a = i * M_PI / 180; // degrees to radians
 		glVertex3f(-height*0.5f, radius * cos(a), radius * sin(a));
@@ -200,9 +199,9 @@ void Ccylinder::InnerRender() const
 	glEnd();
 
 	// Cylinder Top
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 0.0f, 1.0f);
-	for(int i = 0; i <= 360; i += (360 / n))
+	for (int i = 0; i <= 360; i += (360 / n))
 	{
 		float a = i * M_PI / 180; // degrees to radians
 		glVertex3f(height * 0.5f, radius * cos(a), radius * sin(a));
@@ -211,30 +210,30 @@ void Ccylinder::InnerRender() const
 
 	// Cylinder "Cover"
 	glBegin(GL_QUAD_STRIP);
-	for(int i = 0; i < 480; i += (360 / n))
+	for (int i = 0; i < 480; i += (360 / n))
 	{
 		float a = i * M_PI / 180; // degrees to radians
 
-		glVertex3f(height*0.5f,  radius * cos(a), radius * sin(a) );
-		glVertex3f(-height*0.5f, radius * cos(a), radius * sin(a) );
+		glVertex3f(height*0.5f, radius * cos(a), radius * sin(a));
+		glVertex3f(-height*0.5f, radius * cos(a), radius * sin(a));
 	}
 	glEnd();
 }
 
 // LINE ==================================================
-Lline::Lline() : Primitive(), origin(0, 0, 0), destination(1, 1, 1)
+PLine::PLine() : Primitive(), origin(0, 0, 0), destination(1, 1, 1)
 {
 	type = PrimitiveTypes::Primitive_Line;
 }
 
-Lline::Lline(float x, float y, float z) : Primitive(), origin(0, 0, 0), destination(x, y, z)
+PLine::PLine(float x, float y, float z) : Primitive(), origin(0, 0, 0), destination(x, y, z)
 {
 	type = PrimitiveTypes::Primitive_Line;
 }
 
-void Lline::InnerRender() const
+void PLine::InnerRender() const
 {
-	glLineWidth(2.0f);
+	glLineWidth(1.0f);
 
 	glBegin(GL_LINES);
 
@@ -247,17 +246,17 @@ void Lline::InnerRender() const
 }
 
 // PLANE ==================================================
-Pplane::Pplane() : Primitive(), normal(0, 1, 0), constant(1)
+PPlane::PPlane() : Primitive(), normal(0, 1, 0), constant(1)
 {
 	type = PrimitiveTypes::Primitive_Plane;
 }
 
-Pplane::Pplane(float x, float y, float z, float d) : Primitive(), normal(x, y, z), constant(d)
+PPlane::PPlane(float x, float y, float z, float d) : Primitive(), normal(x, y, z), constant(d)
 {
 	type = PrimitiveTypes::Primitive_Plane;
 }
 
-void Pplane::InnerRender() const
+void PPlane::InnerRender() const
 {
 	glLineWidth(1.0f);
 
@@ -265,7 +264,7 @@ void Pplane::InnerRender() const
 
 	float d = 200.0f;
 
-	for(float i = -d; i <= d; i += 1.0f)
+	for (float i = -d; i <= d; i += 1.0f)
 	{
 		glVertex3f(i, 0.0f, -d);
 		glVertex3f(i, 0.0f, d);

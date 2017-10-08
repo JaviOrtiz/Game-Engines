@@ -20,6 +20,12 @@ ModuleRenderer3D::~ModuleRenderer3D()
 // Called before render is available
 bool ModuleRenderer3D::Init()
 {
+	grid = new PPlane(0,0,0,10);
+	circle = new PSphere(2);
+	circle->SetPos(7, 0, 0);
+	cyl = new PCylinder(2, 7);
+	cyl->SetPos(-7, 0, 0);
+
 	LOG("Creating 3D Renderer context");
 	App->Console.AddLog("Creating 3D Renderer context");
 	bool ret = true;
@@ -142,6 +148,11 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	grid->Render();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	cyl->Render();
+	circle->Render();
 	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
 	{
 		Render((**it));

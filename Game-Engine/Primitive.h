@@ -1,4 +1,3 @@
-
 #pragma once
 #include "glmath.h"
 #include "Color.h"
@@ -27,43 +26,43 @@ public:
 	PrimitiveTypes	GetType() const;
 
 public:
-	
+
 	Color color;
 	mat4x4 transform;
-	bool axis,wire;
+	bool axis, wire;
 
 protected:
 	PrimitiveTypes type;
 };
 
 // ============================================
-class Ccube : public Primitive
+class Cube : public Primitive
 {
-public :
-	Ccube();
-	Ccube(float sizeX, float sizeY, float sizeZ);
+public:
+	Cube();
+	Cube(float sizeX, float sizeY, float sizeZ);
 	void InnerRender() const;
 public:
 	vec3 size;
 };
 
 // ============================================
-class Ssphere : public Primitive
+class PSphere : public Primitive
 {
 public:
-	Ssphere();
-	Ssphere(float radius);
+	PSphere();
+	PSphere(float radius);
 	void InnerRender() const;
 public:
 	float radius;
 };
 
 // ============================================
-class Ccylinder : public Primitive
+class PCylinder : public Primitive
 {
 public:
-	Ccylinder();
-	Ccylinder(float radius, float height);
+	PCylinder();
+	PCylinder(float radius, float height);
 	void InnerRender() const;
 public:
 	float radius;
@@ -71,11 +70,11 @@ public:
 };
 
 // ============================================
-class Lline : public Primitive
+class PLine : public Primitive
 {
 public:
-	Lline();
-	Lline(float x, float y, float z);
+	PLine();
+	PLine(float x, float y, float z);
 	void InnerRender() const;
 public:
 	vec3 origin;
@@ -83,11 +82,11 @@ public:
 };
 
 // ============================================
-class Pplane : public Primitive
+class PPlane : public Primitive
 {
 public:
-	Pplane();
-	Pplane(float x, float y, float z, float d);
+	PPlane();
+	PPlane(float x, float y, float z, float d);
 	void InnerRender() const;
 public:
 	vec3 normal;

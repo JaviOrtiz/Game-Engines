@@ -44,10 +44,10 @@ public:
 	float acceleration;
 	float brake;
 
-	Ccylinder Helix1;
-	Ccylinder Helix2;
-	Ccylinder Helix3;
-	Ccylinder Helix4;
+	PCylinder Helix1;
+	PCylinder Helix2;
+	PCylinder Helix3;
+	PCylinder Helix4;
 
 	PhysBody3D* h1;
 	PhysBody3D* h2;
