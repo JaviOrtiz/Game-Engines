@@ -11,6 +11,11 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include "GeometryLoader.h"
+#include "Devil\include\il.h"
+
+#pragma comment (lib, "DevIL/libx86/DevIL.lib")
+#pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib  */  
+#pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib  */ 
 
 #define MAX_LIGHTS 8
  struct Mesh
