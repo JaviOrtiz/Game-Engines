@@ -51,6 +51,7 @@ public:
 public:
 
 	std::vector<Geometry*> geometryvector;
+	AABB BoundingBox;
 
 	uint index_id = 0;
 	uint vertices_id = 0;

@@ -100,7 +100,8 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
-
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+		RecentreCameraToGeometry();
 	
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
@@ -160,4 +161,39 @@ void ModuleCamera3D::CalculateViewMatrix()
 {
 	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
+
+
+}
+
+void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
+{
+	if (meshAABB == nullptr)
+		Reference = vec3(0.0f, 0.0f, 0.0f);
+	else
+	{
+		vec centre = meshAABB->CenterPoint();
+		Reference = vec3(centre.x, centre.y, centre.z);
+		LastCentreGeometry = meshAABB;
+
+		
+		Z = normalize(Position - Reference);
+		
+
+		vec difference = meshAABB->maxPoint - meshAABB->minPoint;
+		float wide = difference.Length() + 2.0f; 
+		float FOVdistance = (wide * 0.5f) / tan(60.0f * 0.5f * DEGTORAD);
+
+																		 
+
+		Position = Z * FOVdistance;
+
+		// Recalculate matrix (CalculateViewMatrix is called inside LookAt)-------------
+		LookAt(Reference);
+		/**/
+	}
+}
+
+void ModuleCamera3D::RecentreCameraToGeometry()
+{
+	CenterCameraToGeometry(LastCentreGeometry);
 }

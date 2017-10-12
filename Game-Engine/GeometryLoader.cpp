@@ -53,7 +53,14 @@ bool GeometryLoader::Start()
 
 update_status GeometryLoader::PreUpdate(float dt)
 {
+	if (App->input->dropped==true)
+	{
+		BoundingBox.SetNegativeInfinity();
+		for (std::vector<Geometry*>::iterator item = geometryvector.begin(); item != geometryvector.cend(); ++item)
+			BoundingBox.Enclose((float3*)(*item)->vertices, (*item)->numVertices);
 
+		App->camera->CenterCameraToGeometry(&BoundingBox);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -138,8 +145,10 @@ bool GeometryLoader::LoadFile(const char* full_path)
 				glBufferData(GL_ARRAY_BUFFER, sizeof(float) *m->numVertices * 2, &m->textures[0], GL_STATIC_DRAW);
 				}
 			geometryvector.push_back(m);
+			
+			
 		}
-		
+		App->input->dropped = false;
 		aiReleaseImport(scene);
 		return true;
 	}
