@@ -53,14 +53,7 @@ bool GeometryLoader::Start()
 
 update_status GeometryLoader::PreUpdate(float dt)
 {
-	/*if (App->input->dropped==true)
-	{
-		BoundingBox.SetNegativeInfinity();
-		for (std::vector<Geometry*>::iterator item = geometryvector.begin(); item != geometryvector.cend(); ++item)
-			BoundingBox.Enclose((float3*)(*item)->vertices, (*item)->numVertices);
-
-		App->camera->CenterCameraToGeometry(&BoundingBox);
-	}*/
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -86,9 +79,9 @@ bool GeometryLoader::LoadFile(const char* full_path)
 		//Loading meshes
 		LoadMesh(node, scene, newgeo);
 
-		for (int i = 0; i < newgeo->geometryvector.size(); i++)
+		for (int i = 0; i < newgeo->meshvector.size(); i++)
 		{
-			newgeo->numTriangles += newgeo->geometryvector[i]->numTriangles;
+			newgeo->numTriangles += newgeo->meshvector[i]->numTriangles;
 
 		}
 		geometryvector.push_back(newgeo);
@@ -182,12 +175,18 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 		newMesh->name = node->mName.C_Str();
 		newMesh->numTriangles = mesh->mNumFaces;
 		//Push new mesh
-		newgeo->geometryvector.push_back(newMesh);
+		newgeo->meshvector.push_back(newMesh);
 	}
 	for (uint i = 0; i < node->mNumChildren; i++)
 	{
 		LoadMesh(node->mChildren[i], scene,newgeo);
 	}
+
+	BoundingBox.SetNegativeInfinity();
+	for (std::vector<ModelMesh*>::iterator item = newgeo->meshvector.begin(); item != newgeo->meshvector.cend(); ++item)
+		BoundingBox.Enclose((float3*)(*item)->vertices, (*item)->numVertices);
+
+	App->camera->CenterCameraToGeometry(&BoundingBox);
 }
 
 GLuint GeometryLoader::LoadImage_devil(const char * theFileName, GLuint *buff)

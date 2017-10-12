@@ -46,7 +46,7 @@ struct Geometry
 	aiQuaternion rotation;
 	aiVector3D scale;
 
-	std::vector<ModelMesh*> geometryvector;
+	std::vector<ModelMesh*> meshvector;
 };
 
 class GeometryLoader : public Module

@@ -150,7 +150,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
 	{
-		for (std::vector<ModelMesh*>::iterator re = (*it)->geometryvector.begin(); re != (*it)->geometryvector.end(); ++re)
+		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
 		{
 			Render((**re));
 		}
