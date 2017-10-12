@@ -21,10 +21,6 @@ ModuleRenderer3D::~ModuleRenderer3D()
 bool ModuleRenderer3D::Init()
 {
 	grid = new PPlane(0,0,0,10);
-	circle = new PSphere(2);
-	circle->SetPos(7, 0, 0);
-	cyl = new PCylinder(2, 7);
-	cyl->SetPos(-7, 0, 0);
 
 	LOG("Creating 3D Renderer context");
 	App->Console.AddLog("Creating 3D Renderer context");
@@ -151,20 +147,21 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	grid->Render();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	cyl->Render();
-	circle->Render();
+
 	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
 	{
-		Render((**it));
+		for (std::vector<ModelMesh*>::iterator re = (*it)->geometryvector.begin(); re != (*it)->geometryvector.end(); ++re)
+		{
+			Render((**re));
+		}
 	}
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleRenderer3D::Render(Geometry toDraw)
+void ModuleRenderer3D::Render(ModelMesh toDraw)
 {
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindTexture(GL_TEXTURE_2D, toDraw.idDevilImage);
 
 	if (WireFrame)
@@ -209,7 +206,7 @@ void ModuleRenderer3D::Render(Geometry toDraw)
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_ELEMENT_ARRAY_BUFFER);
-
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glPopMatrix();
 	glUseProgram(0);
 }

@@ -53,21 +53,18 @@ bool GeometryLoader::Start()
 
 update_status GeometryLoader::PreUpdate(float dt)
 {
-	if (App->input->dropped==true)
+	/*if (App->input->dropped==true)
 	{
 		BoundingBox.SetNegativeInfinity();
 		for (std::vector<Geometry*>::iterator item = geometryvector.begin(); item != geometryvector.cend(); ++item)
 			BoundingBox.Enclose((float3*)(*item)->vertices, (*item)->numVertices);
 
 		App->camera->CenterCameraToGeometry(&BoundingBox);
-	}
+	}*/
 	return UPDATE_CONTINUE;
 }
 
-update_status GeometryLoader::PostUpdate(float dt)
-{
-	return UPDATE_CONTINUE;
-}
+
 
 bool GeometryLoader::CleanUp()
 {
@@ -78,83 +75,118 @@ bool GeometryLoader::CleanUp()
 bool GeometryLoader::LoadFile(const char* full_path)
 {
 	const aiScene* scene = aiImportFile(full_path, aiProcessPreset_TargetRealtime_MaxQuality);
-
+	Geometry* newgeo = new Geometry;
+	aiNode* node = scene->mRootNode;
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		LOG("Scene %s loaded succesfully", full_path);
-		// Use scene->mNumMeshes to iterate on scene->mMeshes array
-		for (int i = 0; i < scene->mNumMeshes; i++)
+		//Loading global geometry info
+		node->mTransformation.Decompose(newgeo->position, newgeo->rotation, newgeo->scale);
+
+		newgeo->name = node->mName.C_Str();
+		//Loading meshes
+		LoadMesh(node, scene, newgeo);
+
+		for (int i = 0; i < newgeo->geometryvector.size(); i++)
 		{
-			aiMesh* newMesh = scene->mMeshes[i];
-			Geometry* m = new Geometry;
-			m->numVertices = newMesh->mNumVertices;
-			m->vertices = new float[m->numVertices * 3];
-			memcpy(m->vertices, newMesh->mVertices, sizeof(float)* m->numVertices * 3);
-			LOG("New mesh with %d vertices", m->numVertices);
+			newgeo->numTriangles += newgeo->geometryvector[i]->numTriangles;
 
-			glGenBuffers(1, (GLuint*)&m->idVertices);
-			glBindBuffer(GL_ARRAY_BUFFER, m->idVertices);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->vertices, GL_STATIC_DRAW);
-
-			if (newMesh->HasFaces())
-			{
-				m->numIndices = newMesh->mNumFaces * 3;
-				m->indices = new uint[m->numIndices];
-				for (uint i = 0; i < newMesh->mNumFaces; ++i)
-				{
-					if (newMesh->mFaces[i].mNumIndices != 3)
-					{
-						LOG("WARNING, geometry face with != 3 indices!");
-					}
-					else
-					{
-						memcpy(&m->indices[i * 3], newMesh->mFaces[i].mIndices, 3 * sizeof(uint));
-					}
-				}
-
-
-				glGenBuffers(1, (GLuint*)&m->idIndices);
-				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->idIndices);
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * m->numIndices, m->indices, GL_STATIC_DRAW);
-			}
-			if (newMesh->HasNormals())
-			{
-				m->normals = new float[m->numVertices * 3];
-				memcpy(m->normals, newMesh->mNormals, sizeof(float) * m->numVertices * 3);
-
-				glGenBuffers(1, (GLuint*) &(m->idNormals));
-				glBindBuffer(GL_ARRAY_BUFFER, m->idNormals);
-				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->normals, GL_STATIC_DRAW);
-			}
-		
-			if (newMesh->HasTextureCoords(0))
-			{
-				m->textures = new float[m->numVertices * 2];
-
-				for (int x = 0; x < scene->mMeshes[i]->mNumVertices; ++x) {
-
-					m->textures[x * 2] = scene->mMeshes[i]->mTextureCoords[0][x].x;
-					m->textures[x * 2 + 1] = scene->mMeshes[i]->mTextureCoords[0][x].y;
-				}
-				m->tex_name = "Challenger Ahri.png";
-
-				LoadImage_devil(m->tex_name, &m->idDevilImage);
-
-				glGenBuffers(1, (GLuint*)&(m->idTexture));
-				glBindBuffer(GL_ARRAY_BUFFER, m->idTexture);
-				glBufferData(GL_ARRAY_BUFFER, sizeof(float) *m->numVertices * 2, &m->textures[0], GL_STATIC_DRAW);
-				}
-			geometryvector.push_back(m);
-			
-			
 		}
-		App->input->dropped = false;
+		geometryvector.push_back(newgeo);
+		App->Console.AddLog("The model %s with %i triangles was loaded correctly",newgeo->name, newgeo->numTriangles);
 		aiReleaseImport(scene);
 		return true;
 	}
 	else {
-		LOG("Error loading scene %s", full_path);
+		App->Console.AddLog("Error loading scene %s", full_path);
 		return false;
+	}
+}
+
+
+void GeometryLoader::ChangeTexture(const char * Path)
+{
+	/*for (int i = 0; i < geometryvector.size(); i++) {
+		Geometry* ActualGeometry = geometryvector[i]; //Passing through every mesh of the geometryvector to change it's texture.
+		ActualGeometry->tex_name = Path;
+		LoadImage_devil(ActualGeometry->tex_name, &ActualGeometry->idDevilImage);
+	}*/
+}
+
+void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* newgeo)
+{
+	for (uint i = 0; i < node->mNumMeshes; i++)
+	{
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		ModelMesh* newMesh = new ModelMesh;
+		newMesh->numVertices = mesh->mNumVertices;
+		newMesh->vertices = new float[newMesh->numVertices * 3];
+		memcpy(newMesh->vertices, mesh->mVertices, sizeof(float)* newMesh->numVertices * 3);
+		App->Console.AddLog("New mesh with %d vertices", newMesh->numVertices);
+
+		glGenBuffers(1, (GLuint*)&newMesh->idVertices);
+		glBindBuffer(GL_ARRAY_BUFFER, newMesh->idVertices);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * newMesh->numVertices * 3, newMesh->vertices, GL_STATIC_DRAW);
+
+		if (mesh->HasFaces())
+		{
+			newMesh->numIndices = mesh->mNumFaces * 3;
+			newMesh->indices = new uint[newMesh->numIndices];
+			for (uint i = 0; i < mesh->mNumFaces; ++i)
+			{
+				if (mesh->mFaces[i].mNumIndices != 3)
+				{
+					App->Console.AddLog("WARNING, geometry face with != 3 indices!");
+				}
+				else
+				{
+					memcpy(&newMesh->indices[i * 3], mesh->mFaces[i].mIndices, 3 * sizeof(uint));
+				}
+			}
+
+
+			glGenBuffers(1, (GLuint*)&newMesh->idIndices);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->idIndices);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * newMesh->numIndices, newMesh->indices, GL_STATIC_DRAW);
+		}
+		if (mesh->HasNormals())
+		{
+			newMesh->normals = new float[newMesh->numVertices * 3];
+			memcpy(newMesh->normals, mesh->mNormals, sizeof(float) * newMesh->numVertices * 3);
+
+			glGenBuffers(1, (GLuint*) &(newMesh->idNormals));
+			glBindBuffer(GL_ARRAY_BUFFER, newMesh->idNormals);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * newMesh->numVertices * 3, newMesh->normals, GL_STATIC_DRAW);
+		}
+		if (mesh->HasTextureCoords(0))
+		{
+			newMesh->textures = new float[newMesh->numVertices * 2];
+
+			for (int x = 0; x < mesh->mNumVertices; ++x) {
+
+				newMesh->textures[x * 2] = mesh->mTextureCoords[0][x].x;
+				newMesh->textures[x * 2 + 1] = mesh->mTextureCoords[0][x].y;
+			}
+			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+			uint numtextures = material->GetTextureCount(aiTextureType_DIFFUSE);
+			aiString path;
+			material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
+			newMesh->tex_name = path.C_Str();
+			LoadImage_devil(newMesh->tex_name, &newMesh->idDevilImage);
+
+			glGenBuffers(1, (GLuint*)&(newMesh->idTexture));
+			glBindBuffer(GL_ARRAY_BUFFER, newMesh->idTexture);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) *newMesh->numVertices * 2, &newMesh->textures[0], GL_STATIC_DRAW);
+		}
+		//SetValues
+		node->mTransformation.Decompose(newMesh->position, newMesh->rotation, newMesh->scale);
+		newMesh->name = node->mName.C_Str();
+		newMesh->numTriangles = mesh->mNumFaces;
+		//Push new mesh
+		newgeo->geometryvector.push_back(newMesh);
+	}
+	for (uint i = 0; i < node->mNumChildren; i++)
+	{
+		LoadMesh(node->mChildren[i], scene,newgeo);
 	}
 }
 

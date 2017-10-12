@@ -180,7 +180,7 @@ void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 		
 
 		vec difference = meshAABB->maxPoint - meshAABB->minPoint;
-		float wide = difference.Length() + 2.0f; 
+		float wide = difference.Length(); 
 		float FOVdistance = (wide * 0.5f) / tan(60.0f * 0.5f * DEGTORAD);
 
 																		 

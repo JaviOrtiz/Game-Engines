@@ -18,16 +18,7 @@
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib  */ 
 
 #define MAX_LIGHTS 8
- struct Mesh
- {		
-	uint idVertices = 0; // id in VRAM 
-	uint numVertices = 0;
-	float* vertices = nullptr;
 
-	uint idIndices = 0; // id in VRAM 
-	uint numIndices = 0;
-	unsigned short* indices = nullptr;
-};
 
 class ModuleRenderer3D : public Module
 {
@@ -46,7 +37,7 @@ public:
 	void SaveConfig(JSON_Object *root);
 	void LoadConfig(JSON_Object *root);
 
-	void Render(Geometry toDraw);
+	void Render(ModelMesh toDraw);
 
 
 
@@ -68,6 +59,4 @@ public:
 	bool IndexDraw = false;
 	bool drawnormals = false;
 	PPlane* grid;
-	PSphere* circle;
-	PCylinder* cyl;
 };
