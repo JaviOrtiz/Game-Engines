@@ -7,6 +7,8 @@
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	name = "Camera";
+
 	CalculateViewMatrix();
 
 	X = vec3(1.0f, 0.0f, 0.0f);
@@ -25,7 +27,6 @@ bool ModuleCamera3D::Start()
 {
 	LOG("Setting up the camera");
 	bool ret = true;
-	Target = App->player->vehicle;
 	/*CameraLocation = vec3(0.0f, 15, 0.0f);
 	ViewVector = vec3(0.0f, 10.05f, 0.0f);
 	camera_dist = 27;*/

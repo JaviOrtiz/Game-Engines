@@ -7,16 +7,15 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
-#include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "ModulePlayer.h"
 #include "ModuleImGui.h"
 #include "imguiconsole.h"
 #include "GeometryLoader.h"
 #include "JConfig.h"
 #include "Assimp\include\ai_assert.h"
 #include"Assimp\include\anim.h"
+#include "ModuleEditor.h"
 
 struct Performance
 {
@@ -32,13 +31,12 @@ public:
 	ModuleWindow* window;
 	ModuleInput* input;
 	ModuleAudio* audio;
-	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
-	ModulePlayer* player;
 	ModuleImGui* imgui;
 	GeometryLoader* geometryloader;
 	JConfig* config;
+	ModuleEditor* editor;
 private:
 
 	Timer	ms_timer;

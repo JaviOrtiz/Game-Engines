@@ -11,6 +11,7 @@
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	name = "Renderer 3D";
 }
 
 // Destructor
@@ -148,16 +149,15 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	grid->Render();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
+	for (std::vector<Geometry*>::iterator it = App->editor->geometryvector.begin(); it != App->editor->geometryvector.end(); ++it)
 	{
 		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
 		{
-			Render((**re));
+			App->renderer3D->Render(**re);
 		}
 	}
 
 	return UPDATE_CONTINUE;
-
 }
 
 void ModuleRenderer3D::Render(ModelMesh toDraw)

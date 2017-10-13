@@ -10,7 +10,7 @@
 #include <string>
 struct ModelMesh
 {
-	//~ModelMesh();
+	~ModelMesh();
 	std::string name;
 	uint idVertices = 0; // id in VRAM 
 	uint numVertices = 0;
@@ -40,7 +40,7 @@ struct ModelMesh
 
 struct Geometry
 {
-	//~Geometry();
+	~Geometry();
 
 	std::string name;
 	uint numTriangles = 0;
@@ -73,14 +73,9 @@ public:
 	GLuint LoadImage_devil(const char* theFileName, GLuint *buff);
 	bool loadTextureFromPixels32(GLuint * id_pixels, GLuint width, GLuint height, GLuint *buff);
 
-	void ClearGeometryvector();
-
 	void ChangeTexture(const char* Path);
 public:
 
-	std::vector<Geometry*> geometryvector;
+	
 	AABB BoundingBox;
-
-	uint index_id = 0;
-	uint vertices_id = 0;
 };

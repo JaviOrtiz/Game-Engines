@@ -7,7 +7,7 @@
 #include "GeometryLoader.h"
 #include"Devil\include\ilut.h"
 #include "SDL\include\SDL_opengl.h"
-
+#include "ModuleEditor.h"
 #pragma comment (lib,"Assimp/libx86/assimp.lib")
 #pragma comment (lib, "Devil/libx86/DevIL.lib")
 #pragma comment (lib, "Devil/libx86/ILU.lib")
@@ -84,7 +84,7 @@ bool GeometryLoader::LoadFile(const char* full_path)
 			newgeo->numTriangles += newgeo->meshvector[i]->numTriangles;
 
 		}
-		geometryvector.push_back(newgeo);
+		App->editor->geometryvector.push_back(newgeo);
 		App->Console.AddLog("The model %s with %i triangles was loaded correctly", newgeo->name.c_str() , newgeo->numTriangles);
 		aiReleaseImport(scene);
 		return true;
@@ -98,7 +98,7 @@ bool GeometryLoader::LoadFile(const char* full_path)
 
 void GeometryLoader::ChangeTexture(const char * Path)
 {
-	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
+	for (std::vector<Geometry*>::iterator it = App->editor->geometryvector.begin(); it != App->editor->geometryvector.end(); ++it)
 	{
 		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
 		{
@@ -269,9 +269,37 @@ bool GeometryLoader::loadTextureFromPixels32(GLuint * id_pixels, GLuint width_im
 	return true;
 }
 
-void GeometryLoader::ClearGeometryvector()
+ModelMesh::~ModelMesh()
 {
-	geometryvector.clear();
+	if (vertices != nullptr)
+	{
+		for (int i = 0; i < sizeof(vertices); i++)
+		{
+			vertices[i] = NULL;
+		}
+	}
+
+	if (indices != nullptr)
+	{
+		for (int i = 0; i < sizeof(indices); i++)
+		{
+			indices[i] = NULL;
+		}
+	}
+	if (normals != nullptr)
+	{
+		for (int i = 0; i < sizeof(normals); i++)
+		{
+			normals[i] = NULL;
+		}
+	}
+	if (textures != nullptr)
+	{
+		for (int i = 0; i < sizeof(textures); i++)
+		{
+			textures[i] = NULL;
+		}
+	}
 }
 
 void ModelMesh::ImGuiDraw()
@@ -291,6 +319,11 @@ void ModelMesh::ImGuiDraw()
 		ImGui::PopItemWidth();
 		ImGui::TreePop();
 	}
+}
+
+Geometry::~Geometry()
+{
+	meshvector.clear();
 }
 
 void Geometry::ImGuiDraw()

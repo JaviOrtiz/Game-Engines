@@ -5,12 +5,11 @@ Application::Application()
 	window = new ModuleWindow(this);
 	input = new ModuleInput(this);
 	audio = new ModuleAudio(this, true);
-	scene_intro = new ModuleSceneIntro(this);
 	renderer3D = new ModuleRenderer3D(this);
 	camera = new ModuleCamera3D(this);
-	player = new ModulePlayer(this);
 	imgui = new ModuleImGui(this);
 	geometryloader = new GeometryLoader(this);
+	editor = new ModuleEditor(this);
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -25,13 +24,12 @@ Application::Application()
 	// Renderer last!
 	AddModule(renderer3D);
 	AddModule(imgui);
+	AddModule(editor);
 
-	window->name = "Window";
-	camera->name = "Camera";
-	input->name = "Input";
-	audio->name = "Audio";
-	renderer3D->name = "Renderer 3D";
-	imgui->name = "ImGui";
+
+
+
+
 }
 
 Application::~Application()

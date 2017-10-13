@@ -1,73 +1,48 @@
-/*#include "Application.h"
+#include "Application.h"
 #include "ModuleEditor.h"
+#include "GeometryLoader.h"
+#include "ModuleRenderer3D.h"
 
-ModuleWorld::ModuleWorld(bool start_enable)
+ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
+{
+	name = "Editor";
+}
+
+ModuleEditor::~ModuleEditor()
 {
 }
 
-ModuleWorld::~ModuleWorld()
+bool ModuleEditor::Init()
 {
-}
-
-bool ModuleWorld::Init()
-{
-	g_vertex_buffer_data= {
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f,-1.0f,
-		1.0f,-1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		1.0f,-1.0f, 1.0f
-	};
 
 	return true;
 }
 
-bool ModuleWorld::Start()
+bool ModuleEditor::Start()
 {
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, g_vertex_buffer_data.size()*sizeof(float)*3, &g_vertex_buffer_data[0], GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glVertexAttribPointer(
-		0,
-		3,                  // size
-		GL_FLOAT,           // class
-		GL_FALSE,           // normalized??
-		0,
-		(void*)0            // buffer gap
+	
 
+	return true;
+}
 
+update_status ModuleEditor::Update(float dt)
+{
 
-}*/
+	for (std::vector<Geometry*>::iterator it = App->editor->geometryvector.begin(); it != App->editor->geometryvector.end(); ++it)
+	{
+		(**it).ImGuiDraw();
+	}
+
+	return UPDATE_CONTINUE;
+}
+
+bool ModuleEditor::CleanUp()
+{
+	ClearGeometryVector();
+	return false;
+}
+
+void ModuleEditor::ClearGeometryVector()
+{
+	geometryvector.clear();
+}

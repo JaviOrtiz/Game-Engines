@@ -6,6 +6,7 @@
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	name = "Input";
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
 	memset(mouse_buttons, KEY_IDLE, sizeof(KEY_STATE) * MAX_MOUSE_BUTTONS);
@@ -120,7 +121,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				uint length = strlen(dropped_filedir);
 				if (strcmp(&dropped_filedir[length - 4], ".FBX") == 0 || strcmp(&dropped_filedir[length - 4], ".fbx") == 0)
 				{
-					App->geometryloader->ClearGeometryvector();
+					App->editor->ClearGeometryVector();
 					App->geometryloader->LoadFile(dropped_filedir);
 				}
 				else if (strcmp(&dropped_filedir[length - 4], ".PNG") == 0 || strcmp(&dropped_filedir[length - 4], ".png") == 0)

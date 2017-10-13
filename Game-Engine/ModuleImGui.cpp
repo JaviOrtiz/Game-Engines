@@ -13,6 +13,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
+#include "ModuleEditor.h"
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
@@ -21,6 +22,7 @@
 ModuleImGui::ModuleImGui(Application * app, bool start_enabled) : Module(app, start_enabled),
 Fps_Plot_Data(FPS_AND_MS_PLOT_DATA_LENGTH), Ms_Plot_Data(FPS_AND_MS_PLOT_DATA_LENGTH)
 {
+	name = "ImGui";
 }
 
 ModuleImGui::~ModuleImGui()
@@ -44,17 +46,14 @@ bool ModuleImGui::Start()
 
 update_status ModuleImGui::PreUpdate(float dt)
 {
+	ImGui_ImplSdlGL3_NewFrame(App->window->window);
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleImGui::PostUpdate(float dt)
 {
-	ImGui_ImplSdlGL3_NewFrame(App->window->window);
+	
 
-	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
-	{
-		(**it).ImGuiDraw();
-	}
 
 	//		MAIN MENU		//
 
