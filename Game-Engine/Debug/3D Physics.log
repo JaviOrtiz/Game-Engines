@@ -1,8 +1,283 @@
-﻿  ModuleCamera3D.cpp
-c:\users\javi\desktop\citm\motores\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  Timer.cpp
+  Primitive.cpp
+  PhysBody3D.cpp
+  ModuleEditor.cpp
+  ModuleWindow.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
-c:\users\javi\desktop\citm\motores\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
-c:\users\javi\desktop\citm\motores\game-engines\game-engine\modulecamera3d.cpp(53): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\3D Physics - class6.exe
-  3D Physics.vcxproj -> C:\Users\Javi\Desktop\Citm\Motores\Game-Engines\Game-Engine\Debug\3D Physics - class6.pdb (Partial PDB)
+c:\users\danii\desktop\game-engines\game-engine\modulewindow.cpp(224): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\modulewindow.cpp(235): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
+  ModuleSceneIntro.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+  ModuleRenderer3D.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(407): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(417): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(427): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(437): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(447): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\modulerenderer3d.cpp(457): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  ModulePlayer.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+  ModuleInput.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+  ModuleImGui.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(242): warning C4244: '=': conversión de 'uint' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\moduleimgui.cpp(243): warning C4244: '=': conversión de 'uint' a 'float'; posible pérdida de datos
+  ModuleCamera3D.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\modulecamera3d.cpp(53): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  ModuleAudio.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+  mmgr.cpp
+  Clock.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  TransformOps.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\transformops.cpp(76): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\transformops.cpp(287): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  SSEMath.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Quat.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\quat.cpp(772): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\quat.cpp(782): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Polynomial.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  MathOps.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  MathLog.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Generando código...
+  Compilando...
+  MathFunc.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\mathfunc.cpp(548): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\mathfunc.cpp(565): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(2260): note: vea la declaración de 'sscanf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(88): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  grisu3_cpp.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  float4x4.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float4x4.cpp(2031): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float4x4.cpp(2067): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(17): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  float4d.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  float4.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float4.cpp(532): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(17): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  float3x4.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float3x4.cpp(1576): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float3x4.cpp(1607): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(17): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  float3x3.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float3x3.cpp(1429): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float3x3.cpp(1457): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(17): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  float3.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float3.cpp(242): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(17): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  float2.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\float2.cpp(242): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(17): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Callstack.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  BitOps.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  TriangleMesh.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Triangle.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\triangle.cpp(1949): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Sphere.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\sphere.cpp(1394): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\sphere.cpp(1414): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\cmath(47): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Ray.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\ray.cpp(368): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Polyhedron.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Polygon.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Plane.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\plane.cpp(919): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\plane.cpp(938): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  PBVolume.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  OBB.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\obb.cpp(2725): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Generando código...
+  Compilando...
+  LineSegment.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\linesegment.cpp(441): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Line.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\line.cpp(363): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Frustum.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\frustum.cpp(1129): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Circle.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\circle.cpp(257): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Capsule.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\capsule.cpp(451): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\capsule.cpp(473): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  AABB.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb.cpp(1207): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  LCG.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\type_traits(2342): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  GJK.cpp
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\xlocale(314): warning C4530: Se ha utilizado el controlador de excepciones de C++, pero la semántica de desenredo no está habilitada. Especifique /EHsc
+d:\visual 2017\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Main.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+  log.cpp
+  Light.cpp
+  JConfig.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+  imgui_impl_sdl_gl3.cpp
+  imgui_draw.cpp
+  imgui_demo.cpp
+  imgui.cpp
+  glmath.cpp
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(12): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(27): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(43): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(53): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(72): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(87): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(103): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(600): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(618): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(758): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\glmath.cpp(778): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+  GeometryLoader.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\geometryloader.cpp(82): warning C4018: '<': no coinciden signed/unsigned
+c:\users\danii\desktop\game-engines\game-engine\geometryloader.cpp(157): warning C4018: '<': no coinciden signed/unsigned
+c:\users\danii\desktop\game-engines\game-engine\geometryloader.cpp(298): warning C4018: '<': no coinciden signed/unsigned
+c:\users\danii\desktop\game-engines\game-engine\assimp\include\quaternion.inl(188): warning C4305: '=': truncamiento de 'double' a 'float'
+  c:\users\danii\desktop\game-engines\game-engine\assimp\include\quaternion.inl(161): note: durante la compilación de la función miembro de plantilla clase de 'aiVector3t<float> aiQuaterniont<float>::GetEuler(void) const'
+  c:\users\danii\desktop\game-engines\game-engine\geometryloader.cpp(275): note: vea la referencia a la creación de instancias de plantilla de función 'aiVector3t<float> aiQuaterniont<float>::GetEuler(void) const' que se está compilando
+  c:\users\danii\desktop\game-engines\game-engine\assimp\include\anim.h(107): note: vea la referencia a la creación de instancias de plantilla clase de 'aiQuaterniont<float>' que se está compilando
+c:\users\danii\desktop\game-engines\game-engine\assimp\include\quaternion.inl(195): warning C4305: '=': truncamiento de 'double' a 'float'
+  Color.cpp
+  Application.cpp
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\geometry\aabb2d.h(132): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\imguiconsole.h(135): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: vea la declaración de 'strcpy'
+c:\users\danii\desktop\game-engines\game-engine\application.cpp(10): warning C4316: 'ModuleCamera3D': puede que el objeto asignado en el montón no esté alineado 16
+c:\users\danii\desktop\game-engines\game-engine\application.cpp(105): warning C4244: '=': conversión de 'float' a 'uint'; posible pérdida de datos
+c:\users\danii\desktop\game-engines\game-engine\application.cpp(187): warning C4244: '=': conversión de 'Uint32' a 'float'; posible pérdida de datos
+  Generando código...
+  grisu3.c
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\grisu3.c(322): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+c:\users\danii\desktop\game-engines\game-engine\mathgeolib\math\grisu3.c(332): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: vea la declaración de 'sprintf'
+  parson.c
+  Generando código...
+  3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\3D Physics - class6.exe
+  3D Physics.vcxproj -> C:\Users\Danii\Desktop\Game-Engines\Game-Engine\Debug\3D Physics - class6.pdb (Partial PDB)

@@ -211,102 +211,10 @@ void ModuleRenderer3D::Render(ModelMesh toDraw)
 	glPopMatrix();
 	glUseProgram(0);
 }
-
+
+
 void ModuleRenderer3D::ImGuiDrawer()
 {
-
-	static ImVec4 color = ImColor(114, 144, 154, 200);
-	int misc_flags = (false ? ImGuiColorEditFlags_HDR : 0) | (false ? ImGuiColorEditFlags_AlphaPreviewHalf : (true ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
-	static bool saved_palette_inited = false;
-	static ImVec4 saved_palette[32];
-	static ImVec4 backup_color;
-	if (!saved_palette_inited)
-		for (int n = 0; n < IM_ARRAYSIZE(saved_palette); n++)
-			ImGui::ColorConvertHSVtoRGB(n / 31.0f, 0.8f, 0.8f, saved_palette[n].x, saved_palette[n].y, saved_palette[n].z);
-	bool open_popup = ImGui::ColorButton("MyColor##3b", color, misc_flags);
-	open_popup |= ImGui::Button("Palette");
-	if (open_popup)
-	{
-		ImGui::OpenPopup("mypicker");
-		backup_color = color;
-	}
-	if (ImGui::BeginPopup("mypicker"))
-	{
-		// FIXME: Adding a drag and drop example here would be perfect!
-		ImGui::Text("Material Palette");
-		ImGui::Separator();
-		ImGui::ColorPicker4("##picker", (float*)&color, misc_flags | ImGuiColorEditFlags_NoSidePreview | ImGuiColorEditFlags_NoSmallPreview);
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("Current");
-		ImGui::ColorButton("##current", color, ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_AlphaPreviewHalf, ImVec2(60, 40));
-		ImGui::Text("Previous");
-		if (ImGui::ColorButton("##previous", backup_color, ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_AlphaPreviewHalf, ImVec2(60, 40)))
-			color = backup_color;
-		ImGui::Separator();
-		ImGui::Text("Palette");
-		for (int n = 0; n < IM_ARRAYSIZE(saved_palette); n++)
-		{
-			ImGui::PushID(n);
-			if ((n % 8) != 0)
-				ImGui::SameLine(0.0f, ImGui::GetStyle().ItemSpacing.y);
-			if (ImGui::ColorButton("##palette", saved_palette[n], ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_NoTooltip, ImVec2(20, 20)))
-				color = ImVec4(saved_palette[n].x, saved_palette[n].y, saved_palette[n].z, color.w); // Preserve alpha!
-			ImGui::PopID();
-			App->renderer3D->red = color.x;
-			App->renderer3D->green = color.y;
-			App->renderer3D->blue = color.z;
-
-		}
-		ImGui::EndGroup();
-		ImGui::EndPopup();
-	}
-	static ImVec4 bcolor = ImColor(114, 144, 154, 200);
-	int bmisc_flags = (false ? ImGuiColorEditFlags_HDR : 0) | (false ? ImGuiColorEditFlags_AlphaPreviewHalf : (true ? ImGuiColorEditFlags_AlphaPreview : 0)) | (true ? 0 : ImGuiColorEditFlags_NoOptions);
-	static bool bsaved_palette_inited = false;
-	static ImVec4 bsaved_palette[32];
-	static ImVec4 bbackup_color;
-	if (!bsaved_palette_inited)
-		for (int n = 0; n < IM_ARRAYSIZE(bsaved_palette); n++)
-			ImGui::ColorConvertHSVtoRGB(n / 31.0f, 0.8f, 0.8f, bsaved_palette[n].x, bsaved_palette[n].y, bsaved_palette[n].z);
-	bool bopen_popup = ImGui::ColorButton("MyBackgroundColor##3b", bcolor, bmisc_flags);
-	bopen_popup |= ImGui::Button("BPalette");
-	if (bopen_popup)
-	{
-		ImGui::OpenPopup("BackGroundPicker");
-		backup_color = color;
-	}
-	if (ImGui::BeginPopup("BackGroundPicker"))
-	{
-		// FIXME: Adding a drag and drop example here would be perfect!
-		ImGui::Text("Material Palette");
-		ImGui::Separator();
-		ImGui::ColorPicker4("##picker", (float*)&bcolor, bmisc_flags | ImGuiColorEditFlags_NoSidePreview | ImGuiColorEditFlags_NoSmallPreview);
-		ImGui::SameLine();
-		ImGui::BeginGroup();
-		ImGui::Text("Current");
-		ImGui::ColorButton("##current", bcolor, ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_AlphaPreviewHalf, ImVec2(60, 40));
-		ImGui::Text("Previous");
-		if (ImGui::ColorButton("##previous", backup_color, ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_AlphaPreviewHalf, ImVec2(60, 40)))
-			bcolor = bbackup_color;
-		ImGui::Separator();
-		ImGui::Text("Palette");
-		for (int n = 0; n < IM_ARRAYSIZE(bsaved_palette); n++)
-		{
-			ImGui::PushID(n);
-			if ((n % 8) != 0)
-				ImGui::SameLine(0.0f, ImGui::GetStyle().ItemSpacing.y);
-			if (ImGui::ColorButton("##palette", bsaved_palette[n], ImGuiColorEditFlags_NoPicker | ImGuiColorEditFlags_NoTooltip, ImVec2(20, 20)))
-				bcolor = ImVec4(bsaved_palette[n].x, bsaved_palette[n].y, bsaved_palette[n].z, bcolor.w); // Preserve alpha!
-			ImGui::PopID();
-			App->renderer3D->bred = bcolor.x;
-			App->renderer3D->bgreen = bcolor.y;
-			App->renderer3D->bblue = bcolor.z;
-
-		}
-		ImGui::EndGroup();
-		ImGui::EndPopup();
-	}
 	if (ImGui::Checkbox("Gl_Deepth_Test", &App->renderer3D->DeepTest))
 	{
 		App->renderer3D->Gl_State(App->renderer3D->DeepTest, GL_DEPTH_TEST);

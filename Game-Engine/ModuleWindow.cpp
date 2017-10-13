@@ -103,27 +103,26 @@ void ModuleWindow::SetTitle(const char* title)
 
 void ModuleWindow::SetFullscreen(bool set)
 {
-	if (set != Fullscreen)
+	
+	Fullscreen = set;
+	if (Fullscreen == true)
 	{
-		Fullscreen = set;
-		if (Fullscreen == true)
+		if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN) != 0)
 		{
-			if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN) != 0)
-			{
 				LOG("Could not switch to fullscreen: %s\n", SDL_GetError());
 				App->Console.AddLog("Could not switch to fullscreen: %s\n", SDL_GetError());
-			}
-			Fullscreen_Desktop = false;
 		}
-		else
+			Fullscreen_Desktop = false;
+	}
+	else
+	{
+		if (SDL_SetWindowFullscreen(window, 0) != 0)
 		{
-			if (SDL_SetWindowFullscreen(window, 0) != 0)
-			{
 				LOG("Could not switch to windowed: %s\n", SDL_GetError());
 				App->Console.AddLog("Could not switch to windowed: %s\n", SDL_GetError());
-			}
 		}
 	}
+
 }
 
 void ModuleWindow::SetResizable(bool set)
@@ -134,7 +133,7 @@ void ModuleWindow::SetResizable(bool set)
 
 void ModuleWindow::SetBorderless(bool set)
 {
-	if (set != Borderless && Fullscreen == false && Fullscreen_Desktop == false)
+	if (Fullscreen == false && Fullscreen_Desktop == false)
 	{
 		Borderless = set;
 		SDL_SetWindowBordered(window, (SDL_bool)!Borderless);
@@ -143,25 +142,23 @@ void ModuleWindow::SetBorderless(bool set)
 
 void ModuleWindow::SetFullScreenDesktop(bool set)
 {
-	if (set != Fullscreen_Desktop)
+
+	Fullscreen_Desktop = set;
+	if (Fullscreen_Desktop == true)
 	{
-		Fullscreen_Desktop = set;
-		if (Fullscreen_Desktop == true)
+		if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
 		{
-			if (SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP) != 0)
-			{
 				LOG("Could not switch to fullscreen desktop: %s\n", SDL_GetError());
 				App->Console.AddLog("Could not switch to fullscreen desktop: %s\n", SDL_GetError());
-			}
-			Fullscreen = false;
 		}
-		else
+		Fullscreen = false;
+	}
+	else
+	{
+		if (SDL_SetWindowFullscreen(window, 0) != 0)
 		{
-			if (SDL_SetWindowFullscreen(window, 0) != 0)
-			{
 				LOG("Could not switch to windowed: %s\n", SDL_GetError());
 				App->Console.AddLog("Could not switch to windowed: %s\n", SDL_GetError());
-			}
 		}
 	}
 }
@@ -261,10 +258,6 @@ void ModuleWindow::ImGuiDrawer()
 		SDL_SetWindowSize(window, Window_Width, Window_Height);
 	}
 
-	if (ImGui::Checkbox("Fullscreen", &Fullscreen))
-	{
-		SetFullscreen(Fullscreen);
-	}
 
 	ImGui::SameLine();
 
@@ -272,9 +265,9 @@ void ModuleWindow::ImGuiDrawer()
 	{
 		SetResizable(Resizable);
 	}
-	if (ImGui::Checkbox("Borderless", &Borderless))
-	{
-		SetBorderless(Borderless);
-	}
+	if (ImGui::Checkbox("borderless", &Borderless)) SetBorderless(Borderless);
+
+	if (ImGui::Checkbox("fullscreen", &Fullscreen)) SetFullscreen(Fullscreen);
+
 
 }

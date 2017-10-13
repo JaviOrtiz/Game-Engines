@@ -4,6 +4,10 @@
 #include "Module.h"
 #include "Application.h"
 #include "SDL/include/SDL.h"
+#include "Glew\include\glew.h"
+#include "ImGui\imgui.h"
+#include "Imgui/imgui_impl_sdl_gl3.h"
+#include "SDL\include\SDL_opengl.h"
 
 class Application;
 

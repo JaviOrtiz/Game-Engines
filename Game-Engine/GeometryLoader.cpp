@@ -98,6 +98,14 @@ bool GeometryLoader::LoadFile(const char* full_path)
 
 void GeometryLoader::ChangeTexture(const char * Path)
 {
+	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
+	{
+		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
+		{
+			(*re)->tex_name = Path;
+			LoadImage_devil((*re)->tex_name.c_str(), &(*re)->idDevilImage);
+		}
+	}
 	/*for (int i = 0; i < geometryvector.size(); i++) {
 		Geometry* ActualGeometry = geometryvector[i]; //Passing through every mesh of the geometryvector to change it's texture.
 		ActualGeometry->tex_name = Path;
