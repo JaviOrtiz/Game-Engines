@@ -7,11 +7,11 @@
 #include "Assimp\include\scene.h"
 #include "Assimp\include\postprocess.h"
 #include "Assimp\include\cfileio.h"
-
+#include <string>
 struct ModelMesh
 {
 	//~ModelMesh();
-	const char* name;
+	std::string name;
 	uint idVertices = 0; // id in VRAM 
 	uint numVertices = 0;
 	float* vertices = nullptr;
@@ -27,12 +27,14 @@ struct ModelMesh
 	uint idTexture = 0; // id in VRAM
 	uint idDevilImage = 0;
 	float* textures = nullptr;
-	const char* tex_name;
+	std::string tex_name;
 
 	uint numTriangles = 0;
 	aiVector3D position;
 	aiQuaternion rotation;
 	aiVector3D scale;
+	
+	void ImGuiDraw();
 };
 
 
@@ -40,13 +42,15 @@ struct Geometry
 {
 	//~Geometry();
 
-	const char* name;
+	std::string name;
 	uint numTriangles = 0;
 	aiVector3D position;
 	aiQuaternion rotation;
 	aiVector3D scale;
 
 	std::vector<ModelMesh*> meshvector;
+
+	void ImGuiDraw();
 };
 
 class GeometryLoader : public Module

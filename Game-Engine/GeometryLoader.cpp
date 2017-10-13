@@ -85,7 +85,7 @@ bool GeometryLoader::LoadFile(const char* full_path)
 
 		}
 		geometryvector.push_back(newgeo);
-		App->Console.AddLog("The model %s with %i triangles was loaded correctly",newgeo->name, newgeo->numTriangles);
+		App->Console.AddLog("The model %s with %i triangles was loaded correctly", newgeo->name.c_str() , newgeo->numTriangles);
 		aiReleaseImport(scene);
 		return true;
 	}
@@ -164,7 +164,7 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 			aiString path;
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
 			newMesh->tex_name = path.C_Str();
-			LoadImage_devil(newMesh->tex_name, &newMesh->idDevilImage);
+			LoadImage_devil(newMesh->tex_name.c_str(), &newMesh->idDevilImage);
 
 			glGenBuffers(1, (GLuint*)&(newMesh->idTexture));
 			glBindBuffer(GL_ARRAY_BUFFER, newMesh->idTexture);
@@ -265,3 +265,44 @@ void GeometryLoader::ClearGeometryvector()
 {
 	geometryvector.clear();
 }
+
+void ModelMesh::ImGuiDraw()
+{
+	if (ImGui::TreeNode(name.c_str()))
+	{
+		ImGui::Text("Transformation:");
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Position x %.2f y %.2f z %.2f", position.x, position.y, position.z);
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Rotation x %.2f y %.2f z %.2f", rotation.GetEuler().x, rotation.GetEuler().y, rotation.GetEuler().z);
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Scale x %.2f y %.2f z %.2f", scale.x, scale.y, scale.z);
+		ImGui::Text("Geometry");
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Triangles %i", numTriangles);
+
+		ImGui::Text("Texture");
+		ImGui::Image((GLuint*)idTexture, ImVec2(64, 64), ImVec2(0, 0), ImVec2(1, 1));
+		ImGui::PushItemWidth(150);
+		ImGui::PopItemWidth();
+		ImGui::TreePop();
+	}
+}
+
+void Geometry::ImGuiDraw()
+{
+	if (ImGui::TreeNode(name.c_str()))
+	{
+		ImGui::Text("Transformation:");
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Position x %.2f y %.2f z %.2f", position.x, position.y, position.z);
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Rotation x %.2f y %.2f z %.2f", rotation.GetEuler().x, rotation.GetEuler().y, rotation.GetEuler().z);
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Scale x %.2f y %.2f z %.2f", scale.x, scale.y, scale.z);
+		ImGui::Text("Geometry");
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Triangles %i", numTriangles);
+		for (int i = 0; i < meshvector.size(); i++)
+		{
+			meshvector[i]->ImGuiDraw();
+
+		}
+		ImGui::TreePop();
+
+	}
+}
+
+

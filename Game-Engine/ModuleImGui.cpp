@@ -63,6 +63,10 @@ update_status ModuleImGui::PostUpdate(float dt)
 {
 	ImGui_ImplSdlGL3_NewFrame(App->window->window);
 
+	for (std::vector<Geometry*>::iterator it = App->geometryloader->geometryvector.begin(); it != App->geometryloader->geometryvector.end(); ++it)
+	{
+		(**it).ImGuiDraw();
+	}
 
 	//		MAIN MENU		//
 
