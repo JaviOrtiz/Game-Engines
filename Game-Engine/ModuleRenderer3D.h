@@ -39,7 +39,7 @@ public:
 
 	void Render(ModelMesh toDraw);
 
-
+	void ImGuiDrawer();
 
 public:
 	float red = 1.0f, green = 1.0f, blue = 1.0f, bred = 0.14f, bgreen = 0.41f, bblue = 0.75f;

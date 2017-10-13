@@ -52,6 +52,10 @@ public:
 		return true; 
 	}
 
+	virtual void ImGuiDrawer()
+	{
+
+	}
 
 	virtual void LoadConfig(JSON_Object *root) {
 
