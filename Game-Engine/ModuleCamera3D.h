@@ -36,6 +36,7 @@ public:
 	int				camera_dist;
 	vec3			VehicleLocation;
 	uint			camera_fx;
+	bool			FPS;
 private:
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;
