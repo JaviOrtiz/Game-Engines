@@ -60,13 +60,9 @@ update_status ModuleCamera3D::Update(float dt)
 	if (!zoomed)
 		Reference += New_Position;
 
-	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN) 
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT) 
 	{
-		FPS = !FPS;
-
-	}
-
-	if (FPS == true) {
+		
 
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			speed = 15 * dt;
@@ -198,22 +194,14 @@ void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 		vec centre = meshAABB->CenterPoint();
 		Reference = vec3(centre.x, centre.y, centre.z);
 		LastCentreGeometry = meshAABB;
-
-		
-		Z = normalize(Position - Reference);
-		
-
+		Z = normalize(Position / 2 - Reference);
 		vec difference = meshAABB->maxPoint - meshAABB->minPoint;
-		float wide = difference.Length(); 
-		float FOVdistance = (wide * 0.9f) / tan(60.0f * 0.5f * DEGTORAD);
-
-																		 
-
+		float wide = difference.Length();
+		float FOVdistance = (wide*0.5f) / tan(60.0f * 0.5f * DEGTORAD);
 		Position = Z * FOVdistance;
-
-		// Recalculate matrix (CalculateViewMatrix is called inside LookAt)-------------
+		Position.y = !Position.y + 5.0f;
 		LookAt(Reference);
-		/**/
+		
 	}
 }
 
