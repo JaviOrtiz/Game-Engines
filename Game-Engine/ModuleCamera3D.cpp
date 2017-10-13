@@ -13,8 +13,8 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
-	Position = vec3(0.0f, 1.0f, 0.0f);
-	Reference = vec3(0.0f, 0.0f, 0.0f);
+	Position = vec3(0.0f, 2.0f, 0.0f);//2.0f to better look on camera
+	Reference = vec3(0.0f, 2.0f, 0.0f);//2.0f to better look on camera
 }
 
 ModuleCamera3D::~ModuleCamera3D()
@@ -45,13 +45,25 @@ update_status ModuleCamera3D::Update(float dt)
 {
 
 	vec3 New_Position(0, 0, 0);
-	float speed = 3.0f*dt;
+	float speed = 5.0f*dt;
+
+	bool zoomed = false;
+	if (App->input->GetMouseZ() != 0)
+	{
+		New_Position += App->input->GetMouseZ()*Z*speed*2;// 2 for more speed on zoom
+		zoomed = true;
+
+	}
+	Position += New_Position;
+
+	if (!zoomed)
+		Reference += New_Position;
 
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 15*dt;
 
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT) New_Position.y += speed;
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) New_Position.y -= speed;
+	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_REPEAT) New_Position.y += speed;
+	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT) New_Position.y -= speed;
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) New_Position -= Z * speed;
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) New_Position += Z * speed;
@@ -93,14 +105,14 @@ update_status ModuleCamera3D::Update(float dt)
 			if (Y.y < 0.0f)
 			{
 				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				Y = cross(X, Z);
+				Y = cross(Z, X);
 			}
 		}
 
 		Position = Reference + Z * length(Position);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		RecentreCameraToGeometry();
 	
 	// Recalculate matrix -------------
@@ -168,7 +180,7 @@ void ModuleCamera3D::CalculateViewMatrix()
 void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 {
 	if (meshAABB == nullptr)
-		Reference = vec3(0.0f, 0.0f, 0.0f);
+		Reference = vec3(0.0f, 2.0f, 0.0f);//2.0f to better look on camera
 	else
 	{
 		vec centre = meshAABB->CenterPoint();
@@ -181,7 +193,7 @@ void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 
 		vec difference = meshAABB->maxPoint - meshAABB->minPoint;
 		float wide = difference.Length(); 
-		float FOVdistance = (wide * 0.5f) / tan(60.0f * 0.5f * DEGTORAD);
+		float FOVdistance = (wide * 0.9f) / tan(60.0f * 0.5f * DEGTORAD);
 
 																		 
 

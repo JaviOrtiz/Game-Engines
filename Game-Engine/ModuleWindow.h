@@ -11,8 +11,8 @@ class ModuleWindow : public Module
 {
 public:
 
-	int		Window_Width = 0;
-	int		Window_Height = 0;
+	int		Window_Width = 1280;
+	int		Window_Height = 720;
 	bool	Fullscreen = false;
 	bool	Fullscreen_Desktop = false;
 	bool	Resizable;
@@ -42,6 +42,7 @@ public:
 	bool IsBorderless();
 	bool IsFullscreenDesktop();
 	float GetBrightness();
+	void ImGuiDrawer();
 
 	void SaveConfig(JSON_Object* root);
 	void LoadConfig(JSON_Object* root);

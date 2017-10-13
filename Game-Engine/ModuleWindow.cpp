@@ -70,6 +70,12 @@ bool ModuleWindow::Init()
 		}
 	}
 
+	Brightness = App->window->GetBrightness();
+	Fullscreen = IsFullscreen();
+	Resizable = IsResizable();
+	Borderless =IsBorderless();
+	Fullscreen_Desktop =IsFullscreenDesktop();
+
 	return ret;
 }
 
@@ -196,6 +202,7 @@ float ModuleWindow::GetBrightness()
 	return SDL_GetWindowBrightness(window);
 }
 
+
 void ModuleWindow::SaveConfig(JSON_Object * root)
 {
 	json_object_set_number(root, "Width", Window_Width / SCREEN_SIZE);
@@ -236,4 +243,38 @@ void ModuleWindow::LoadConfig(JSON_Object * root)
 	{
 		EngineName = json_object_get_string(root, "EngineName");
 	}
+}
+
+
+void ModuleWindow::ImGuiDrawer() 
+{
+	if (ImGui::SliderFloat("Brightness", &Brightness, 0.0f, 1.0f))
+	{
+		SetBrightness(Brightness);
+	}
+
+	ImGui::SliderInt("Screen Width", &Window_Width, 100, 1920);
+	ImGui::SliderInt("Screen Height", &Window_Height, 100, 1080);
+
+	if (ImGui::Button("Save Window Size"))
+	{
+		SDL_SetWindowSize(window, Window_Width, Window_Height);
+	}
+
+	if (ImGui::Checkbox("Fullscreen", &Fullscreen))
+	{
+		SetFullscreen(Fullscreen);
+	}
+
+	ImGui::SameLine();
+
+	if (ImGui::Checkbox("Resizable", &Resizable))
+	{
+		SetResizable(Resizable);
+	}
+	if (ImGui::Checkbox("Borderless", &Borderless))
+	{
+		SetBorderless(Borderless);
+	}
+
 }

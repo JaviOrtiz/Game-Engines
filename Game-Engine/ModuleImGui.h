@@ -30,13 +30,6 @@ public:
 
 public:
 	char*	New_Name;
-	float	Brightness;
-	int		Screen_Width = 0;
-	int		Screen_Height = 0;
-	bool	Fullscreen;
-	bool	Resizable;
-	bool	Borderless;
-	bool	Full_Desktop;
 	int		Pc_Ram;
 	int		Pc_Cache;
 	int		Pc_Cpu;

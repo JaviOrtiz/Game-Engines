@@ -157,6 +157,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	}
 
 	return UPDATE_CONTINUE;
+
 }
 
 void ModuleRenderer3D::Render(ModelMesh toDraw)
