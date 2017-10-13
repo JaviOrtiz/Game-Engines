@@ -28,6 +28,7 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
+	bool Start();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
@@ -60,4 +61,7 @@ public:
 	bool IndexDraw = false;
 	bool drawnormals = false;
 	PPlane* grid;
+
+	float* BackgroundColor = new float[3];
+	float* ColorOverMaterial = new float[3];
 };

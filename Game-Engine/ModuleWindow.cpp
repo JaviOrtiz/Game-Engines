@@ -76,7 +76,7 @@ bool ModuleWindow::Init()
 	Resizable = IsResizable();
 	Borderless =IsBorderless();
 	Fullscreen_Desktop =IsFullscreenDesktop();
-	App->renderer3D->OnResize();
+	App->renderer3D->OnResize(Window_Width, Window_Height);
 	return ret;
 }
 

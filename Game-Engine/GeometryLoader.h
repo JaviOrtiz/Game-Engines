@@ -71,7 +71,7 @@ public:
 	//void BindMeshToBuffer();
 	void LoadMesh(aiNode * node, const aiScene * scene, Geometry* newgeo);
 	GLuint LoadImage_devil(const char* theFileName, GLuint *buff);
-	bool loadTexture(GLuint * id_pixels, GLuint width, GLuint height);
+	bool loadTexture(GLuint * id_pixels, GLuint width, GLuint height, GLuint *buff);
 
 	void ChangeTexture(const char* Path);
 public:

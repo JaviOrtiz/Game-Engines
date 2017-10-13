@@ -228,7 +228,7 @@ GLuint GeometryLoader::LoadImage_devil(const char * theFileName, GLuint *buff)
 
 		if (success == IL_TRUE)
 		{
-			textureLoaded = loadTexture((GLuint*)ilGetData(), (GLuint)ilGetInteger(IL_IMAGE_WIDTH), (GLuint)ilGetInteger(IL_IMAGE_HEIGHT));
+			textureLoaded = loadTexture((GLuint*)ilGetData(), (GLuint)ilGetInteger(IL_IMAGE_WIDTH), (GLuint)ilGetInteger(IL_IMAGE_HEIGHT), buff);
 			//Create texture from file pixels
 			textureLoaded = true;
 		}
@@ -246,23 +246,18 @@ GLuint GeometryLoader::LoadImage_devil(const char * theFileName, GLuint *buff)
 
 }
 
-bool GeometryLoader::loadTexture(GLuint * id_pixels, GLuint width_img, GLuint height_img)
+bool GeometryLoader::loadTexture(GLuint * id_pixels, GLuint width_img, GLuint height_img,GLuint *buff)
 {
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, buff);
+	glBindTexture(GL_TEXTURE_2D, *buff);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 		// Type of texture
-		0,								// Pyramid level (for mip-mapping) - 0 is the top level
-		ilGetInteger(IL_IMAGE_FORMAT),	// Internal pixel format to use. Can be a generic type like GL_RGB or GL_RGBA, or a sized type
-		ilGetInteger(IL_IMAGE_WIDTH),	// Image width
-		ilGetInteger(IL_IMAGE_HEIGHT),	// Image height
-		0,								// Border width in pixels (can either be 1 or 0)
-		ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
-		GL_UNSIGNED_BYTE,				// Image data type
-		ilGetData());					// The actual image data itself
-
-	glGenerateMipmap(GL_TEXTURE_2D);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_img, height_img,
+		-0, GL_RGBA, GL_UNSIGNED_BYTE, id_pixels);
+	glBindTexture(GL_TEXTURE_2D, NULL);
 	//Check for error
 	GLenum error = glGetError();
 	if (error != GL_NO_ERROR)

@@ -139,7 +139,7 @@ void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool Rota
 	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
 	Y = cross(Z, X);
 
-	if(!RotateAroundReference)
+	if (!RotateAroundReference)
 	{
 		this->Reference = this->Position;
 		this->Position += Z * 0.05f;
@@ -197,7 +197,7 @@ void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 		Z = normalize(Position / 2 - Reference);
 		vec difference = meshAABB->maxPoint - meshAABB->minPoint;
 		float wide = difference.Length();
-		float FOVdistance = (wide*0.5f) / tan(60.0f * 0.5f * DEGTORAD);
+		float FOVdistance = (wide*0.5f) / (tan(60.0f * 0.5f * DEGTORAD));
 		Position = Z * FOVdistance;
 		Position.y = !Position.y;
 		LookAt(Reference);
