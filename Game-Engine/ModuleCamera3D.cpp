@@ -51,7 +51,7 @@ update_status ModuleCamera3D::Update(float dt)
 	bool zoomed = false;
 	if (App->input->GetMouseZ() != 0)
 	{
-		New_Position += App->input->GetMouseZ()*Z*speed*2;// 2 for more speed on zoom
+		New_Position -= App->input->GetMouseZ()*Z*speed*2;// 2 for more speed on zoom
 		zoomed = true;
 
 	}
@@ -118,7 +118,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
-	
+	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_REPEAT) Position = {0,0,0};
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		RecentreCameraToGeometry();
@@ -199,7 +199,7 @@ void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 		float wide = difference.Length();
 		float FOVdistance = (wide*0.5f) / tan(60.0f * 0.5f * DEGTORAD);
 		Position = Z * FOVdistance;
-		Position.y = !Position.y + 5.0f;
+		Position.y = !Position.y;
 		LookAt(Reference);
 		
 	}

@@ -172,6 +172,11 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 			aiString path;
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
 			newMesh->tex_name = path.C_Str();
+
+			std::size_t pos = newMesh->tex_name.rfind("\\");     //if the texture path is in a folder, tries to take only the name of the .png file 
+			std::string str3 = newMesh->tex_name.substr(pos + 1);
+			newMesh->tex_name = str3.c_str();
+
 			LoadImage_devil(newMesh->tex_name.c_str(), &newMesh->idDevilImage);
 
 			glGenBuffers(1, (GLuint*)&(newMesh->idTexture));

@@ -257,6 +257,7 @@ void ModuleWindow::ImGuiDrawer()
 	if (ImGui::Button("Save Window Size"))
 	{
 		SDL_SetWindowSize(window, Window_Width, Window_Height);
+		App->renderer3D->OnResize(Window_Width, Window_Height);
 	}
 
 
