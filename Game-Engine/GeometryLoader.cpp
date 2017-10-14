@@ -100,7 +100,7 @@ void GeometryLoader::ChangeTexture(const char * Path)
 		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
 		{
 			(*re)->tex_name = Path;
-			LoadImage_devil((*re)->tex_name.c_str(), &(*re)->idDevilImage);
+			LoadImage_devil((*re)->tex_name.c_str(),(*re));
 		}
 	}
 	/*for (int i = 0; i < geometryvector.size(); i++) {
@@ -174,7 +174,7 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 			std::string str3 = newMesh->tex_name.substr(pos + 1);
 			newMesh->tex_name = str3.c_str();
 
-			LoadImage_devil(newMesh->tex_name.c_str(), &newMesh->idDevilImage);
+			LoadImage_devil(newMesh->tex_name.c_str(), newMesh);
 
 			glGenBuffers(1, (GLuint*)&(newMesh->idTexture));
 			glBindBuffer(GL_ARRAY_BUFFER, newMesh->idTexture);
@@ -199,22 +199,20 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 	App->camera->CenterCameraToGeometry(&BoundingBox);
 }
 
-GLuint GeometryLoader::LoadImage_devil(const char * theFileName, GLuint *buff)
+GLuint GeometryLoader::LoadImage_devil(const char * theFileName, ModelMesh* mesh)
 {
-
-	//Texture loading success
 	bool textureLoaded = false;
 
-	//Generate and set current image ID
-	uint imgID = 0;
+	
+	uint imgID = 0; // We generate and set current image ID
 	ilGenImages(1, &imgID);
 	ilBindImage(imgID);
 
-	//Load image
-	ILboolean success = ilLoadImage(theFileName);
+	
+	ILboolean success = ilLoadImage(theFileName); //Loading image with devil passing the filename
 
-	//Image loaded successfully
-	if (success == IL_TRUE)
+
+	if (success == IL_TRUE)		//if we loaded the image correctly, we 
 	{
 		ILinfo ImageInfo;
 		iluGetImageInfo(&ImageInfo);
@@ -228,8 +226,10 @@ GLuint GeometryLoader::LoadImage_devil(const char * theFileName, GLuint *buff)
 
 		if (success == IL_TRUE)
 		{
-			textureLoaded = loadTexture((GLuint*)ilGetData(), (GLuint)ilGetInteger(IL_IMAGE_WIDTH), (GLuint)ilGetInteger(IL_IMAGE_HEIGHT), buff);
+			textureLoaded = loadTexture((GLuint*)ilGetData(), (GLuint)ilGetInteger(IL_IMAGE_WIDTH), (GLuint)ilGetInteger(IL_IMAGE_HEIGHT), &(GLuint)mesh->idDevilImage);
 			//Create texture from file pixels
+			mesh->tex_size.x = ImageInfo.Width;
+			mesh->tex_size.y = ImageInfo.Height;
 			textureLoaded = true;
 		}
 
@@ -248,7 +248,7 @@ GLuint GeometryLoader::LoadImage_devil(const char * theFileName, GLuint *buff)
 
 bool GeometryLoader::loadTexture(GLuint * id_pixels, GLuint width_img, GLuint height_img,GLuint *buff)
 {
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // we set the texture parameters and bind the image to a buffer so it can be called later
 	glGenTextures(1, buff);
 	glBindTexture(GL_TEXTURE_2D, *buff);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -319,7 +319,10 @@ void ModelMesh::ImGuiDraw()
 		if (ImGui::Checkbox("Draw Normals", &drawNormals))
 		{
 		}
+		ImGui::Separator();
 		ImGui::Text("Texture");
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Texture Name: %s", tex_name.c_str());
+		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Texture Size: %i %i", (int)tex_size.x, (int)tex_size.y);
 		ImGui::Text("Color Over Texture");
 		ImGui::ColorEdit4("##Texture Color", &ColorOverMaterial.x);
 		if (ImGui::Checkbox("Print Texture", &drawTexture))

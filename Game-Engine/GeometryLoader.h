@@ -28,11 +28,13 @@ struct ModelMesh
 	uint idDevilImage = 0;
 	float* textures = nullptr;
 	std::string tex_name;
+	vec2 tex_size;
 
 	uint numTriangles = 0;
 	aiVector3D position;
 	aiQuaternion rotation;
 	aiVector3D scale;
+
 
 	bool drawTexture = true;
 	bool drawNormals = false;
@@ -75,7 +77,7 @@ public:
 	bool LoadFile(const char* full_path);
 	//void BindMeshToBuffer();
 	void LoadMesh(aiNode * node, const aiScene * scene, Geometry* newgeo);
-	GLuint LoadImage_devil(const char* theFileName, GLuint *buff);
+	GLuint LoadImage_devil(const char* theFileName,ModelMesh* model);
 	bool loadTexture(GLuint * id_pixels, GLuint width, GLuint height, GLuint *buff);
 
 	void ChangeTexture(const char* Path);
