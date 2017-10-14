@@ -52,14 +52,14 @@ update_status ModuleImGui::PreUpdate(float dt)
 
 update_status ModuleImGui::PostUpdate(float dt)
 {
-	
+
 
 
 	//		MAIN MENU		//
 
 	if (ImGui::BeginMainMenuBar())
 	{
-		
+
 
 		if (ImGui::BeginMenu("Help"))
 		{
@@ -87,6 +87,13 @@ update_status ModuleImGui::PostUpdate(float dt)
 			}
 			ImGui::EndMenu();
 		}
+
+		if (ImGui::BeginMenu("Modules"))
+		{
+			if (ImGui::MenuItem("Show Modules"))
+				Modules = !Modules;
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("Exit"))
 		{
 			return UPDATE_STOP;
@@ -102,25 +109,55 @@ update_status ModuleImGui::PostUpdate(float dt)
 	// Start About? //
 	if (About)
 	{
-		ImGuiWindowFlags window_flags = ImGuiWindowFlags_AlwaysAutoResize;
-		ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
-		ImGui::Begin("About", (bool*)false, window_flags);
-		ImGui::Text("Pochinki's Engine 0.1");
-		ImGui::Text("We are a pair of students who are working on a 3d Game Engine c++ based.");		//NEED TO BE FINISHED//
-		ImGui::Text("Authors:		Daniel Lopez and Javier Ortiz");
-		ImGui::End();
+		ShowAbout();
 
 	}
 	//End About//
 
-
-	//  Start Window Options//
-	if (ImGui::CollapsingHeader("Window Options"))
+	if (Modules)
 	{
-		App->window->ImGuiDrawer();
+		ShowModules();
 	}
 
-	if (ImGui::CollapsingHeader("Hardware"))
+		if (Showconsole) App->Console.Draw("Super Console", (bool*)true);
+		ImGui::Render();
+		SDL_GL_SwapWindow(App->window->window);
+		return UPDATE_CONTINUE;
+	};
+
+
+	bool ModuleImGui::CleanUp()
+	{
+		return false;
+	}
+
+	void ModuleImGui::PushFPSandMSPlot(uint fps, uint ms)
+	{
+		static uint count = 0;
+
+		if (count >= FPS_AND_MS_PLOT_DATA_LENGTH)
+			for (int i = 0; i < FPS_AND_MS_PLOT_DATA_LENGTH - 1; i++)
+			{
+				Fps_Plot_Data[i] = Fps_Plot_Data[i + 1];
+				Ms_Plot_Data[i] = Ms_Plot_Data[i + 1];
+			}
+		else
+			count++;
+
+		Fps_Plot_Data[count - 1] = fps;
+		Ms_Plot_Data[count - 1] = ms;
+	}
+
+
+	void ModuleImGui::ChangeName(char* new_name)
+	{
+
+		App->window->EngineName = new_name;
+
+
+	}
+
+	void ModuleImGui::Hardware()
 	{
 		uint title_size = 50;
 		char title[50];
@@ -169,84 +206,66 @@ update_status ModuleImGui::PostUpdate(float dt)
 		ImGui::Text(title);
 
 
+
+
+
 	}
-	const Performance* PerformanceData = App->GetPerformanceStruct();
-	PushFPSandMSPlot(PerformanceData->Frames_Last_Second, PerformanceData->Miliseconds_Per_Frame);
-
-	// End Window Options//
-
-	// Start Application//
-	if (ImGui::CollapsingHeader("Application"))
+	void ModuleImGui::ShowAbout()
 	{
-		uint title_size = 50;
-		char title[50];
-		//Framerate PlotHistogram
-		sprintf_s(title, title_size, "Framerate: %i", PerformanceData->Frames_Last_Second);
-		ImGui::PlotHistogram("##Framerate", &Fps_Plot_Data[0], Fps_Plot_Data.size(), 0, title, 0.0f, 150.0f, ImVec2(310, 100));
-
-		//Miliseconds PlotHistogram
-		sprintf_s(title, title_size, "Frame Miliseconds: %i", PerformanceData->Miliseconds_Per_Frame);
-		ImGui::PlotHistogram("##Frame Miliseconds", &Ms_Plot_Data[0], Ms_Plot_Data.size(), 0, title, 0.0f, 50.0f, ImVec2(310, 100));
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_AlwaysAutoResize;
+		ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
+		ImGui::Begin("About", (bool*)false, window_flags);
+		ImGui::Text("Pochinki's Engine 0.1");
+		ImGui::Text("We are a pair of students who are working on a 3d Game Engine c++ based.");		//NEED TO BE FINISHED//
+		ImGui::Text("Authors:		Daniel Lopez and Javier Ortiz");
+		ImGui::End();
 	}
 
+	void ModuleImGui::ShowModules() {
 
-	if (ImGui::CollapsingHeader("Renderer"))
-	{
-		App->renderer3D->ImGuiDrawer();
-		/*if (ImGui::Checkbox("Borderless", &Borderless))
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_AlwaysAutoResize;
+		ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
+		ImGui::Begin("Modules", (bool*)false, window_flags);
+		ImGui::Text("Here You can see and edit the Modules Preferences");
+		
+
+		//  Start Window Options//
+		if (ImGui::CollapsingHeader("Window Options"))
 		{
-			App->window->SetBorderless(Borderless);
+			App->window->ImGuiDrawer();
 		}
-		if (ImGui::Checkbox("Resizable", &Resizable))
+
+		if (ImGui::CollapsingHeader("Hardware"))
 		{
-			App->window->SetResizable(Resizable);
+			Hardware();
 		}
-		*/
+		const Performance* PerformanceData = App->GetPerformanceStruct();
+		PushFPSandMSPlot(PerformanceData->Frames_Last_Second, PerformanceData->Miliseconds_Per_Frame);
+
+		// End Window Options//
+
+		// Start Application//
+		if (ImGui::CollapsingHeader("Application"))
+		{
+			uint title_size = 50;
+			char title[50];
+			//Framerate PlotHistogram
+			sprintf_s(title, title_size, "Framerate: %i", PerformanceData->Frames_Last_Second);
+			ImGui::PlotHistogram("##Framerate", &Fps_Plot_Data[0], Fps_Plot_Data.size(), 0, title, 0.0f, 150.0f, ImVec2(310, 100));
+
+			//Miliseconds PlotHistogram
+			sprintf_s(title, title_size, "Frame Miliseconds: %i", PerformanceData->Miliseconds_Per_Frame);
+			ImGui::PlotHistogram("##Frame Miliseconds", &Ms_Plot_Data[0], Ms_Plot_Data.size(), 0, title, 0.0f, 50.0f, ImVec2(310, 100));
+		}
 
 
+		if (ImGui::CollapsingHeader("Renderer"))
+		{
+			App->renderer3D->ImGuiDrawer();
+		}
 
+		App->Options();
 
-
+		ImGui::End();
 	}
-	//End Application//
-	App->Options();
 
-
-	if (Showtest) ImGui::ShowTestWindow();
-	if (Showconsole) App->Console.Draw("Super Console", (bool*)true);
-	ImGui::Render();
-	SDL_GL_SwapWindow(App->window->window);
-	return UPDATE_CONTINUE;
-};
-
-
-bool ModuleImGui::CleanUp()
-{
-	return false;
-}
-
-void ModuleImGui::PushFPSandMSPlot(uint fps, uint ms)
-{
-	static uint count = 0;
-
-	if (count >= FPS_AND_MS_PLOT_DATA_LENGTH)
-		for (int i = 0; i < FPS_AND_MS_PLOT_DATA_LENGTH - 1; i++)
-		{
-			Fps_Plot_Data[i] = Fps_Plot_Data[i + 1];
-			Ms_Plot_Data[i] = Ms_Plot_Data[i + 1];
-		}
-	else
-		count++;
-
-	Fps_Plot_Data[count - 1] = fps;
-	Ms_Plot_Data[count - 1] = ms;
-}
-
-
-void ModuleImGui::ChangeName(char* new_name)
-{
-
-	App->window->EngineName = new_name;
-
-
-}

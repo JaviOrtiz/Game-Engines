@@ -24,9 +24,10 @@ public:
 
 	void PushFPSandMSPlot(uint fps, uint ms);
 	void ChangeName(char*);
-
-
+	void Hardware();
+	void ShowAbout();
 	bool CleanUp();
+	void ShowModules();
 
 public:
 	char*	New_Name;
@@ -39,9 +40,8 @@ public:
 	LCG		Random_Num_2;
 	float	Random_Num_Int = 0;
 	float	Random_Num_Float = 0;
-	bool	Showtest = false;
 	bool    Showconsole = false;
-	bool	Homework = false;
+	bool	Modules = false;
 	bool	About = false;
 	//OpenGL//
 
