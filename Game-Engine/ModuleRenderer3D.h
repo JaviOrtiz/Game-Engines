@@ -61,7 +61,7 @@ public:
 	bool IndexDraw = false;
 	bool drawnormals = false;
 	PPlane* grid;
+	vec3 BackgroundColor;
+	vec3 ColorOverMaterial;
 
-	float* BackgroundColor = new float[3];
-	float* ColorOverMaterial = new float[3];
 };

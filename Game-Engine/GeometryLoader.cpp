@@ -312,9 +312,20 @@ void ModelMesh::ImGuiDraw()
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Scale x %.2f y %.2f z %.2f", scale.x, scale.y, scale.z);
 		ImGui::Text("Geometry");
 		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Triangles %i", numTriangles);
-
+		if (ImGui::Checkbox("WireFrame", &wireframe))
+		{
+		}
+		ImGui::SameLine();
+		if (ImGui::Checkbox("Draw Normals", &drawNormals))
+		{
+		}
 		ImGui::Text("Texture");
-		ImGui::Image((GLuint*)idTexture, ImVec2(64, 64), ImVec2(0, 0), ImVec2(1, 1), ImColor(255, 255, 255, 255), ImColor(255, 255, 255, 128));
+		ImGui::Text("Color Over Texture");
+		ImGui::ColorEdit4("##Texture Color", &ColorOverMaterial.x);
+		if (ImGui::Checkbox("Print Texture", &drawTexture))
+		{
+		}
+		
 		ImGui::TreePop();
 	}
 }

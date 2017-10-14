@@ -33,7 +33,12 @@ struct ModelMesh
 	aiVector3D position;
 	aiQuaternion rotation;
 	aiVector3D scale;
-	
+
+	bool drawTexture = true;
+	bool drawNormals = false;
+	bool wireframe = false;
+	vec3 ColorOverMaterial = {1, 1, 1};
+
 	void ImGuiDraw();
 };
 

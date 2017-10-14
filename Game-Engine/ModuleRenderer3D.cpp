@@ -144,7 +144,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(App->camera->GetViewMatrix());
-	glClearColor(BackgroundColor[0], BackgroundColor[1], BackgroundColor[2], 1);
+	glClearColor(BackgroundColor.x, BackgroundColor.y, BackgroundColor.z, 1);
 	return UPDATE_CONTINUE;
 }
 
@@ -168,17 +168,17 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 
 void ModuleRenderer3D::Render(ModelMesh toDraw)
 {
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, toDraw.idDevilImage);
-	glColor4f(ColorOverMaterial[0], ColorOverMaterial[1], ColorOverMaterial[2] , 1);
-	if (WireFrame)
+
+	glColor4f(toDraw.ColorOverMaterial.x, toDraw.ColorOverMaterial.y, toDraw.ColorOverMaterial.z , 1);
+
+	if (toDraw.wireframe)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glPushMatrix();
 
-	if (drawnormals && toDraw.normals != nullptr) {
+	if (toDraw.drawNormals && toDraw.normals != nullptr) {
 		for (uint i = 0; i < toDraw.numVertices * 3; i += 3)
 		{
 			glLineWidth(2.0f);
@@ -194,8 +194,9 @@ void ModuleRenderer3D::Render(ModelMesh toDraw)
 		}
 	}
 
-	if (toDraw.textures != nullptr) {
-
+	if (toDraw.textures != nullptr && toDraw.drawTexture) {
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, toDraw.idDevilImage);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, toDraw.idTexture);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
@@ -222,10 +223,9 @@ void ModuleRenderer3D::Render(ModelMesh toDraw)
 void ModuleRenderer3D::ImGuiDrawer()
 {
 	ImGui::Text("Background Color");
-	ImGui::ColorEdit4("##Background", &BackgroundColor[0]);
+	ImGui::ColorEdit4("##Background", &BackgroundColor.x);
 
-	ImGui::Text("Color Over Texture");
-	ImGui::ColorEdit4("##Texture Color", &ColorOverMaterial[0]);
+	
 
 	if (ImGui::Checkbox("Gl_Deepth_Test", &App->renderer3D->DeepTest))
 	{
@@ -242,13 +242,6 @@ void ModuleRenderer3D::ImGuiDrawer()
 	if (ImGui::Checkbox("Gl_Color_Material", &App->renderer3D->ColorMaterial))
 	{
 		App->renderer3D->Gl_State(App->renderer3D->ColorMaterial, GL_COLOR_MATERIAL);
-	}
-	if (ImGui::Checkbox("Gl_Texture_2D", &App->renderer3D->Texture2D))
-	{
-		App->renderer3D->Gl_State(App->renderer3D->Texture2D, GL_TEXTURE_2D);
-	}
-	if (ImGui::Checkbox("WireFrame", &App->renderer3D->WireFrame))
-	{
 	}
 	if (ImGui::Checkbox("Draw Normals", &App->renderer3D->drawnormals))
 	{
@@ -298,13 +291,13 @@ void ModuleRenderer3D::Gl_State(bool state, GLenum dummy) {
 
 void ModuleRenderer3D::SaveConfig(JSON_Object * root)
 {
-	json_object_set_number(root, "Red", ColorOverMaterial[0]);
-	json_object_set_number(root, "Green", ColorOverMaterial[1]);
-	json_object_set_number(root, "Blue", ColorOverMaterial[2]);
+	json_object_set_number(root, "Red", ColorOverMaterial.x);
+	json_object_set_number(root, "Green", ColorOverMaterial.y);
+	json_object_set_number(root, "Blue", ColorOverMaterial.z);
 
-	json_object_set_number(root, "BackGroundRed", BackgroundColor[0]);
-	json_object_set_number(root, "BackGroundGreen", BackgroundColor[1]);
-	json_object_set_number(root, "BackGroundBlue", BackgroundColor[2]);
+	json_object_set_number(root, "BackGroundRed", BackgroundColor.x);
+	json_object_set_number(root, "BackGroundGreen", BackgroundColor.y);
+	json_object_set_number(root, "BackGroundBlue", BackgroundColor.z);
 
 	json_object_set_boolean(root, "GL_DEPTH_TEST", DeepTest);
 	json_object_set_boolean(root, "GL_CULL_FACE", CullFace);
@@ -318,63 +311,63 @@ void ModuleRenderer3D::LoadConfig(JSON_Object* root)
 {
 	if (json_object_get_value(root, "Red") == NULL) {
 		json_object_set_value(root, "Red", json_value_init_object());
-		ColorOverMaterial[0] = 1;
-		json_object_set_number(root, "Red", ColorOverMaterial[0]);
+		ColorOverMaterial.x = 1;
+		json_object_set_number(root, "Red", ColorOverMaterial.x);
 
 	}
 	else
 	{
-		ColorOverMaterial[0] = json_object_get_number(root, "Red");
+		ColorOverMaterial.x = json_object_get_number(root, "Red");
 	}
 	if (json_object_get_value(root, "Green") == NULL) {
 		json_object_set_value(root, "Green", json_value_init_object());
-		ColorOverMaterial[1] = 1;
-		json_object_set_number(root, "Green", ColorOverMaterial[1]);
+		ColorOverMaterial.y = 1;
+		json_object_set_number(root, "Green", ColorOverMaterial.y);
 
 	}
 	else
 	{
-		ColorOverMaterial[1] = json_object_get_number(root, "Blue");
+		ColorOverMaterial.y = json_object_get_number(root, "Blue");
 	}
 	if (json_object_get_value(root, "Blue") == NULL) {
 		json_object_set_value(root, "Blue", json_value_init_object());
-		ColorOverMaterial[2] = 1;
-		json_object_set_number(root, "Blue", ColorOverMaterial[2]);
+		ColorOverMaterial.z = 1;
+		json_object_set_number(root, "Blue", ColorOverMaterial.z);
 
 	}
 	else
 	{
-		ColorOverMaterial[2] = json_object_get_number(root, "Blue");
+		ColorOverMaterial.z = json_object_get_number(root, "Blue");
 	}
 	if (json_object_get_value(root, "BackGroundRed") == NULL) {
 		json_object_set_value(root, "BackGroundRed", json_value_init_object());
-		BackgroundColor[0] = 1;
-		json_object_set_number(root, "BackGroundRed", BackgroundColor[0]);
+		BackgroundColor.x = 1;
+		json_object_set_number(root, "BackGroundRed", BackgroundColor.x);
 
 	}
 	else
 	{
-		BackgroundColor[0] = json_object_get_number(root, "BackGroundGreen");
+		BackgroundColor.x = json_object_get_number(root, "BackGroundGreen");
 	}
 	if (json_object_get_value(root, "BackGroundGreen") == NULL) {
 		json_object_set_value(root, "BackGroundGreen", json_value_init_object());
-		BackgroundColor[1] = 1;
-		json_object_set_number(root, "BackGroundGreen", BackgroundColor[1]);
+		BackgroundColor.y = 1;
+		json_object_set_number(root, "BackGroundGreen", BackgroundColor.y);
 
 	}
 	else
 	{
-		BackgroundColor[1] = json_object_get_number(root, "BackGroundGreen");
+		BackgroundColor.y = json_object_get_number(root, "BackGroundGreen");
 	}
 	if (json_object_get_value(root, "BackGroundBlue") == NULL) {
 		json_object_set_value(root, "BackGroundBlue", json_value_init_object());
-		BackgroundColor[2] = 1;
-		json_object_set_number(root, "BackGroundBlue", BackgroundColor[2]);
+		BackgroundColor.z = 1;
+		json_object_set_number(root, "BackGroundBlue", BackgroundColor.z);
 
 	}
 	else
 	{
-		BackgroundColor[2] = json_object_get_number(root, "BackGroundBlue");
+		BackgroundColor.z = json_object_get_number(root, "BackGroundBlue");
 	}
 
 	if (json_object_get_boolean(root, "GL_DEPTH_TEST") == NULL) {
