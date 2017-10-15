@@ -118,8 +118,7 @@ update_status ModuleImGui::PostUpdate(float dt)
 	{
 		ShowModules();
 	}
-
-		if (Showconsole) App->Console.Draw("Super Console", (bool*)true);
+		if (Showconsole) App->Console.Draw("Super Console", (bool*)false);
 		ImGui::Render();
 		SDL_GL_SwapWindow(App->window->window);
 		return UPDATE_CONTINUE;
@@ -128,7 +127,7 @@ update_status ModuleImGui::PostUpdate(float dt)
 
 	bool ModuleImGui::CleanUp()
 	{
-		return false;
+		return true;
 	}
 
 	void ModuleImGui::PushFPSandMSPlot(uint fps, uint ms)

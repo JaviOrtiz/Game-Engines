@@ -113,7 +113,6 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += New_Position;
 		Reference += New_Position;
 	}
-
 	// Mouse motion ----------------
 
 	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LALT)== KEY_REPEAT)
@@ -225,16 +224,11 @@ void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 	else
 	{
 		vec centre = meshAABB->CenterPoint();
-		Reference = vec3(centre.x, centre.y, centre.z);
+		float3 newpos = meshAABB->Size()*0.65;
+		Position = vec3(centre.x + newpos.x, centre.y + newpos.y, centre.z + newpos.z + 5);
+		Reference = vec3(centre.x + newpos.x, centre.y + newpos.y, centre.z + newpos.z);
+		LookAt(vec3(centre.x, centre.y, centre.z));
 		LastCentreGeometry = meshAABB;
-		Z = normalize(Position / 2 - Reference);
-		vec difference = meshAABB->maxPoint - meshAABB->minPoint;
-		float wide = difference.Length();
-		float FOVdistance = (wide*0.5f) / (tan(60.0f * 0.5f * DEGTORAD));
-		Position = Z * FOVdistance;
-		Position.y = !Position.y;
-		LookAt(Reference);
-		
 	}
 }
 

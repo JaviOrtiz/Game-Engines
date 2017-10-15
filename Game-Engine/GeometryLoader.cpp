@@ -67,30 +67,38 @@ bool GeometryLoader::LoadFile(const char* full_path)
 {
 	const aiScene* scene = aiImportFile(full_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	Geometry* newgeo = new Geometry;
-	aiNode* node = scene->mRootNode;
-	if (scene != nullptr && scene->HasMeshes())
-	{
-		//Loading global geometry info
-		node->mTransformation.Decompose(newgeo->position, newgeo->rotation, newgeo->scale);
-
-		newgeo->name = node->mName.C_Str();
-		//Loading meshes
-		LoadMesh(node, scene, newgeo);
-
-		for (int i = 0; i < newgeo->meshvector.size(); i++)
+	if (scene->mRootNode != nullptr) {
+		aiNode* node = scene->mRootNode;
+		if (scene != nullptr && scene->HasMeshes())
 		{
-			newgeo->numTriangles += newgeo->meshvector[i]->numTriangles;
+			App->Console.AddLog("Loading Scene with %i meshes", (int)node->mNumChildren);
+			//Loading global geometry info
+			node->mTransformation.Decompose(newgeo->position, newgeo->rotation, newgeo->scale);
 
+			newgeo->name = node->mName.C_Str();
+			//Loading meshes
+			LoadMesh(node, scene, newgeo);
+
+			for (int i = 0; i < newgeo->meshvector.size(); i++)
+			{
+				newgeo->numTriangles += newgeo->meshvector[i]->numTriangles;
+
+			}
+			App->editor->geometryvector.push_back(newgeo);
+			App->Console.AddLog("The model %s with %i triangles was loaded correctly", newgeo->name.c_str(), newgeo->numTriangles);
+			aiReleaseImport(scene);
+			return true;
 		}
-		App->editor->geometryvector.push_back(newgeo);
-		App->Console.AddLog("The model %s with %i triangles was loaded correctly", newgeo->name.c_str() , newgeo->numTriangles);
-		aiReleaseImport(scene);
-		return true;
+		else {
+			App->Console.AddLog("Error loading scene %s", full_path);
+			return false;
+		}
 	}
 	else {
-		App->Console.AddLog("Error loading scene %s", full_path);
+		App->Console.AddLog("Can't accede the scene RootNode %s", full_path);
 		return false;
 	}
+	//RELEASE(newgeo);
 }
 
 
@@ -117,10 +125,11 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 	{
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		ModelMesh* newMesh = new ModelMesh;
+		App->Console.AddLog("Creating New Mesh", newMesh->numVertices);
 		newMesh->numVertices = mesh->mNumVertices;
 		newMesh->vertices = new float[newMesh->numVertices * 3];
 		memcpy(newMesh->vertices, mesh->mVertices, sizeof(float)* newMesh->numVertices * 3);
-		App->Console.AddLog("New mesh with %d vertices", newMesh->numVertices);
+		App->Console.AddLog("Mesh with %d vertices", newMesh->numVertices);
 
 		glGenBuffers(1, (GLuint*)&newMesh->idVertices);
 		glBindBuffer(GL_ARRAY_BUFFER, newMesh->idVertices);
@@ -139,9 +148,12 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 				else
 				{
 					memcpy(&newMesh->indices[i * 3], mesh->mFaces[i].mIndices, 3 * sizeof(uint));
+	
 				}
+			
 			}
-
+			App->Console.AddLog("Mesh with %d faces", mesh->mNumFaces);
+			App->Console.AddLog("Mesh with %d indices", newMesh->numIndices);
 
 			glGenBuffers(1, (GLuint*)&newMesh->idIndices);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->idIndices);
@@ -155,26 +167,29 @@ void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* ne
 			glGenBuffers(1, (GLuint*) &(newMesh->idNormals));
 			glBindBuffer(GL_ARRAY_BUFFER, newMesh->idNormals);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * newMesh->numVertices * 3, newMesh->normals, GL_STATIC_DRAW);
+			App->Console.AddLog("Mesh with %d normals", newMesh->normals);
 		}
 		if (mesh->HasTextureCoords(0))
 		{
 			newMesh->textures = new float[newMesh->numVertices * 2];
-
+			App->Console.AddLog("Mesh with Texture Coords");
 			for (int x = 0; x < mesh->mNumVertices; ++x) {
 
 				newMesh->textures[x * 2] = mesh->mTextureCoords[0][x].x;
 				newMesh->textures[x * 2 + 1] = mesh->mTextureCoords[0][x].y;
+				
 			}
+
 			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 			uint numtextures = material->GetTextureCount(aiTextureType_DIFFUSE);
 			aiString path;
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
-			newMesh->tex_name = path.C_Str();
+			newMesh->tex_name = PassTexToTextureDirectory(path.C_Str());
 
 			std::size_t pos = newMesh->tex_name.rfind("\\");     //if the texture path is in a folder, tries to take only the name of the .png file 
 			std::string str3 = newMesh->tex_name.substr(pos + 1);
 			newMesh->tex_name = str3.c_str();
-
+			App->Console.AddLog("Loading Texture");
 			LoadImage_devil(newMesh->tex_name.c_str(), newMesh);
 
 			glGenBuffers(1, (GLuint*)&(newMesh->idTexture));
@@ -243,6 +258,9 @@ GLuint GeometryLoader::LoadImage_devil(const char * theFileName, ModelMesh* mesh
 	{
 		App->Console.AddLog("Texture Wasn't able to be loaded correctly");
 	}
+	else {
+		App->Console.AddLog("Texture loaded correctly");
+	}
 	return textureLoaded;
 
 }
@@ -266,40 +284,39 @@ bool GeometryLoader::loadTexture(GLuint * id_pixels, GLuint width_img, GLuint he
 		App->Console.AddLog("Error loading texture from %p pixels! %s\n", id_pixels, gluErrorString(error));
 		return false;
 	}
-
+	App->Console.AddLog("Success loading texture from %p pixels! %s\n", id_pixels, gluErrorString(error));
 	return true;
+}
+
+std::string GeometryLoader::PassTexToTextureDirectory(const char * tex)
+{
+	std::string fullPath = "Models&Textures/";
+	fullPath.append(tex);
+	return fullPath;
 }
 
 ModelMesh::~ModelMesh()
 {
 	if (vertices != nullptr)
 	{
-		for (int i = 0; i < sizeof(vertices); i++)
-		{
-			vertices[i] = NULL;
-		}
+		delete[] vertices;
+		vertices = nullptr;
 	}
 
 	if (indices != nullptr)
 	{
-		for (int i = 0; i < sizeof(indices); i++)
-		{
-			indices[i] = NULL;
-		}
+		delete[] indices;
+		indices = nullptr;
 	}
 	if (normals != nullptr)
 	{
-		for (int i = 0; i < sizeof(normals); i++)
-		{
-			normals[i] = NULL;
-		}
+		delete[] normals;
+		normals = nullptr;
 	}
 	if (textures != nullptr)
 	{
-		for (int i = 0; i < sizeof(textures); i++)
-		{
-			textures[i] = NULL;
-		}
+		delete[] textures;
+		textures = nullptr;
 	}
 }
 
@@ -336,10 +353,10 @@ void ModelMesh::ImGuiDraw()
 
 Geometry::~Geometry()
 {
-	for (int i = 0; i < meshvector.size(); i++) 
+	while (!meshvector.empty())
 	{
-		delete &i;
-		i = NULL;
+		delete meshvector.back();
+		meshvector.pop_back();
 	}
 }
 

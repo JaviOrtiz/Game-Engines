@@ -17,7 +17,7 @@ public:
 	bool Start();
 	update_status Update(float dt);
 
-	bool CleanUp();
+	bool CleanUp() override;
 
 	void ClearGeometryVector();
 public:

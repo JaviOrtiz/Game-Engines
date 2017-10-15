@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
-    <ProjectName>3D Physics - class6</ProjectName>
+    <ProjectName>Pochinki's Engine</ProjectName>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -172,14 +172,12 @@
     <ClInclude Include="mmgr\nommgr.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleImGui.h" />
-    <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleEditor.h" />
     <ClInclude Include="p2List.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleInput.h" />
-    <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2DynArray.h" />
     <ClInclude Include="p2Point.h" />
@@ -242,9 +240,7 @@
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleImGui.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
-    <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
-    <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="ModuleEditor.cpp" />
     <ClCompile Include="PhysBody3D.cpp" />

@@ -10,24 +10,21 @@ ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, s
 
 ModuleEditor::~ModuleEditor()
 {
+	
 }
 
 bool ModuleEditor::Init()
 {
-
 	return true;
 }
 
 bool ModuleEditor::Start()
 {
-	
-
 	return true;
 }
 
 update_status ModuleEditor::Update(float dt)
 {
-
 	for (std::vector<Geometry*>::iterator it = App->editor->geometryvector.begin(); it != App->editor->geometryvector.end(); ++it)
 	{
 		(**it).ImGuiDraw();
@@ -39,15 +36,15 @@ update_status ModuleEditor::Update(float dt)
 bool ModuleEditor::CleanUp()
 {
 	ClearGeometryVector();
-	return false;
+	return true;
 }
 
 void ModuleEditor::ClearGeometryVector()
 {
-	for (int i = 0; i < geometryvector.size(); i++)
+	while (!geometryvector.empty()) 
 	{
-		delete &i;
-		i = NULL;
+		delete geometryvector.back();
+		geometryvector.pop_back();
 	}
-	geometryvector.clear();
+		geometryvector.clear();
 }

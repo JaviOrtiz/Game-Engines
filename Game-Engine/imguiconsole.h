@@ -2,7 +2,7 @@
 #include "ImGui\imgui.h"
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 
-struct ExampleAppConsole
+struct ExampleAppConsole2
 {
 	char                  InputBuf[256];
 	ImVector<char*>       Items;
@@ -11,7 +11,7 @@ struct ExampleAppConsole
 	int                   HistoryPos;    // -1: new line, 0..History.Size-1 browsing history.
 	ImVector<const char*> Commands;
 
-	ExampleAppConsole()
+	ExampleAppConsole2()
 	{
 		ClearLog();
 		memset(InputBuf, 0, sizeof(InputBuf));
@@ -22,7 +22,7 @@ struct ExampleAppConsole
 		Commands.push_back("CLASSIFY");  // "classify" is here to provide an example of "C"+[tab] completing to "CL" and displaying matches.
 		AddLog("Welcome to ImGui!");
 	}
-	~ExampleAppConsole()
+	~ExampleAppConsole2()
 	{
 		ClearLog();
 		for (int i = 0; i < History.Size; i++)
@@ -63,13 +63,7 @@ struct ExampleAppConsole
 			return;
 		}
 
-		ImGui::TextWrapped("This example implements a console with basic coloring, completion and history. A more elaborate implementation may want to store entries along with extra data such as timestamp, emitter, etc.");
-		ImGui::TextWrapped("Enter 'HELP' for help, press TAB to use text completion.");
-
 		// TODO: display items starting from the bottom
-
-		if (ImGui::SmallButton("Add Dummy Text")) { AddLog("%d some text", Items.Size); AddLog("some more text"); AddLog("display very important message here!"); } ImGui::SameLine();
-		if (ImGui::SmallButton("Add Dummy Error")) { AddLog("[error] something went wrong"); } ImGui::SameLine();
 		if (ImGui::SmallButton("Clear")) { ClearLog(); } ImGui::SameLine();
 		bool copy_to_clipboard = ImGui::SmallButton("Copy"); ImGui::SameLine();
 		if (ImGui::SmallButton("Scroll to bottom")) ScrollToBottom = true;
@@ -182,7 +176,7 @@ struct ExampleAppConsole
 
 	static int TextEditCallbackStub(ImGuiTextEditCallbackData* data) // In C++11 you are better off using lambdas for this sort of forwarding callbacks
 	{
-		ExampleAppConsole* console = (ExampleAppConsole*)data->UserData;
+		ExampleAppConsole2* console = (ExampleAppConsole2*)data->UserData;
 		return console->TextEditCallback(data);
 	}
 

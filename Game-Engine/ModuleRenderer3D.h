@@ -39,7 +39,7 @@ public:
 	void SaveConfig(JSON_Object *root);
 	void LoadConfig(JSON_Object *root);
 
-	void Render(ModelMesh toDraw);
+	void Render(ModelMesh* toDraw);
 
 	void ImGuiDrawer();
 

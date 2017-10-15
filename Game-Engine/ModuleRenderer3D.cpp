@@ -38,11 +38,6 @@ bool ModuleRenderer3D::Init()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
 	GLenum err = glewInit();
-	App->Console.AddLog("Using Glew %s", glewGetString(GLEW_VERSION));
-	App->Console.AddLog("Vendor: %s", glewGetString(GL_VENDOR));
-	App->Console.AddLog("Renderer: %s", glewGetString(GL_RENDERER));
-	App->Console.AddLog("OpenGL version supported %s", glGetString(GL_VERSION));
-	App->Console.AddLog("GLSL: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
 
 	//Create context
@@ -161,34 +156,34 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	{
 		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
 		{
-			App->renderer3D->Render(**re);
+			App->renderer3D->Render(*re);
 		}
 	}
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleRenderer3D::Render(ModelMesh toDraw)
+void ModuleRenderer3D::Render(ModelMesh* toDraw)
 {
 
-	glColor4f(toDraw.ColorOverMaterial.x, toDraw.ColorOverMaterial.y, toDraw.ColorOverMaterial.z , 1);
+	glColor4f(toDraw->ColorOverMaterial.x, toDraw->ColorOverMaterial.y, toDraw->ColorOverMaterial.z , 1);
 
-	if (toDraw.wireframe)
+	if (toDraw->wireframe)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glPushMatrix();
 
-	if (toDraw.drawNormals && toDraw.normals != nullptr) {
-		for (uint i = 0; i < toDraw.numVertices * 3; i += 3)
+	if (toDraw->drawNormals && toDraw->normals != nullptr) {
+		for (uint i = 0; i < toDraw->numVertices * 3; i += 3)
 		{
 			glLineWidth(2.0f);
 			glColor3f(1.0f, 0.0f, 0.0f);
 
 			glBegin(GL_LINES);
-			glVertex3f(toDraw.vertices[i], toDraw.vertices[i + 1], toDraw.vertices[i + 2]);
-			glVertex3f(toDraw.vertices[i] + toDraw.normals[i], toDraw.vertices[i + 1] + toDraw.normals[i + 1], toDraw.vertices[i + 2] + toDraw.normals[i + 2]);
+			glVertex3f(toDraw->vertices[i], toDraw->vertices[i + 1], toDraw->vertices[i + 2]);
+			glVertex3f(toDraw->vertices[i] + toDraw->normals[i], toDraw->vertices[i + 1] + toDraw->normals[i + 1], toDraw->vertices[i + 2] + toDraw->normals[i + 2]);
 			glEnd();
 
 			glLineWidth(1.0f);
@@ -196,22 +191,22 @@ void ModuleRenderer3D::Render(ModelMesh toDraw)
 		}
 	}
 
-	if (toDraw.textures != nullptr && toDraw.drawTexture) {
+	if (toDraw->textures != nullptr && toDraw->drawTexture) {
 		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, toDraw.idDevilImage);
+		glBindTexture(GL_TEXTURE_2D, toDraw->idDevilImage);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, toDraw.idTexture);
+		glBindBuffer(GL_ARRAY_BUFFER, toDraw->idTexture);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 
 	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_ELEMENT_ARRAY_BUFFER);
-	glBindBuffer(GL_ARRAY_BUFFER, toDraw.idVertices);
+	glBindBuffer(GL_ARRAY_BUFFER, toDraw->idVertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, toDraw.idIndices);
-	glDrawElements(GL_TRIANGLES, toDraw.numIndices, GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, toDraw->idIndices);
+	glDrawElements(GL_TRIANGLES, toDraw->numIndices, GL_UNSIGNED_INT, NULL);
 
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);

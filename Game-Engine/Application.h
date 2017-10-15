@@ -56,7 +56,7 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
-	ExampleAppConsole Console;
+	ExampleAppConsole2 Console;
 	Performance* GetPerformanceStruct();
 	bool Options();
 private:

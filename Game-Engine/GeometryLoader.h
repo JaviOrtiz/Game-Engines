@@ -1,13 +1,15 @@
 #pragma once
-
+#include <string>
+#include <vector>
 #include "Application.h"
 #include "Globals.h"
-#include <vector>
+
 #include "Assimp\include\cimport.h"
 #include "Assimp\include\scene.h"
 #include "Assimp\include\postprocess.h"
 #include "Assimp\include\cfileio.h"
-#include <string>
+
+
 struct ModelMesh
 {
 	~ModelMesh();
@@ -79,7 +81,7 @@ public:
 	void LoadMesh(aiNode * node, const aiScene * scene, Geometry* newgeo);
 	GLuint LoadImage_devil(const char* theFileName,ModelMesh* model);
 	bool loadTexture(GLuint * id_pixels, GLuint width, GLuint height, GLuint *buff);
-
+	std::string PassTexToTextureDirectory(const char* tex);
 	void ChangeTexture(const char* Path);
 public:
 
