@@ -3,7 +3,7 @@
 #include "ModuleRenderer3D.h"
 #include "GeometryLoader.h"
 #include <vector>
-
+#include "mmgr\mmgr.h"
 
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
@@ -16,7 +16,9 @@ ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Modul
 
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
-{}
+{
+	RELEASE(grid);
+}
 
 // Called before render is available
 bool ModuleRenderer3D::Init()
@@ -252,6 +254,7 @@ bool ModuleRenderer3D::CleanUp()
 {
 	LOG("Destroying 3D Renderer");
 	App->Console.AddLog("Destroying 3D Renderer");
+	RELEASE(grid);
 	ImGui_ImplSdlGL3_Shutdown();
 	SDL_GL_DeleteContext(context);
 

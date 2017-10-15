@@ -1,5 +1,5 @@
 #include "Application.h"
-
+#include "mmgr\mmgr.h"
 Application::Application()
 {
 	window = new ModuleWindow(this);
@@ -34,15 +34,20 @@ Application::Application()
 
 Application::~Application()
 {
+	RELEASE(config);
 	std::list<Module*>::iterator item = list_modules.end();
-
-	while (item != list_modules.begin())
-	{
+	item--;
+	while (item != list_modules.begin())	{
+		RELEASE(item._Ptr->_Myval->module_timer);
+		RELEASE(item._Ptr->_Myval);
 		item--;
-		delete (*item);
-
-
+		}
+	if (item == list_modules.begin())
+	{
+		RELEASE(item._Ptr->_Myval->module_timer);
+		RELEASE(item._Ptr->_Myval);
 	}
+	list_modules.clear();
 }
 
 bool Application::Init()

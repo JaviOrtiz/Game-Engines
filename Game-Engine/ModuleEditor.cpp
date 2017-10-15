@@ -2,7 +2,7 @@
 #include "ModuleEditor.h"
 #include "GeometryLoader.h"
 #include "ModuleRenderer3D.h"
-
+#include "mmgr\mmgr.h"
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Editor";
@@ -44,5 +44,10 @@ bool ModuleEditor::CleanUp()
 
 void ModuleEditor::ClearGeometryVector()
 {
+	for (int i = 0; i < geometryvector.size(); i++)
+	{
+		delete &i;
+		i = NULL;
+	}
 	geometryvector.clear();
 }

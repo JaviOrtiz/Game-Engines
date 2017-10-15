@@ -1,5 +1,5 @@
 #include "Application.h"
-
+#include "mmgr\mmgr.h"
 #include "Assimp\include\cimport.h"
 #include "Assimp\include\scene.h"
 #include "Assimp\include\postprocess.h"
@@ -12,6 +12,7 @@
 #pragma comment (lib, "Devil/libx86/DevIL.lib")
 #pragma comment (lib, "Devil/libx86/ILU.lib")
 #pragma comment (lib, "Devil/libx86/ILUT.lib")
+
 
 
 GeometryLoader::GeometryLoader(Application * app, bool start_enabled) : Module(app, start_enabled)
@@ -335,7 +336,11 @@ void ModelMesh::ImGuiDraw()
 
 Geometry::~Geometry()
 {
-	meshvector.clear();
+	for (int i = 0; i < meshvector.size(); i++) 
+	{
+		delete &i;
+		i = NULL;
+	}
 }
 
 void Geometry::ImGuiDraw()
