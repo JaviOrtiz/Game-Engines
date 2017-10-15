@@ -179,7 +179,7 @@ void ModuleRenderer3D::Render(ModelMesh* toDraw)
 		for (uint i = 0; i < toDraw->numVertices * 3; i += 3)
 		{
 			glLineWidth(2.0f);
-			glColor3f(1.0f, 0.0f, 0.0f);
+			glColor3f(1.0f, 1.0f, 0.0f);
 
 			glBegin(GL_LINES);
 			glVertex3f(toDraw->vertices[i], toDraw->vertices[i + 1], toDraw->vertices[i + 2]);
