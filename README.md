@@ -3,6 +3,34 @@ Pochinki's Engine
 We are a pair of students who are working on a 3d Game Engine c++ based.
 We are using ImGui library, DevIL,OpenGl,mmgr, Assimp, Glew and MathGeoLib.
 +
+
+Controls.
+
+Drag and drop to load fbx and textures.
+
+RightClick to activate FPS movement.
+
+W->Move Forward.
+
+E->Move Right.
+
+A->Move Left.
+
+S->Move Backward.
+
+Q->Move Down.
+
+E->Move Up.
+
+
+
+Alt+LeftClick to rotate the camera arround the object.
+
+F-> Focus on the object
+
+
+
+
 ChangeLog
 
 
