@@ -215,7 +215,8 @@ update_status ModuleImGui::PostUpdate(float dt)
 		ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
 		ImGui::Begin("About", (bool*)false, window_flags);
 		ImGui::Text("Pochinki's Engine 0.1");
-		ImGui::Text("We are a pair of students who are working on a 3d Game Engine c++ based.");		//NEED TO BE FINISHED//
+		ImGui::Text("We are a pair of students who are working on a 3d Game Engine c++ based.");
+		ImGui::Text("We are using ImGui library, DevIL,OpenGl,mmgr, Assimp, Glew and MathGeoLib.");		
 		ImGui::Text("Authors:		Daniel Lopez and Javier Ortiz");
 		ImGui::End();
 	}
