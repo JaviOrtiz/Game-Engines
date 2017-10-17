@@ -28,6 +28,7 @@ public:
 	bool CleanUp();
 	void ShowModules();
 
+	void ShowEditor(bool* p_open = NULL);
 public:
 	char*	New_Name;
 	int		Pc_Ram;
@@ -42,6 +43,7 @@ public:
 	bool    Showconsole = false;
 	bool	Modules = false;
 	bool	About = false;
+	bool    showEditor = false;
 	//OpenGL//
 
 

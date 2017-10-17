@@ -218,19 +218,24 @@ void PCylinder::InnerRender() const
 }
 
 // LINE ==================================================
-PLine::PLine() : Primitive(), origin(0, 0, 0), destination(1, 1, 1)
+pLine::pLine() : Primitive(), origin(0, 0, 0), destination(1, 1, 1)
 {
 	type = PrimitiveTypes::Primitive_Line;
 }
 
-PLine::PLine(float x, float y, float z) : Primitive(), origin(0, 0, 0), destination(x, y, z)
+pLine::pLine(float x, float y, float z) : Primitive(), origin(0, 0, 0), destination(x, y, z)
 {
 	type = PrimitiveTypes::Primitive_Line;
 }
 
-void PLine::InnerRender() const
+pLine::pLine(float oX, float oY, float oZ, float dX, float dY, float dZ) : Primitive(), origin(oX, oY, oZ), destination(dX, dY, dZ)
 {
-	glLineWidth(1.0f);
+	type = PrimitiveTypes::Primitive_Line;
+}
+
+void pLine::InnerRender() const
+{
+	glLineWidth(2.0f);
 
 	glBegin(GL_LINES);
 

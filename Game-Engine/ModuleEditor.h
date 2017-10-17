@@ -5,6 +5,7 @@
 #include "Light.h"
 #include "MathGeoLib.h"
 #include "GeometryLoader.h"
+#include "GameObject.h"
 
 class ModuleEditor : public Module
 {
@@ -19,8 +20,13 @@ public:
 
 	bool CleanUp() override;
 
-	void ClearGeometryVector();
-public:
+	void Render();
+	void ShowEditor();
 
-	std::vector<Geometry*> geometryvector;
+	GameObject* GetRoot();
+
+	GameObject* CreateNewGameObject(const char* path);
+public:
+	
+	GameObject* root;
 };

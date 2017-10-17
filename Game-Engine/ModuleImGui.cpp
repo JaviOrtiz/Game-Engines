@@ -59,8 +59,6 @@ update_status ModuleImGui::PostUpdate(float dt)
 
 	if (ImGui::BeginMainMenuBar())
 	{
-
-
 		if (ImGui::BeginMenu("Help"))
 		{
 			if (ImGui::MenuItem("Documentation"))
@@ -92,6 +90,10 @@ update_status ModuleImGui::PostUpdate(float dt)
 		{
 			if (ImGui::MenuItem("Show Modules"))
 				Modules = !Modules;
+			if (ImGui::MenuItem("Show Editor Window"))
+			{
+				showEditor = !showEditor;
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Exit"))
@@ -111,6 +113,10 @@ update_status ModuleImGui::PostUpdate(float dt)
 	{
 		ShowAbout();
 
+	}
+	if (showEditor)
+	{
+		ShowEditor();
 	}
 	//End About//
 
@@ -265,6 +271,28 @@ update_status ModuleImGui::PostUpdate(float dt)
 		}
 
 		App->Options();
+
+		ImGui::End();
+	}
+
+	void ModuleImGui::ShowEditor(bool* p_open)
+	{
+		ImGuiWindowFlags window_flags = 0;
+
+		if (!ImGui::Begin("Show Editor", p_open, window_flags))
+		{
+			// Early out if the window is collapsed, as an optimization.
+			ImGui::End();
+			return;
+		}
+
+		//ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);    // 2/3 of the space for widget and 1/3 for labels
+		ImGui::PushItemWidth(-140);                                 // Right align, keep 140 pixels for labels
+
+		if (ImGui::CollapsingHeader("GameObjects Hieriarchy"))
+		{
+			App->editor->ShowEditor();
+		}
 
 		ImGui::End();
 	}

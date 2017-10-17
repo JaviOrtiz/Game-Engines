@@ -20,31 +20,52 @@ bool ModuleEditor::Init()
 
 bool ModuleEditor::Start()
 {
+	root = new GameObject();
+	root->SetName("Root");
+
 	return true;
 }
 
 update_status ModuleEditor::Update(float dt)
 {
-	for (std::vector<Geometry*>::iterator it = App->editor->geometryvector.begin(); it != App->editor->geometryvector.end(); ++it)
-	{
-		(**it).ImGuiDraw();
-	}
 
 	return UPDATE_CONTINUE;
 }
 
 bool ModuleEditor::CleanUp()
 {
-	ClearGeometryVector();
+	delete root;
 	return true;
 }
 
-void ModuleEditor::ClearGeometryVector()
+void ModuleEditor::Render()
 {
-	while (!geometryvector.empty()) 
+	root->Update();
+}
+
+void ModuleEditor::ShowEditor()
+{
+	root->OnEditor();
+}
+
+GameObject * ModuleEditor::GetRoot()
+{
+	return root;
+}
+
+GameObject * ModuleEditor::CreateNewGameObject(const char * path)
+{
+	GameObject* ret = App->geometryloader->LoadGameObject(path);
+	if (ret != nullptr)
 	{
-		delete geometryvector.back();
-		geometryvector.pop_back();
+		root->DeleteChilds();
+		root->AddChild(ret);
+		//App->camera->CenterToGO(ret);
 	}
-		geometryvector.clear();
+	else
+	{
+		LOG("Couldn't load .fbx file!");
+	}
+
+	return ret;
 }

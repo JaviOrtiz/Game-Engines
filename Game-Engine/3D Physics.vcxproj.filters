@@ -34,6 +34,9 @@
     <Filter Include="Sources\Devil">
       <UniqueIdentifier>{29c04405-0208-486a-886a-b80f6ca296d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\GameObject and Components">
+      <UniqueIdentifier>{599a2f27-b8ac-456d-8ea6-58b5ac44d299}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -366,6 +369,24 @@
     <ClInclude Include="Devil\include\ilut_config.h">
       <Filter>Sources\Devil</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentCamera.h">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentMaterial.h">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentMesh.h">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentTransform.h">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -547,6 +568,24 @@
     </ClCompile>
     <ClCompile Include="ModuleEditor.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentCamera.cpp">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentMaterial.cpp">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentMesh.cpp">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentTransform.cpp">
+      <Filter>Sources\GameObject and Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Sources\GameObject and Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

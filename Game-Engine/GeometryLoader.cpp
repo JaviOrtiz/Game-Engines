@@ -1,21 +1,26 @@
-#include "Application.h"
-#include "mmgr\mmgr.h"
-#include "Assimp\include\cimport.h"
-#include "Assimp\include\scene.h"
-#include "Assimp\include\postprocess.h"
-#include "Assimp\include\cfileio.h"
 #include "GeometryLoader.h"
-#include"Devil\include\ilut.h"
-#include "SDL\include\SDL_opengl.h"
 #include "ModuleEditor.h"
-#pragma comment (lib,"Assimp/libx86/assimp.lib")
-#pragma comment (lib, "Devil/libx86/DevIL.lib")
-#pragma comment (lib, "Devil/libx86/ILU.lib")
-#pragma comment (lib, "Devil/libx86/ILUT.lib")
+#include "GameObject.h"
+#include "ComponentMesh.h"
+#include "ComponentMaterial.h"
+#include "ComponentTransform.h"
+#include "Glew\include\glew.h"
+#include "MathGeoLib\Math\Quat.h"
 
+#include "Assimp\include\cimport.h" 
+#include "Assimp\include\scene.h" 
+#include "Assimp\include\postprocess.h" 
+#include "Assimp\include\cfileio.h"
+#include "Devil\include\il.h"
+#include "Devil\include\ilu.h"
+#include "Devil\include\ilut.h"
 
+#pragma comment (lib, "Devil/libx86/DevIL.lib" ) /* Loading Devil lib */
+#pragma comment (lib, "Devil/libx86/ILU.lib" ) /* Loading ILU lib */
+#pragma comment (lib, "Devil/libx86/ILUT.lib" ) 
+#pragma comment (lib, "Assimp/libx86/assimp.lib")
 
-GeometryLoader::GeometryLoader(Application * app, bool start_enabled) : Module(app, start_enabled)
+GeometryLoader::GeometryLoader(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Geometry Loader";
 }
@@ -24,212 +29,209 @@ GeometryLoader::~GeometryLoader()
 {
 }
 
-bool GeometryLoader::Start()
+bool GeometryLoader::Init()
 {
+	struct aiLogStream stream;
+	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
+	aiAttachLogStream(&stream);
 
 	ilutRenderer(ILUT_OPENGL);
 	ilInit();
 	iluInit();
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
+	return true;
+}
 
-	ilClearColour(255, 255, 255, 000);
+GameObject* GeometryLoader::LoadGameObject(const char* fullPath)
+{
+	GameObject* newObject = new GameObject();
 
-	//Check for error
-	ILenum ilError = ilGetError();
-	if (ilError != IL_NO_ERROR)
+	uint length = strlen(fullPath);
+
+	std::string namePath = fullPath;
+
+	uint i = namePath.find_last_of("\\");
+	char* testM = new char[length - i];
+	namePath.copy(testM, length - i, i);
+	newObject->SetName(testM);
+
+	delete[] testM;
+	testM = nullptr;
+
+	const aiScene* scene = aiImportFile(fullPath, aiProcessPreset_TargetRealtime_MaxQuality);
+	if (scene != nullptr && scene->HasMeshes())
 	{
-		LOG("IlInit error!!");
-	}
+		LOG("Scene %s loaded succesfully", fullPath);
 
-
-	struct aiLogStream stream;
-	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
-	aiAttachLogStream(&stream);
-	return true;
-}
-
-update_status GeometryLoader::PreUpdate(float dt)
-{
-	
-	return UPDATE_CONTINUE;
-}
-
-
-
-bool GeometryLoader::CleanUp()
-{
-	aiDetachAllLogStreams();
-	return true;
-}
-
-bool GeometryLoader::LoadFile(const char* full_path)
-{
-	const aiScene* scene = aiImportFile(full_path, aiProcessPreset_TargetRealtime_MaxQuality);
-	Geometry* newgeo = new Geometry;
-	if (scene->mRootNode != nullptr) {
+		//Load transform
 		aiNode* node = scene->mRootNode;
-		if (scene != nullptr && scene->HasMeshes())
-		{
-			App->Console.AddLog("Loading Scene with %i meshes", (int)node->mNumChildren);
-			//Loading global geometry info
-			node->mTransformation.Decompose(newgeo->position, newgeo->rotation, newgeo->scale);
+		newObject->AddComponent(LoadTransform(node));
 
-			newgeo->name = node->mName.C_Str();
-			//Loading meshes
-			LoadMesh(node, scene, newgeo);
+		LOG("Loading meshes");
 
-			for (int i = 0; i < newgeo->meshvector.size(); i++)
-			{
-				newgeo->numTriangles += newgeo->meshvector[i]->numTriangles;
+		LoadMesh(node, scene, newObject);
 
-			}
-			App->editor->geometryvector.push_back(newgeo);
-			App->Console.AddLog("The model %s with %i triangles was loaded correctly", newgeo->name.c_str(), newgeo->numTriangles);
-			aiReleaseImport(scene);
-			return true;
-		}
-		else {
-			App->Console.AddLog("Error loading scene %s", full_path);
-			return false;
-		}
+		aiReleaseImport(scene);
+
+		return newObject;
 	}
-	else {
-		App->Console.AddLog("Can't accede the scene RootNode %s", full_path);
-		return false;
+	else
+	{
+		LOG("Error loading scene %s", fullPath);
+		return nullptr;
 	}
-	//RELEASE(newgeo);
 }
 
-
-void GeometryLoader::ChangeTexture(const char * Path)
+/*
+void GeometryLoader::LoadNewTexture(const char* fullPath)
 {
-	for (std::vector<Geometry*>::iterator it = App->editor->geometryvector.begin(); it != App->editor->geometryvector.end(); ++it)
+	int count = 0;
+	for (int i = 0; i < App->editor->GetRoot()->childs.size(); i++)
 	{
-		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
+		count = 0;
+		for (int j = 0; j < App->editor->GetRoot()->childs[i]->components.size(); j++)
 		{
-			(*re)->tex_name = Path;
-			LoadImage_devil((*re)->tex_name.c_str(),(*re));
-		}
-	}
-	/*for (int i = 0; i < geometryvector.size(); i++) {
-		Geometry* ActualGeometry = geometryvector[i]; //Passing through every mesh of the geometryvector to change it's texture.
-		ActualGeometry->tex_name = Path;
-		LoadImage_devil(ActualGeometry->tex_name, &ActualGeometry->idDevilImage);
-	}*/
-}
-
-void GeometryLoader::LoadMesh(aiNode * node, const aiScene * scene, Geometry* newgeo)
-{
-	for (uint i = 0; i < node->mNumMeshes; i++)
-	{
-		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-		ModelMesh* newMesh = new ModelMesh;
-		App->Console.AddLog("Creating New Mesh", newMesh->numVertices);
-		newMesh->numVertices = mesh->mNumVertices;
-		newMesh->vertices = new float[newMesh->numVertices * 3];
-		memcpy(newMesh->vertices, mesh->mVertices, sizeof(float)* newMesh->numVertices * 3);
-		App->Console.AddLog("Mesh with %d vertices", newMesh->numVertices);
-
-		glGenBuffers(1, (GLuint*)&newMesh->idVertices);
-		glBindBuffer(GL_ARRAY_BUFFER, newMesh->idVertices);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * newMesh->numVertices * 3, newMesh->vertices, GL_STATIC_DRAW);
-
-		if (mesh->HasFaces())
-		{
-			newMesh->numIndices = mesh->mNumFaces * 3;
-			newMesh->indices = new uint[newMesh->numIndices];
-			for (uint i = 0; i < mesh->mNumFaces; ++i)
+			if (App->editor->GetRoot()->childs[i]->components[j]->GetType() == Component_Material)
 			{
-				if (mesh->mFaces[i].mNumIndices != 3)
-				{
-					App->Console.AddLog("WARNING, geometry face with != 3 indices!");
-				}
-				else
-				{
-					memcpy(&newMesh->indices[i * 3], mesh->mFaces[i].mIndices, 3 * sizeof(uint));
-	
-				}
-			
+				dynamic_cast<ComponentMaterial*>(App->editor->GetRoot()->childs[i]->components[j])->OverrideTexture(fullPath);
+				count++;
 			}
-			App->Console.AddLog("Mesh with %d faces", mesh->mNumFaces);
-			App->Console.AddLog("Mesh with %d indices", newMesh->numIndices);
-
-			glGenBuffers(1, (GLuint*)&newMesh->idIndices);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->idIndices);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * newMesh->numIndices, newMesh->indices, GL_STATIC_DRAW);
 		}
-		if (mesh->HasNormals())
+
+		//In case it didn't have any previous material
+		if (count == 0)
 		{
-			newMesh->normals = new float[newMesh->numVertices * 3];
-			memcpy(newMesh->normals, mesh->mNormals, sizeof(float) * newMesh->numVertices * 3);
-
-			glGenBuffers(1, (GLuint*) &(newMesh->idNormals));
-			glBindBuffer(GL_ARRAY_BUFFER, newMesh->idNormals);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * newMesh->numVertices * 3, newMesh->normals, GL_STATIC_DRAW);
-			App->Console.AddLog("Mesh with %d normals", newMesh->normals);
+			ComponentMaterial* newMat = new ComponentMaterial();
+			newMat->idTexture = App->textures->ImportImage(fullPath);
+			newMat->SetName(fullPath);
+			App->sceneEditor->GetRoot()->childs[i]->AddComponent(newMat);
 		}
-		if (mesh->HasTextureCoords(0))
-		{
-			newMesh->textures = new float[newMesh->numVertices * 2];
-			App->Console.AddLog("Mesh with Texture Coords");
-			for (int x = 0; x < mesh->mNumVertices; ++x) {
-
-				newMesh->textures[x * 2] = mesh->mTextureCoords[0][x].x;
-				newMesh->textures[x * 2 + 1] = mesh->mTextureCoords[0][x].y;
-				
-			}
-
-			aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-			uint numtextures = material->GetTextureCount(aiTextureType_DIFFUSE);
-			aiString path;
-			material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
-			newMesh->tex_name = PassTexToTextureDirectory(path.C_Str());
-
-			std::size_t pos = newMesh->tex_name.rfind("\\");     //if the texture path is in a folder, tries to take only the name of the .png file 
-			std::string str3 = newMesh->tex_name.substr(pos + 1);
-			newMesh->tex_name = str3.c_str();
-			App->Console.AddLog("Loading Texture");
-			LoadImage_devil(newMesh->tex_name.c_str(), newMesh);
-
-			glGenBuffers(1, (GLuint*)&(newMesh->idTexture));
-			glBindBuffer(GL_ARRAY_BUFFER, newMesh->idTexture);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) *newMesh->numVertices * 2, &newMesh->textures[0], GL_STATIC_DRAW);
-		}
-		//SetValues
-		node->mTransformation.Decompose(newMesh->position, newMesh->rotation, newMesh->scale);
-		newMesh->name = node->mName.C_Str();
-		newMesh->numTriangles = mesh->mNumFaces;
-		//Push new mesh
-		newgeo->meshvector.push_back(newMesh);
 	}
+	LOG("Set %s as new texture for current meshes.");
+}*/
+
+CompMesh* GeometryLoader::LoadMesh(aiNode* node, const aiScene* scene, GameObject* addTo)
+{
+	for (int i = 0; i < node->mNumMeshes; i++)
+	{
+		CompMesh* m = new CompMesh;
+		aiMesh* newMesh = scene->mMeshes[node->mMeshes[i]];
+
+		if (newMesh != nullptr)
+		{
+			//VERTICES
+			m->numVertices = newMesh->mNumVertices;
+
+			m->vertices = new float[m->numVertices * 3];
+
+			memcpy(m->vertices, newMesh->mVertices, sizeof(float)* m->numVertices * 3);
+
+			LOG("New mesh with %d vertices", m->numVertices);
+
+			glGenBuffers(1, (GLuint*)&m->idVertices);
+			glBindBuffer(GL_ARRAY_BUFFER, m->idVertices);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->vertices, GL_STATIC_DRAW);
+
+			//INDICES
+			if (newMesh->HasFaces())
+			{
+				m->numIndices = newMesh->mNumFaces * 3;
+				m->indices = new uint[m->numIndices];
+
+				for (uint i = 0; i < newMesh->mNumFaces; ++i)
+				{
+					if (newMesh->mFaces[i].mNumIndices != 3)
+					{
+						LOG("WARNING, geometry face with != 3 indices!");
+					}
+					else
+					{
+						memcpy(&m->indices[i * 3], newMesh->mFaces[i].mIndices, 3 * sizeof(uint));
+					}
+				}
+
+				glGenBuffers(1, (GLuint*)&m->idIndices);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m->idIndices);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * m->numIndices, m->indices, GL_STATIC_DRAW);
+			}
+
+			//NORMALS
+			if (newMesh->HasNormals())
+			{
+				m->normals = new float[m->numVertices * 3];
+				memcpy(m->normals, newMesh->mNormals, sizeof(float) * m->numVertices * 3);
+
+				glGenBuffers(1, (GLuint*) &(m->idNormals));
+				glBindBuffer(GL_ARRAY_BUFFER, m->idNormals);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->normals, GL_STATIC_DRAW);
+			}
+
+			//COLORS
+			if (newMesh->HasVertexColors(0))
+			{
+				m->colors = new float[m->numVertices * 3];
+				memcpy(m->colors, newMesh->mColors, sizeof(float) * m->numVertices * 3);
+
+				glGenBuffers(1, (GLuint*) &(m->idColors));
+				glBindBuffer(GL_ARRAY_BUFFER, m->idColors);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->colors, GL_STATIC_DRAW);
+			}
+
+			//TEXTURE COORDS
+			if (newMesh->HasTextureCoords(0))
+			{
+				m->texCoords = new float[m->numVertices * 3];
+				memcpy(m->texCoords, newMesh->mTextureCoords[0], sizeof(float) * m->numVertices * 3);
+
+				glGenBuffers(1, (GLuint*) &(m->idTexCoords));
+				glBindBuffer(GL_ARRAY_BUFFER, m->idTexCoords);
+				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->texCoords, GL_STATIC_DRAW);
+
+				aiMaterial* material = nullptr;
+				material = scene->mMaterials[newMesh->mMaterialIndex];
+				addTo->AddComponent(LoadMaterial(material));
+
+			}
+
+			m->SetName(node->mName.C_Str());
+
+			m->enclosingBox.SetNegativeInfinity();
+
+			m->enclosingBox.Enclose((float3*)m->vertices, m->numVertices);
+
+			addTo->AddComponent(m);
+		}
+	}
+
 	for (uint i = 0; i < node->mNumChildren; i++)
 	{
-		LoadMesh(node->mChildren[i], scene,newgeo);
+		LoadMesh(node->mChildren[i], scene, addTo);
 	}
 
-	BoundingBox.SetNegativeInfinity();
-	for (std::vector<ModelMesh*>::iterator item = newgeo->meshvector.begin(); item != newgeo->meshvector.cend(); ++item)
-		BoundingBox.Enclose((float3*)(*item)->vertices, (*item)->numVertices);
-
-	App->camera->CenterCameraToGeometry(&BoundingBox);
+	return nullptr;
 }
 
-GLuint GeometryLoader::LoadImage_devil(const char * theFileName, ModelMesh* mesh)
+uint GeometryLoader::ImportImage(const char * image)
 {
-	bool textureLoaded = false;
+	ILuint imageID;				// Create an image ID as a ULuint
 
-	
-	uint imgID = 0; // We generate and set current image ID
-	ilGenImages(1, &imgID);
-	ilBindImage(imgID);
+	GLuint textureID;			// Create a texture ID as a GLuint
 
-	
-	ILboolean success = ilLoadImage(theFileName); //Loading image with devil passing the filename
+	ILboolean success;			// Create a flag to keep track of success/failure
 
+	ILenum error;				// Create a flag to keep track of the IL error state
 
-	if (success == IL_TRUE)		//if we loaded the image correctly, we 
+	ilGenImages(1, &imageID); 		// Generate the image ID
+
+	ilBindImage(imageID); 			// Bind the image
+
+	success = ilLoadImage(image); 	// Load the image file
+
+									// If we managed to load the image, then we can start to do things with it...
+	if (success)
 	{
+		// If the image is flipped (i.e. upside-down and mirrored, flip it the right way up!)
 		ILinfo ImageInfo;
 		iluGetImageInfo(&ImageInfo);
 		if (ImageInfo.Origin == IL_ORIGIN_UPPER_LEFT)
@@ -237,147 +239,98 @@ GLuint GeometryLoader::LoadImage_devil(const char * theFileName, ModelMesh* mesh
 			iluFlipImage();
 		}
 
-		//Convert image to RGBA
-		success = ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+		// Convert the image into a suitable format to work with
+		// NOTE: If your image contains alpha channel you can replace IL_RGB with IL_RGBA
+		success = ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
 
-		if (success == IL_TRUE)
+		// Quit out if we failed the conversion
+		if (!success)
 		{
-			textureLoaded = loadTexture((GLuint*)ilGetData(), (GLuint)ilGetInteger(IL_IMAGE_WIDTH), (GLuint)ilGetInteger(IL_IMAGE_HEIGHT), &(GLuint)mesh->idDevilImage);
-			//Create texture from file pixels
-			mesh->tex_size.x = ImageInfo.Width;
-			mesh->tex_size.y = ImageInfo.Height;
-			textureLoaded = true;
+			error = ilGetError();
+			LOG("Image conversion failed - IL reports error: %s ", iluErrorString(error));
+			exit(-1);
 		}
 
-		//Delete file from memory
-		ilDeleteImages(1, &imgID);
-	}
+		// Generate a new texture
+		glGenTextures(1, &textureID);
 
-	//Report error
-	if (!textureLoaded)
+		// Bind the texture to a name
+		glBindTexture(GL_TEXTURE_2D, textureID);
+
+		// Set texture clamping method
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+		// Set texture interpolation method to use linear interpolation (no MIPMAPS)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		// Specify the texture specification
+		glTexImage2D(GL_TEXTURE_2D, 				// Type of texture
+			0,				// Pyramid level (for mip-mapping) - 0 is the top level
+			ilGetInteger(IL_IMAGE_FORMAT),	// Internal pixel format to use. Can be a generic type like GL_RGB or GL_RGBA, or a sized type
+			ilGetInteger(IL_IMAGE_WIDTH),	// Image width
+			ilGetInteger(IL_IMAGE_HEIGHT),	// Image height
+			0,				// Border width in pixels (can either be 1 or 0)
+			ilGetInteger(IL_IMAGE_FORMAT),	// Format of image pixel data
+			GL_UNSIGNED_BYTE,		// Image data type
+			ilGetData());			// The actual image data itself
+
+	}
+	else // If we failed to open the image file in the first place...
 	{
-		App->Console.AddLog("Texture Wasn't able to be loaded correctly");
+		error = ilGetError();
+		LOG("Image load failed - IL reports error: %s", iluErrorString(error));
+		return 0;
 	}
-	else {
-		App->Console.AddLog("Texture loaded correctly");
-	}
-	return textureLoaded;
 
+	ilDeleteImages(1, &imageID); // Because we have already copied image data into texture data we can release memory used by image.
+
+	LOG("Texture creation successful.");
+
+	return textureID; // Return the GLuint to the texture so you can use it!
 }
 
-bool GeometryLoader::loadTexture(GLuint * id_pixels, GLuint width_img, GLuint height_img,GLuint *buff)
+CompMaterial* GeometryLoader::LoadMaterial(aiMaterial* newMaterial)
+
 {
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // we set the texture parameters and bind the image to a buffer so it can be called later
-	glGenTextures(1, buff);
-	glBindTexture(GL_TEXTURE_2D, *buff);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_img, height_img,
-		-0, GL_RGBA, GL_UNSIGNED_BYTE, id_pixels);
-	glBindTexture(GL_TEXTURE_2D, NULL);
-	//Check for error
-	GLenum error = glGetError();
-	if (error != GL_NO_ERROR)
+	CompMaterial* m = new CompMaterial;
+	//MATERIAL
+
+	if (newMaterial != nullptr)
 	{
-		App->Console.AddLog("Error loading texture from %p pixels! %s\n", id_pixels, gluErrorString(error));
-		return false;
+		uint numTextures = newMaterial->GetTextureCount(aiTextureType_DIFFUSE);
+		aiString path;
+
+		newMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &path);
+
+		std::string fullPath = "Models&Textures/";
+		fullPath.append(path.C_Str());
+		m->idTexture = ImportImage(fullPath.c_str());
+		m->SetName(path.C_Str());
+
+		return m;
 	}
-	App->Console.AddLog("Success loading texture from %p pixels! %s\n", id_pixels, gluErrorString(error));
+	return nullptr;
+}
+
+CompTransform* GeometryLoader::LoadTransform(aiNode* node)
+{
+	aiVector3D translation;
+	aiVector3D scale;
+	aiQuaternion rotation;
+
+	node->mTransformation.Decompose(scale, rotation, translation);
+
+	float3 pos(translation.x, translation.y, translation.z);
+	float3 sca(scale.x, scale.y, scale.z);
+	Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
+
+	return new CompTransform(pos, sca, rot);
+}
+
+
+bool GeometryLoader::CleanUp()
+{
 	return true;
 }
-
-std::string GeometryLoader::PassTexToTextureDirectory(const char * tex)
-{
-	std::string fullPath = "Models&Textures/";
-	fullPath.append(tex);
-	return fullPath;
-}
-
-ModelMesh::~ModelMesh()
-{
-	if (vertices != nullptr)
-	{
-		delete[] vertices;
-		vertices = nullptr;
-	}
-
-	if (indices != nullptr)
-	{
-		delete[] indices;
-		indices = nullptr;
-	}
-	if (normals != nullptr)
-	{
-		delete[] normals;
-		normals = nullptr;
-	}
-	if (textures != nullptr)
-	{
-		delete[] textures;
-		textures = nullptr;
-	}
-}
-
-void ModelMesh::ImGuiDraw()
-{
-	if (ImGui::TreeNode(name.c_str()))
-	{
-		ImGui::Text("Transformation:");
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Position x %.2f y %.2f z %.2f", position.x, position.y, position.z);
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Rotation x %.2f y %.2f z %.2f", rotation.GetEuler().x, rotation.GetEuler().y, rotation.GetEuler().z);
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Scale x %.2f y %.2f z %.2f", scale.x, scale.y, scale.z);
-		ImGui::Text("Geometry");
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Triangles %i", numTriangles);
-		if (ImGui::Checkbox("WireFrame", &wireframe))
-		{
-		}
-		ImGui::SameLine();
-		if (ImGui::Checkbox("Draw Normals", &drawNormals))
-		{
-		}
-		ImGui::Separator();
-		ImGui::Text("Texture");
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Texture Name: %s", tex_name.c_str());
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Texture Size: %i %i", (int)tex_size.x, (int)tex_size.y);
-		ImGui::Text("Color Over Texture");
-		ImGui::ColorEdit4("##Texture Color", &ColorOverMaterial.x);
-		if (ImGui::Checkbox("Print Texture", &drawTexture))
-		{
-		}
-		
-		ImGui::TreePop();
-	}
-}
-
-Geometry::~Geometry()
-{
-	while (!meshvector.empty())
-	{
-		delete meshvector.back();
-		meshvector.pop_back();
-	}
-}
-
-void Geometry::ImGuiDraw()
-{
-	if (ImGui::TreeNode(name.c_str()))
-	{
-		ImGui::Text("Transformation:");
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Position x %.2f y %.2f z %.2f", position.x, position.y, position.z);
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Rotation x %.2f y %.2f z %.2f", rotation.GetEuler().x, rotation.GetEuler().y, rotation.GetEuler().z);
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Scale x %.2f y %.2f z %.2f", scale.x, scale.y, scale.z);
-		ImGui::Text("Geometry");
-		ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Triangles %i", numTriangles);
-		for (int i = 0; i < meshvector.size(); i++)
-		{
-			meshvector[i]->ImGuiDraw();
-
-		}
-		ImGui::TreePop();
-
-	}
-}
-
-

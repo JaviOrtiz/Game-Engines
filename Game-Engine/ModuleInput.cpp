@@ -121,12 +121,11 @@ update_status ModuleInput::PreUpdate(float dt)
 				uint length = strlen(dropped_filedir);
 				if (strcmp(&dropped_filedir[length - 4], ".FBX") == 0 || strcmp(&dropped_filedir[length - 4], ".fbx") == 0)
 				{
-					App->editor->ClearGeometryVector();
-					App->geometryloader->LoadFile(dropped_filedir);
+					App->editor->CreateNewGameObject(dropped_filedir);
 				}
 				else if (strcmp(&dropped_filedir[length - 4], ".PNG") == 0 || strcmp(&dropped_filedir[length - 4], ".png") == 0)
 				{
-					App->geometryloader->ChangeTexture(dropped_filedir);
+					//App->geometryloader->ChangeTexture(dropped_filedir);
 				}
 				SDL_ShowSimpleMessageBox(
 					SDL_MESSAGEBOX_INFORMATION,

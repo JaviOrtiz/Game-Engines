@@ -4,7 +4,9 @@
 #include "GeometryLoader.h"
 #include <vector>
 #include "mmgr\mmgr.h"
-
+#include "ComponentMesh.h"
+#include "ComponentMaterial.h"
+#include "ComponentCamera.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
@@ -152,70 +154,152 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	grid->Render();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	for (std::vector<Geometry*>::iterator it = App->editor->geometryvector.begin(); it != App->editor->geometryvector.end(); ++it)
-	{
-		for (std::vector<ModelMesh*>::iterator re = (*it)->meshvector.begin(); re != (*it)->meshvector.end(); ++re)
-		{
-			App->renderer3D->Render(*re);
-		}
-	}
+	App->editor->Render();
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleRenderer3D::Render(ModelMesh* toDraw)
+void ModuleRenderer3D::Render(GameObject* toDraw)
 {
-
-	glColor4f(toDraw->ColorOverMaterial.x, toDraw->ColorOverMaterial.y, toDraw->ColorOverMaterial.z , 1);
-
-	if (toDraw->wireframe)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	glPushMatrix();
-
-	if (toDraw->drawNormals && toDraw->normals != nullptr) {
-		for (uint i = 0; i < toDraw->numVertices * 3; i += 3)
+	for (int i = 0; i < toDraw->components.size(); i++)
+	{
+		if (toDraw->components[i]->GetType() == Component_Mesh)
 		{
-			glLineWidth(2.0f);
-			glColor3f(1.0f, 1.0f, 0.0f);
+			CompMesh* CMesh = dynamic_cast<CompMesh*> (toDraw->components[i]);
+			if (CMesh->drawdebug)
+			{
+				CMesh->DrawDebug();
+			}
+			//ComponentCamera* camera = (ComponentCamera*)App->sceneEditor->GetRoot()->FindComponent(Component_Camera);
+			/*if (camera != nullptr)
+			{
+				if (camera->Contains(toDraw->enclosingBox))
+				{
+					if (wframe == true)
+					{
+						glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+						glColor3f(0, 1, 1);
+					}
+					else
+					{
+						glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+					}
 
-			glBegin(GL_LINES);
-			glVertex3f(toDraw->vertices[i], toDraw->vertices[i + 1], toDraw->vertices[i + 2]);
-			glVertex3f(toDraw->vertices[i] + toDraw->normals[i], toDraw->vertices[i + 1] + toDraw->normals[i + 1], toDraw->vertices[i + 2] + toDraw->normals[i + 2]);
-			glEnd();
+					glPushMatrix();
 
-			glLineWidth(1.0f);
-			glColor3f(1.0f, 1.0f, 1.0f);
+					if (toDraw->idNormals > 0)
+					{
+						glEnable(GL_LIGHTING);
+						glEnableClientState(GL_NORMAL_ARRAY);
+
+						glBindBuffer(GL_ARRAY_BUFFER, toDraw->idNormals);
+						glNormalPointer(GL_FLOAT, 0, NULL);
+					}
+
+					glEnableClientState(GL_VERTEX_ARRAY);
+					glEnableClientState(GL_ELEMENT_ARRAY_BUFFER);
+					glBindBuffer(GL_ARRAY_BUFFER, toDraw->idVertices);
+					glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+
+					if (toDraw->idTexCoords > 0)
+					{
+						ComponentMaterial* mat = dynamic_cast<ComponentMaterial*>(objectDraw->FindComponent(Component_Material));
+						if (mat != nullptr && wframe == false)
+						{
+							glBindTexture(GL_TEXTURE_2D, mat->idTexture);
+						}
+						glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+						glBindBuffer(GL_ARRAY_BUFFER, toDraw->idTexCoords);
+						glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+					}
+
+					if (toDraw->idColors > 0)
+					{
+						glEnableClientState(GL_COLOR_ARRAY);
+						glBindBuffer(GL_ARRAY_BUFFER, toDraw->idColors);
+						glColorPointer(3, GL_FLOAT, 0, NULL);
+					}
+
+					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, toDraw->idIndices);
+					glDrawElements(GL_TRIANGLES, toDraw->numIndices, GL_UNSIGNED_INT, NULL);
+
+
+					glDisableClientState(GL_COLOR_ARRAY);
+					glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+					glDisableClientState(GL_NORMAL_ARRAY);
+					glDisableClientState(GL_VERTEX_ARRAY);
+					glDisableClientState(GL_ELEMENT_ARRAY_BUFFER);
+
+					glPopMatrix();
+					glUseProgram(0);
+
+					glBindTexture(GL_TEXTURE_2D, 0);
+
+					if (App->physics->debug)
+					{
+						toDraw->DrawDebug();
+					}
+				}
+			}*/
+			//else
+			//{
+			if (WireFrame == true)
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			}
+			else
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			}
+
+			glPushMatrix();
+
+			if (CMesh->idNormals > 0)
+			{
+				glEnable(GL_LIGHTING);
+				glEnableClientState(GL_NORMAL_ARRAY);
+
+				glBindBuffer(GL_ARRAY_BUFFER, CMesh->idNormals);
+				glNormalPointer(GL_FLOAT, 0, NULL);
+			}
+
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_ELEMENT_ARRAY_BUFFER);
+			glBindBuffer(GL_ARRAY_BUFFER, CMesh->idVertices);
+			glVertexPointer(3, GL_FLOAT, 0, NULL);
+
+
+			if (CMesh->idTexCoords > 0)
+			{
+				CompMaterial* mat = dynamic_cast<CompMaterial*>(toDraw->FindComponent(Component_Material));
+				if (mat != nullptr)
+				{
+					glEnable(GL_TEXTURE_2D);
+					glBindTexture(GL_TEXTURE_2D, mat->idTexture);
+				}
+				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+				glBindBuffer(GL_ARRAY_BUFFER, CMesh->idTexCoords);
+				glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+			}
+
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, CMesh->idIndices);
+			glDrawElements(GL_TRIANGLES, CMesh->numIndices, GL_UNSIGNED_INT, NULL);
+
+
+			glDisableClientState(GL_COLOR_ARRAY);
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+			glDisableClientState(GL_NORMAL_ARRAY);
+			glDisableClientState(GL_VERTEX_ARRAY);
+			glDisableClientState(GL_ELEMENT_ARRAY_BUFFER);
+
+			glPopMatrix();
+			glUseProgram(0);
+
+			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 	}
-
-	if (toDraw->textures != nullptr && toDraw->drawTexture) {
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, toDraw->idDevilImage);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glBindBuffer(GL_ARRAY_BUFFER, toDraw->idTexture);
-		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-
-	}
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_ELEMENT_ARRAY_BUFFER);
-	glBindBuffer(GL_ARRAY_BUFFER, toDraw->idVertices);
-	glVertexPointer(3, GL_FLOAT, 0, NULL);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, toDraw->idIndices);
-	glDrawElements(GL_TRIANGLES, toDraw->numIndices, GL_UNSIGNED_INT, NULL);
-
-	glDisableClientState(GL_NORMAL_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_ELEMENT_ARRAY_BUFFER);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glPopMatrix();
-	glUseProgram(0);
 }
-
 
 void ModuleRenderer3D::ImGuiDrawer()
 {

@@ -11,11 +11,11 @@
 #include "ModuleCamera3D.h"
 #include "ModuleImGui.h"
 #include "imguiconsole.h"
-#include "GeometryLoader.h"
 #include "JConfig.h"
 #include "Assimp\include\ai_assert.h"
 #include"Assimp\include\anim.h"
 #include "ModuleEditor.h"
+#include "GeometryLoader.h"
 
 struct Performance
 {
@@ -25,6 +25,7 @@ struct Performance
 	uint	Miliseconds_Per_Frame = 0;
 };
 
+class GeometryLoader;
 class Application
 {
 public:

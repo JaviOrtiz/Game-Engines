@@ -10,8 +10,8 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "GeometryLoader.h"
 #include "Devil\include\il.h"
+#include "GameObject.h"
 #include "Primitive.h"
 
 #pragma comment (lib, "DevIL/libx86/DevIL.lib")
@@ -39,7 +39,7 @@ public:
 	void SaveConfig(JSON_Object *root);
 	void LoadConfig(JSON_Object *root);
 
-	void Render(ModelMesh* toDraw);
+	void Render(GameObject* toDraw);
 
 	void ImGuiDrawer();
 
