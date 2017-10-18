@@ -1,4 +1,4 @@
-#include "ComponentCamera.h"
+#include "CompCamera.h"
 
 #include "Glew\include\glew.h"
 #include "MathGeoLib\Math\MathAll.h"

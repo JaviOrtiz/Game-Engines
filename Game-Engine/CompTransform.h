@@ -15,6 +15,7 @@ public:
 	void OnEditor() override;
 
 private:
+	float3 movedposition;
 	float3 position;
 	float3 scale;
 	Quat rotation;

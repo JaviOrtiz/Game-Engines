@@ -1,7 +1,7 @@
 #include "GameObject.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
-#include "ComponentMesh.h"
+#include "CompMesh.h"
 
 GameObject::GameObject(GameObject* parent): parent(parent)
 {
@@ -104,13 +104,13 @@ void GameObject::OnEditor()
 	}
 }
 
-void GameObject::Move(float3 newPos)
+void GameObject::Move(float3 lastpos,float3 newPos)
 {
 	for (int i = 0; i < components.size(); i++)
 	{
 		if (components[i]->GetType() == Component_Mesh)
 		{
-			dynamic_cast<CompMesh*>(components[i])->Move(newPos);
+			dynamic_cast<CompMesh*>(components[i])->Move(lastpos,newPos);
 		}
 	}
 }

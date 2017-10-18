@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "ComponentMaterial.h"
+#include "CompMaterial.h"
 #include "ImGui\imgui.h"
 
 CompMaterial::CompMaterial() : Component(Component_Material)

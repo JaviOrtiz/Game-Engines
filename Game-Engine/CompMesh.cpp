@@ -1,10 +1,12 @@
-#include "ComponentMesh.h"
+#include "CompMesh.h"
 #include "Primitive.h"
 
 #include "ImGui\imgui.h"
 #include "Glew\include\glew.h"
 #include "MathGeoLib\Geometry\Triangle.h"
 #include "MathGeoLib\Math\float4x4.h"
+
+#include <vector>
 CompMesh::CompMesh() : Component(Component_Mesh)
 {
 	name = "Mesh";
@@ -126,21 +128,22 @@ void CompMesh::OnEditor()
 	}
 }
 
-void CompMesh::Move(float3 newPos)
+void CompMesh::Move(float3 lastpos,float3 newPos)
 {
+	float3 differentialpos = newPos - lastpos;
 	float* newVertices = new float[numVertices * 3];
 	memcpy(newVertices,vertices, sizeof(float)* numVertices * 3);
 	for (int i = 0; i <= numVertices * 3; i+=3)
 	{
-		newVertices[i] += newPos.x;
+		newVertices[i] += differentialpos.x;
 	}
 	for (int i = 1; i <= numVertices * 3; i += 3)
 	{
-		newVertices[i] += newPos.y;
+		newVertices[i] += differentialpos.y;
 	}
 	for (int i = 2; i <= numVertices * 3; i += 3)
 	{
-		newVertices[i] += newPos.z;
+		newVertices[i] += differentialpos.z;
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, idVertices);

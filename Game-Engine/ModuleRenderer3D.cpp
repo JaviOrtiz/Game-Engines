@@ -4,9 +4,9 @@
 #include "GeometryLoader.h"
 #include <vector>
 #include "mmgr\mmgr.h"
-#include "ComponentMesh.h"
-#include "ComponentMaterial.h"
-#include "ComponentCamera.h"
+#include "CompMesh.h"
+#include "CompMaterial.h"
+#include "CompCamera.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */

@@ -1,9 +1,9 @@
 #include "GeometryLoader.h"
 #include "ModuleEditor.h"
 #include "GameObject.h"
-#include "ComponentMesh.h"
-#include "ComponentMaterial.h"
-#include "ComponentTransform.h"
+#include "CompMesh.h"
+#include "CompMaterial.h"
+#include "CompTransform.h"
 #include "Glew\include\glew.h"
 #include "MathGeoLib\Math\Quat.h"
 
