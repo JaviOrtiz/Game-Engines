@@ -68,9 +68,10 @@ GameObject* GeometryLoader::LoadGameObject(const char* fullPath)
 		aiNode* node = scene->mRootNode;
 		newObject->AddComponent(LoadTransform(node));
 
+		
 		LOG("Loading meshes");
 
-		LoadMesh(node, scene, newObject);
+		newObject->AddChild(AddGameObjectChild(node, scene, newObject));
 
 		aiReleaseImport(scene);
 
@@ -81,6 +82,25 @@ GameObject* GeometryLoader::LoadGameObject(const char* fullPath)
 		LOG("Error loading scene %s", fullPath);
 		return nullptr;
 	}
+}
+
+GameObject * GeometryLoader::AddGameObjectChild(aiNode * node, const aiScene * scene, GameObject * parent)
+{
+	for (uint i = 0; i < node->mNumMeshes; i++)
+	{
+		GameObject* newObject = new GameObject(parent);
+		aiMatrix4x4 matrix = node->mTransformation;
+		newObject->AddComponent(LoadTransform(node));
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		newObject->SetName(node->mName.C_Str());
+		LoadMesh(mesh ,node, scene, newObject);
+		return newObject;
+	}
+	for (uint i = 0; i < node->mNumChildren; i++)
+	{
+		parent->AddChild(AddGameObjectChild(node->mChildren[i], scene, parent));
+	}
+	return nullptr;
 }
 
 /*
@@ -111,21 +131,18 @@ void GeometryLoader::LoadNewTexture(const char* fullPath)
 	LOG("Set %s as new texture for current meshes.");
 }*/
 
-CompMesh* GeometryLoader::LoadMesh(aiNode* node, const aiScene* scene, GameObject* addTo)
+CompMesh* GeometryLoader::LoadMesh(aiMesh* mesh ,aiNode* node, const aiScene* scene, GameObject* addTo)
 {
-	for (int i = 0; i < node->mNumMeshes; i++)
-	{
-		CompMesh* m = new CompMesh;
-		aiMesh* newMesh = scene->mMeshes[node->mMeshes[i]];
+	CompMesh* m = new CompMesh;
 
-		if (newMesh != nullptr)
+		if (mesh != nullptr)
 		{
 			//VERTICES
-			m->numVertices = newMesh->mNumVertices;
+			m->numVertices = mesh->mNumVertices;
 
 			m->vertices = new float[m->numVertices * 3];
 
-			memcpy(m->vertices, newMesh->mVertices, sizeof(float)* m->numVertices * 3);
+			memcpy(m->vertices, mesh->mVertices, sizeof(float)* m->numVertices * 3);
 
 			LOG("New mesh with %d vertices", m->numVertices);
 
@@ -134,20 +151,20 @@ CompMesh* GeometryLoader::LoadMesh(aiNode* node, const aiScene* scene, GameObjec
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->vertices, GL_STATIC_DRAW);
 
 			//INDICES
-			if (newMesh->HasFaces())
+			if (mesh->HasFaces())
 			{
-				m->numIndices = newMesh->mNumFaces * 3;
+				m->numIndices = mesh->mNumFaces * 3;
 				m->indices = new uint[m->numIndices];
 
-				for (uint i = 0; i < newMesh->mNumFaces; ++i)
+				for (uint i = 0; i < mesh->mNumFaces; ++i)
 				{
-					if (newMesh->mFaces[i].mNumIndices != 3)
+					if (mesh->mFaces[i].mNumIndices != 3)
 					{
 						LOG("WARNING, geometry face with != 3 indices!");
 					}
 					else
 					{
-						memcpy(&m->indices[i * 3], newMesh->mFaces[i].mIndices, 3 * sizeof(uint));
+						memcpy(&m->indices[i * 3], mesh->mFaces[i].mIndices, 3 * sizeof(uint));
 					}
 				}
 
@@ -157,10 +174,10 @@ CompMesh* GeometryLoader::LoadMesh(aiNode* node, const aiScene* scene, GameObjec
 			}
 
 			//NORMALS
-			if (newMesh->HasNormals())
+			if (mesh->HasNormals())
 			{
 				m->normals = new float[m->numVertices * 3];
-				memcpy(m->normals, newMesh->mNormals, sizeof(float) * m->numVertices * 3);
+				memcpy(m->normals, mesh->mNormals, sizeof(float) * m->numVertices * 3);
 
 				glGenBuffers(1, (GLuint*) &(m->idNormals));
 				glBindBuffer(GL_ARRAY_BUFFER, m->idNormals);
@@ -168,10 +185,10 @@ CompMesh* GeometryLoader::LoadMesh(aiNode* node, const aiScene* scene, GameObjec
 			}
 
 			//COLORS
-			if (newMesh->HasVertexColors(0))
+			if (mesh->HasVertexColors(0))
 			{
 				m->colors = new float[m->numVertices * 3];
-				memcpy(m->colors, newMesh->mColors, sizeof(float) * m->numVertices * 3);
+				memcpy(m->colors, mesh->mColors, sizeof(float) * m->numVertices * 3);
 
 				glGenBuffers(1, (GLuint*) &(m->idColors));
 				glBindBuffer(GL_ARRAY_BUFFER, m->idColors);
@@ -179,17 +196,17 @@ CompMesh* GeometryLoader::LoadMesh(aiNode* node, const aiScene* scene, GameObjec
 			}
 
 			//TEXTURE COORDS
-			if (newMesh->HasTextureCoords(0))
+			if (mesh->HasTextureCoords(0))
 			{
 				m->texCoords = new float[m->numVertices * 3];
-				memcpy(m->texCoords, newMesh->mTextureCoords[0], sizeof(float) * m->numVertices * 3);
+				memcpy(m->texCoords, mesh->mTextureCoords[0], sizeof(float) * m->numVertices * 3);
 
 				glGenBuffers(1, (GLuint*) &(m->idTexCoords));
 				glBindBuffer(GL_ARRAY_BUFFER, m->idTexCoords);
 				glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m->numVertices * 3, m->texCoords, GL_STATIC_DRAW);
 
 				aiMaterial* material = nullptr;
-				material = scene->mMaterials[newMesh->mMaterialIndex];
+				material = scene->mMaterials[mesh->mMaterialIndex];
 				addTo->AddComponent(LoadMaterial(material));
 
 			}
@@ -202,13 +219,6 @@ CompMesh* GeometryLoader::LoadMesh(aiNode* node, const aiScene* scene, GameObjec
 
 			addTo->AddComponent(m);
 		}
-	}
-
-	for (uint i = 0; i < node->mNumChildren; i++)
-	{
-		LoadMesh(node->mChildren[i], scene, addTo);
-	}
-
 	return nullptr;
 }
 

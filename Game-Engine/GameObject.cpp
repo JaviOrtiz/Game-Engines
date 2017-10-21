@@ -40,8 +40,11 @@ void GameObject::Update()
 
 void GameObject::AddChild(GameObject* child)
 {
-	childs.push_back(child);
-	child->parent = this;
+	if (child != nullptr)
+	{
+		childs.push_back(child);
+		child->parent = this;
+	}
 }
 
 void GameObject::DeleteChilds()
@@ -63,6 +66,11 @@ void GameObject::AddComponent(Component* component)
 void GameObject::SetName(const char * name)
 {
 	this->name.assign(name);
+}
+
+void GameObject::SetParent(GameObject * parent)
+{
+	this->parent = parent;
 }
 
 Component* GameObject::FindComponent(ComponentType type) const

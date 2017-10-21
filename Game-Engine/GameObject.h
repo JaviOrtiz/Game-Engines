@@ -16,6 +16,7 @@ public:
 	void DeleteChilds();
 	void AddComponent(Component* component);
 	void SetName(const char* name);
+	void SetParent(GameObject* parent);
 	void OnEditor();
 
 	void Move(float3 lastpos,float3 newPos);

@@ -26,8 +26,8 @@ public:
 	bool CleanUp();
 
 	GameObject* LoadGameObject(const char* fullPath);
-
-	CompMesh* LoadMesh(aiNode* node, const aiScene* scene, GameObject* addTo);
+	GameObject* AddGameObjectChild(aiNode* node, const aiScene* scene, GameObject* addTo);
+	CompMesh* LoadMesh(aiMesh* mesh,aiNode* node, const aiScene* scene, GameObject* addTo);
 	CompMaterial* LoadMaterial(aiMaterial* newMaterial);
 	CompTransform* LoadTransform(aiNode* node);
 
