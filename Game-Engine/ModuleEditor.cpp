@@ -3,6 +3,7 @@
 #include "GeometryLoader.h"
 #include "ModuleRenderer3D.h"
 #include "mmgr\mmgr.h"
+#include "CompCamera.h"
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Editor";
@@ -22,7 +23,10 @@ bool ModuleEditor::Start()
 {
 	root = new GameObject();
 	root->SetName("Root");
-
+	//GameObject* Camera = new GameObject();
+	//Camera->SetName("Camera");
+	//CompCamera* cam = new CompCamera();
+	//Camera->AddComponent(cam);
 	return true;
 }
 

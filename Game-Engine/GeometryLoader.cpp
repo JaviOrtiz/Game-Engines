@@ -51,8 +51,10 @@ GameObject* GeometryLoader::LoadGameObject(const char* fullPath)
 	std::string namePath = fullPath;
 
 	uint i = namePath.find_last_of("\\");
-	char* testM = new char[length - i];
-	namePath.copy(testM, length - i, i);
+	char* testM = new char[length - i + 1];
+	length = length - i;
+	namePath.copy(testM, length, i);
+	testM[length] = '\0';
 	newObject->SetName(testM);
 
 	delete[] testM;
@@ -313,11 +315,24 @@ CompMaterial* GeometryLoader::LoadMaterial(aiMaterial* newMaterial)
 
 		newMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &path);
 
-		std::string fullPath = "Models&Textures/";
-		fullPath.append(path.C_Str());
-		m->idTexture = ImportImage(fullPath.c_str());
-		m->SetName(path.C_Str());
+		uint length = path.length;
 
+		std::string namePath = path.C_Str();
+
+		uint i = namePath.find_last_of("\\");
+		length = length - i - 1;
+		char* lastpath = new char[length + 1];
+	
+		namePath.copy(lastpath, length, i + 1);
+		lastpath[length] = '\0';
+		std::string fullPath = "Models&Textures/";
+		uint l = fullPath.size();
+		fullPath.append(lastpath);
+		m->idTexture = ImportImage(fullPath.c_str());
+		m->SetName(lastpath);
+
+		delete[] lastpath;
+		lastpath = nullptr;
 		return m;
 	}
 	return nullptr;
