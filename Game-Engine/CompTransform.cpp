@@ -30,8 +30,8 @@ void CompTransform::Update()
 void CompTransform::UpdatePositionMatrix()
 {
 	glm::mat4 posmat = glm::translate(glm::mat4(), glm::vec3(position.x, position.y, position.z));
-
-	//glm::mat4 scalemat = glm::scale(scale.x, scale.y, scale.z);
+	glm::vec3 scalevec = { scale.x, scale.y, scale.z };
+	glm::mat4 scalemat = glm::scale(scalevec);
 	glm::vec3 myRotationAxisX(1, 0, 0);	glm::vec3 myRotationAxisY(0, 1, 0);		glm::vec3 myRotationAxisZ(0, 0, 1);
 	rotation.x *= DEGTORAD;
 	rotation.y *= DEGTORAD;
@@ -40,7 +40,7 @@ void CompTransform::UpdatePositionMatrix()
 	rotation.x *= RADTODEG;
 	rotation.y *= RADTODEG;
 	rotation.z *= RADTODEG;
-	glm::mat4 finalmat = posmat*rotmat;
+	glm::mat4 finalmat = posmat*rotmat*scalemat;
 	const float *pSource2 = (const float*)glm::value_ptr(finalmat);
 	for (int i = 0; i < 16; ++i) {
 		positionmatrix[i] = pSource2[i];
@@ -88,6 +88,15 @@ void CompTransform::OnEditor()
 		{
 		}
 		if (ImGui::SliderFloat("rotationZ", &rotation.z, 0, 360))
+		{
+		}
+		if (ImGui::SliderFloat("scaleX", &scale.x, 0, 30))
+		{
+		}
+		if (ImGui::SliderFloat("scaleY", &scale.y, 0, 30))
+		{
+		}
+		if (ImGui::SliderFloat("scaleZ", &scale.z, 0, 30))
 		{
 		}
 

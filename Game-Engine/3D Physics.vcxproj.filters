@@ -462,6 +462,9 @@
     <ClInclude Include="glm\vector_relational.hpp">
       <Filter>Sources\Extra\glm</Filter>
     </ClInclude>
+    <ClInclude Include="Quadtree.h">
+      <Filter>Sources\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -661,6 +664,9 @@
     </ClCompile>
     <ClCompile Include="CompCamera.cpp">
       <Filter>Sources\GameObject and Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Quadtree.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

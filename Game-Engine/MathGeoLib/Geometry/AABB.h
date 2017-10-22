@@ -21,6 +21,8 @@
 #include "../Math/float3.h"
 #include "../Math/SSEMath.h"
 
+#include "../../Color.h"
+
 #ifdef MATH_AUTOMATIC_SSE
 #include "../Math/float4.h"
 #endif
@@ -397,6 +399,9 @@ public:
 	bool Contains(const Frustum &frustum) const;
 	bool Contains(const Polyhedron &polyhedron) const;
 	bool Contains(const Capsule &capsule) const;
+
+
+	void DrawDebug(Color color) const;
 
 	/// Tests whether this AABB and the given object intersect.
 	/** Both objects are treated as "solid", meaning that if one of the objects is fully contained inside

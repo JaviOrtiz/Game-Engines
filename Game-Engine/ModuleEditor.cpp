@@ -27,17 +27,20 @@ bool ModuleEditor::Start()
 	//Camera->SetName("Camera");
 	//CompCamera* cam = new CompCamera();
 	//Camera->AddComponent(cam);
+	Quadroot = new Quadtree(AABB(float3(-100, -5, -100), float3(100, 5, 100)));
+
 	return true;
 }
 
 update_status ModuleEditor::Update(float dt)
 {
-
+	
 	return UPDATE_CONTINUE;
 }
 
 bool ModuleEditor::CleanUp()
 {
+	delete Quadroot;
 	delete root;
 	return true;
 }
@@ -45,6 +48,8 @@ bool ModuleEditor::CleanUp()
 void ModuleEditor::Render()
 {
 	root->Update();
+	Quadroot->DrawDebug(Orange);
+
 }
 
 void ModuleEditor::ShowEditor()
@@ -57,12 +62,17 @@ GameObject * ModuleEditor::GetRoot()
 	return root;
 }
 
+Quadtree * ModuleEditor::GetQuadtree()
+{
+	return Quadroot;
+}
+
 GameObject * ModuleEditor::CreateNewGameObject(const char * path)
 {
 	GameObject* ret = App->geometryloader->LoadGameObject(path);
 	if (ret != nullptr)
 	{
-		root->DeleteChilds();
+		//root->DeleteChilds();
 		root->AddChild(ret);
 		//App->camera->CenterToGO(ret);
 	}

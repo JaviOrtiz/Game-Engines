@@ -6,6 +6,7 @@
 #include "MathGeoLib.h"
 #include "GeometryLoader.h"
 #include "GameObject.h"
+#include "Quadtree.h"
 
 class ModuleEditor : public Module
 {
@@ -24,9 +25,10 @@ public:
 	void ShowEditor();
 
 	GameObject* GetRoot();
-
+	Quadtree* GetQuadtree();
 	GameObject* CreateNewGameObject(const char* path);
 public:
-	
-	GameObject* root;
+	Quadtree* Quadroot;
+	GameObject* root = nullptr;
+
 };
