@@ -9,10 +9,10 @@ CompTransform::CompTransform(float3 pos, float3 scale, Quat rot, ComponentType t
 	name = "Transform";
 	needToMove = false;
 	positionmatrix = new float[16];
-	float3 aulerrot = rotation.ToEulerXYZ().Abs();
-	rotation.x = aulerrot.x;
-	rotation.y = aulerrot.y;
-	rotation.z = aulerrot.z;
+	float3 eulerrot = rotation.ToEulerXYZ().Abs() * RADTODEG;
+	rotation.x = eulerrot.x;
+	rotation.y = eulerrot.y;
+	rotation.z = eulerrot.z;
 	//this->myGO;
 	UpdatePositionMatrix();
 }
@@ -33,8 +33,13 @@ void CompTransform::UpdatePositionMatrix()
 
 	//glm::mat4 scalemat = glm::scale(scale.x, scale.y, scale.z);
 	glm::vec3 myRotationAxisX(1, 0, 0);	glm::vec3 myRotationAxisY(0, 1, 0);		glm::vec3 myRotationAxisZ(0, 0, 1);
+	rotation.x *= DEGTORAD;
+	rotation.y *= DEGTORAD;
+	rotation.z *= DEGTORAD;
 	glm::mat4 rotmat = glm::rotate(rotation.x, myRotationAxisX)*glm::rotate(rotation.y, myRotationAxisY)*glm::rotate(rotation.z, myRotationAxisZ);
-
+	rotation.x *= RADTODEG;
+	rotation.y *= RADTODEG;
+	rotation.z *= RADTODEG;
 	glm::mat4 finalmat = posmat*rotmat;
 	const float *pSource2 = (const float*)glm::value_ptr(finalmat);
 	for (int i = 0; i < 16; ++i) {
@@ -74,6 +79,15 @@ void CompTransform::OnEditor()
 		{
 		}
 		if (ImGui::SliderFloat("Z", &position.z, -200, 200))
+		{
+		}
+		if (ImGui::SliderFloat("rotationX", &rotation.x, 0, 360))
+		{
+		}
+		if (ImGui::SliderFloat("rotationY", &rotation.y, 0, 360))
+		{
+		}
+		if (ImGui::SliderFloat("rotationZ", &rotation.z, 0, 360))
 		{
 		}
 

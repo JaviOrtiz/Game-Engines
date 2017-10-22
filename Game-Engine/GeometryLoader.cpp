@@ -333,7 +333,7 @@ CompTransform* GeometryLoader::LoadTransform(aiNode* node)
 	float3 pos(translation.x, translation.y, translation.z);
 	float3 sca(scale.x, scale.y, scale.z);
 
-	Quat rot(q1.w, q1.x, q1.y, q1.z);
+	Quat rot(q1.x, q1.y, q1.z, q1.w);
 
 	return new CompTransform(pos, sca, rot);
 }
