@@ -6,7 +6,6 @@
 #include "CompTransform.h"
 #include "Glew\include\glew.h"
 #include "MathGeoLib\Math\Quat.h"
-
 #include "Assimp\include\cimport.h" 
 #include "Assimp\include\scene.h" 
 #include "Assimp\include\postprocess.h" 
@@ -328,13 +327,13 @@ CompTransform* GeometryLoader::LoadTransform(aiNode* node)
 {
 	aiVector3D translation;
 	aiVector3D scale;
-	aiQuaternion rotation;
-
-	node->mTransformation.Decompose(scale, rotation, translation);
+	aiQuaternion q1;
+	node->mTransformation.Decompose(scale, q1, translation);
 
 	float3 pos(translation.x, translation.y, translation.z);
 	float3 sca(scale.x, scale.y, scale.z);
-	Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
+
+	Quat rot(q1.w, q1.x, q1.y, q1.z);
 
 	return new CompTransform(pos, sca, rot);
 }

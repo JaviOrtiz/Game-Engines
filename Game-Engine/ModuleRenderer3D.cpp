@@ -6,7 +6,9 @@
 #include "mmgr\mmgr.h"
 #include "CompMesh.h"
 #include "CompMaterial.h"
+#include "CompTransform.h"
 #include "CompCamera.h"
+
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
@@ -165,85 +167,14 @@ void ModuleRenderer3D::Render(GameObject* toDraw)
 	{
 		if (toDraw->components[i]->GetType() == Component_Mesh)
 		{
+			CompTransform* transf = dynamic_cast<CompTransform*>(toDraw->FindComponent(Component_Transform));
+			glPushMatrix();
+			glMultMatrixf((GLfloat*)transf->GetPositionMatrix());
 			CompMesh* CMesh = dynamic_cast<CompMesh*> (toDraw->components[i]);
 			if (CMesh->drawdebug)
 			{
 				CMesh->DrawDebug();
 			}
-			//ComponentCamera* camera = (ComponentCamera*)App->sceneEditor->GetRoot()->FindComponent(Component_Camera);
-			/*if (camera != nullptr)
-			{
-				if (camera->Contains(toDraw->enclosingBox))
-				{
-					if (wframe == true)
-					{
-						glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-						glColor3f(0, 1, 1);
-					}
-					else
-					{
-						glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-					}
-
-					glPushMatrix();
-
-					if (toDraw->idNormals > 0)
-					{
-						glEnable(GL_LIGHTING);
-						glEnableClientState(GL_NORMAL_ARRAY);
-
-						glBindBuffer(GL_ARRAY_BUFFER, toDraw->idNormals);
-						glNormalPointer(GL_FLOAT, 0, NULL);
-					}
-
-					glEnableClientState(GL_VERTEX_ARRAY);
-					glEnableClientState(GL_ELEMENT_ARRAY_BUFFER);
-					glBindBuffer(GL_ARRAY_BUFFER, toDraw->idVertices);
-					glVertexPointer(3, GL_FLOAT, 0, NULL);
-
-
-					if (toDraw->idTexCoords > 0)
-					{
-						ComponentMaterial* mat = dynamic_cast<ComponentMaterial*>(objectDraw->FindComponent(Component_Material));
-						if (mat != nullptr && wframe == false)
-						{
-							glBindTexture(GL_TEXTURE_2D, mat->idTexture);
-						}
-						glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-						glBindBuffer(GL_ARRAY_BUFFER, toDraw->idTexCoords);
-						glTexCoordPointer(3, GL_FLOAT, 0, NULL);
-					}
-
-					if (toDraw->idColors > 0)
-					{
-						glEnableClientState(GL_COLOR_ARRAY);
-						glBindBuffer(GL_ARRAY_BUFFER, toDraw->idColors);
-						glColorPointer(3, GL_FLOAT, 0, NULL);
-					}
-
-					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, toDraw->idIndices);
-					glDrawElements(GL_TRIANGLES, toDraw->numIndices, GL_UNSIGNED_INT, NULL);
-
-
-					glDisableClientState(GL_COLOR_ARRAY);
-					glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-					glDisableClientState(GL_NORMAL_ARRAY);
-					glDisableClientState(GL_VERTEX_ARRAY);
-					glDisableClientState(GL_ELEMENT_ARRAY_BUFFER);
-
-					glPopMatrix();
-					glUseProgram(0);
-
-					glBindTexture(GL_TEXTURE_2D, 0);
-
-					if (App->physics->debug)
-					{
-						toDraw->DrawDebug();
-					}
-				}
-			}*/
-			//else
-			//{
 			if (WireFrame == true)
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -252,8 +183,6 @@ void ModuleRenderer3D::Render(GameObject* toDraw)
 			{
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			}
-
-			glPushMatrix();
 
 			if (CMesh->idNormals > 0)
 			{
@@ -305,8 +234,6 @@ void ModuleRenderer3D::ImGuiDrawer()
 {
 	ImGui::Text("Background Color");
 	ImGui::ColorEdit4("##Background", &BackgroundColor.x);
-
-	
 
 	if (ImGui::Checkbox("Gl_Deepth_Test", &App->renderer3D->DeepTest))
 	{

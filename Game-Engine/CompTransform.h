@@ -3,7 +3,10 @@
 #include "Component.h"
 #include "MathGeoLib\Math\float3.h"
 #include "MathGeoLib\Math\Quat.h"
-
+#include "glm\glm.hpp"
+#include "glm\gtc\matrix_transform.hpp"
+#include "glm\gtx\transform.hpp"
+#include "glm\gtc\type_ptr.hpp"
 class CompTransform : public Component
 {
 public:
@@ -11,7 +14,8 @@ public:
 	~CompTransform();
 
 	void Update();
-
+	void UpdatePositionMatrix();
+	float* GetPositionMatrix();
 	void OnEditor() override;
 
 private:
@@ -19,6 +23,8 @@ private:
 	float3 position;
 	float3 scale;
 	Quat rotation;
+	glm::mat4 transformmatrix;
+	float* positionmatrix;
 
 	bool needToMove;
 };
