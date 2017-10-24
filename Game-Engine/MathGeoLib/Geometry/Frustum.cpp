@@ -38,7 +38,7 @@
 #include "../Math/Quat.h"
 #include "../Algorithm/Random/LCG.h"
 #include "../Algorithm/GJK.h"
-
+#include "../../Glew/include/glew.h"
 #ifdef MATH_ENABLE_STL_SUPPORT
 #include <iostream>
 #endif
@@ -624,6 +624,35 @@ bool Frustum::Contains(const Polyhedron &polyhedron) const
 	return true;
 }
 
+bool Frustum::ContainsAaBox(const AABB & refBox) const
+{
+	float3 vCorner[8];
+	int iTotalIn = 0;
+	refBox.GetCornerPoints(vCorner); // get the corners of the box into the vCorner array
+									 // test all 8 corners against the 6 sides
+									 // if all points are behind 1 specific plane, we are out
+									 // if we are in with all points, then we are fully in
+	for (int p = 0; p < 6; ++p)
+	{
+		int iInCount = 8;
+		int iPtIn = 1;
+		for (int i = 0; i < 8; ++i) {
+			// test this point against the planes
+			if (GetPlane(p).IsOnPositiveSide(vCorner[i]) == true) {
+				iPtIn = 0;
+				--iInCount;
+			}
+			// were all the points outside of plane p?
+			if (iInCount == 0)
+			{
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
 vec Frustum::ClosestPoint(const vec &point) const
 {
 	if (type == OrthographicFrustum)
@@ -666,6 +695,50 @@ float Frustum::Distance(const vec &point) const
 {
 	vec pt = ClosestPoint(point);
 	return pt.Distance(point);
+}
+
+void Frustum::DrawDebug(Color color) const
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	float3 vertices[8];
+	GetCornerPoints(vertices);
+
+	glColor3f(color.r, color.g, color.b);
+
+	glBegin(GL_QUADS);
+
+	glVertex3fv((GLfloat*)&vertices[1]); //glVertex3f(-sx, -sy, sz);
+	glVertex3fv((GLfloat*)&vertices[5]); //glVertex3f( sx, -sy, sz);
+	glVertex3fv((GLfloat*)&vertices[7]); //glVertex3f( sx,  sy, sz);
+	glVertex3fv((GLfloat*)&vertices[3]); //glVertex3f(-sx,  sy, sz);
+
+	glVertex3fv((GLfloat*)&vertices[4]); //glVertex3f( sx, -sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[0]); //glVertex3f(-sx, -sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[2]); //glVertex3f(-sx,  sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[6]); //glVertex3f( sx,  sy, -sz);
+
+	glVertex3fv((GLfloat*)&vertices[5]); //glVertex3f(sx, -sy,  sz);
+	glVertex3fv((GLfloat*)&vertices[4]); //glVertex3f(sx, -sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[6]); //glVertex3f(sx,  sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[7]); //glVertex3f(sx,  sy,  sz);
+
+	glVertex3fv((GLfloat*)&vertices[0]); //glVertex3f(-sx, -sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[1]); //glVertex3f(-sx, -sy,  sz);
+	glVertex3fv((GLfloat*)&vertices[3]); //glVertex3f(-sx,  sy,  sz);
+	glVertex3fv((GLfloat*)&vertices[2]); //glVertex3f(-sx,  sy, -sz);
+
+	glVertex3fv((GLfloat*)&vertices[3]); //glVertex3f(-sx, sy,  sz);
+	glVertex3fv((GLfloat*)&vertices[7]); //glVertex3f( sx, sy,  sz);
+	glVertex3fv((GLfloat*)&vertices[6]); //glVertex3f( sx, sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[2]); //glVertex3f(-sx, sy, -sz);
+
+	glVertex3fv((GLfloat*)&vertices[0]); //glVertex3f(-sx, -sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[4]); //glVertex3f( sx, -sy, -sz);
+	glVertex3fv((GLfloat*)&vertices[5]); //glVertex3f( sx, -sy,  sz);
+	glVertex3fv((GLfloat*)&vertices[1]); //glVertex3f(-sx, -sy,  sz);
+
+	glEnd();
 }
 
 bool Frustum::IsFinite() const

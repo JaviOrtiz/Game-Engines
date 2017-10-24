@@ -25,7 +25,7 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	App->renderer3D->Render(this);
+	App->renderer3D->FrustumCulling(this);
 
 	for (int i = 0; i < childs.size(); i++)
 	{

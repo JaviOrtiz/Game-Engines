@@ -41,12 +41,9 @@ void CompTransform::UpdatePositionMatrix()
 	rotation.y *= RADTODEG;
 	rotation.z *= RADTODEG;
 	glm::mat4 finalmat = posmat*rotmat*scalemat;
-	const float *pSource2 = (const float*)glm::value_ptr(finalmat);
-	for (int i = 0; i < 16; ++i) {
-		positionmatrix[i] = pSource2[i];
-		//App->Console.AddLog("%f", positionmatrix[i]);
-	}
+
 	transformmatrix = finalmat;
+
 	if (myGO != nullptr)
 	{
 		GameObject* GO = myGO->GetParent();
@@ -58,6 +55,17 @@ void CompTransform::UpdatePositionMatrix()
 				transformmatrix *= transf->transformmatrix;
 			}
 			GO = GO->GetParent();
+		}
+	}
+	const float *pSource2 = (const float*)glm::value_ptr(transformmatrix);
+	for (int i = 0; i < 16; ++i) {
+		positionmatrix[i] = pSource2[i];
+
+	}
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++)
+		{
+			TransMatrix[i][j] = positionmatrix[i + i*j];
 		}
 	}
 }
@@ -104,4 +112,9 @@ void CompTransform::OnEditor()
 		ImGui::TextColored({ 0.7f, 1.0f, 1.0f ,1.0f}, "Rotation: X=%.2f, Y=%.2f, Z=%.2f, W=%.2f", rotation.x, rotation.y, rotation.z, rotation.w);
 		ImGui::TreePop();
 	}
+}
+
+float4x4 CompTransform::GetTransMatrix()
+{
+	return TransMatrix;
 }

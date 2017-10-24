@@ -1,4 +1,4 @@
-/*#pragma once
+#pragma once
 
 #include "Component.h"
 #include "MathGeoLib\Geometry\Frustum.h"
@@ -27,4 +27,4 @@ private:
 	float aspectRatio;
 	Frustum frustum;
 	bool frustumCulling;
-};*/
+};

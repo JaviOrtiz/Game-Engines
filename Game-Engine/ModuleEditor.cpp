@@ -23,10 +23,8 @@ bool ModuleEditor::Start()
 {
 	root = new GameObject();
 	root->SetName("Root");
-	//GameObject* Camera = new GameObject();
-	//Camera->SetName("Camera");
-	//CompCamera* cam = new CompCamera();
-	//Camera->AddComponent(cam);
+	CompCamera* cam = new CompCamera();
+	root->AddComponent(cam);
 	Quadroot = new Quadtree(AABB(float3(-100, -5, -100), float3(100, 5, 100)));
 
 	return true;

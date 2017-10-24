@@ -23,7 +23,7 @@
 #include "../Math/float3x4.h"
 #include "../Math/float4x4.h"
 #include "Ray.h"
-
+#include "../../Color.h"
 #ifdef MATH_TINYXML_INTEROP
 #include "Config/tinyxml/tinyxml.h"
 #endif
@@ -97,7 +97,7 @@ enum FrustumHandedness
 /// Represents either an orthographic or a perspective viewing frustum.
 class Frustum
 {
-private:
+public:
 	/// Specifies whether this frustum is a perspective or an orthographic frustum.
 	/** [noscript] @todo Remove the noscript attribute. */
 	FrustumType type;
@@ -590,6 +590,7 @@ public:
 	bool Contains(const Frustum &frustum) const;
 	bool Contains(const Polyhedron &polyhedron) const;
 
+	bool ContainsAaBox(const AABB& refBox) const;
 	/// Computes the closest point inside this Frustum to the given point.
 	/** If the target point lies inside this Frustum, then that point is returned.
 		@see Distance(), Contains(), Intersects().
@@ -602,6 +603,8 @@ public:
 		@todo Add Frustum::Distance(Line/Ray/LineSegment/Plane/Triangle/Polygon/Circle/Disc/AABB/OBB/Capsule/Frustum/Polyhedron).
 		@see Contains(), Intersects(), ClosestPoint(). */
 	float Distance(const vec &point) const;
+
+	void DrawDebug(Color color = Yellow) const;
 
 	/// Tests whether this Frustum and the given object intersect.	
 	/** Both objects are treated as "solid", meaning that if one of the objects is fully contained inside
