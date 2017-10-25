@@ -25,10 +25,13 @@ public:
 	void ShowEditor();
 
 	GameObject* GetRoot();
-	Quadtree* GetQuadtree();
+	Octree* GetQuadtree();
 	GameObject* CreateNewGameObject(const char* path);
+
+	void SelectGameObject(GameObject* selected);
 public:
-	Quadtree* Quadroot;
+	Octree* Quadroot;
 	GameObject* root = nullptr;
+	GameObject* selected = nullptr;
 
 };

@@ -95,28 +95,46 @@ Component* GameObject::FindComponent(ComponentType type) const
 
 void GameObject::OnEditor()
 {
-	if (strcmp(name.c_str(), "Root") == 0)
+	ImGuiTreeNodeFlags flags = 0;
+	if (childs.empty())
 	{
+		flags |= ImGuiTreeNodeFlags_Bullet;
+	}
+	if (selected == true)
+	{
+		flags |= ImGuiTreeNodeFlags_Selected;
+	}
+	if (ImGui::TreeNodeEx(this, flags, this->name.c_str()))
+	{
+		if (ImGui::IsItemHoveredRect() && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			App->editor->SelectGameObject(this);
+		}
 		for (int i = 0; i < childs.size(); i++)
 		{
 			childs[i]->OnEditor();
 		}
+		ImGui::TreePop();
 	}
-	else
+}
+
+void GameObject::ShowInspector()
+{
+	int w, h;
+	w = App->window->Window_Width;
+	ImGui::SetNextWindowSize(ImVec2(300, 500));
+	ImGui::SetNextWindowPos(ImVec2(w - 300, 0));
+
+	std::string temp = name;
+	temp += " Inspector";
+	ImGui::Begin(temp.c_str());
+
+	ImGui::PushItemWidth(-140);
+	for (int i = 0; i < components.size(); i++)
 	{
-		if (ImGui::TreeNodeEx(name.c_str()))
-		{
-			for (int i = 0; i < components.size(); i++)
-			{
-				components[i]->OnEditor();
-			}
-			for (int i = 0; i < childs.size(); i++)
-			{
-				childs[i]->OnEditor();
-			}
-			ImGui::TreePop();
-		}
+		components[i]->OnEditor();
 	}
+	ImGui::End();
 }
 
 void GameObject::Move(float3 lastpos,float3 newPos)

@@ -8,25 +8,25 @@
 #define MAX_OBJECTS 4
 #define MIN_SIZE 1
 
-QuadtreeNode::QuadtreeNode(const AABB& box) : box(box)
+OctreeNode::OctreeNode(const AABB& box) : box(box)
 {
 	parent = nullptr;
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		childs[i] = nullptr;
 	}
 }
 
-QuadtreeNode::~QuadtreeNode()
+OctreeNode::~OctreeNode()
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 8; i++)
 	{
 		delete childs[i];
 		childs[i] = nullptr;
 	}
 }
 
-bool QuadtreeNode::IsLeaf() const
+bool OctreeNode::IsLeaf() const
 {
 	if (childs[0] == nullptr)
 	{
@@ -38,7 +38,7 @@ bool QuadtreeNode::IsLeaf() const
 	}
 }
 
-void QuadtreeNode::Insert(GameObject* toInsert)
+void OctreeNode::Insert(GameObject* toInsert)
 {
 	if (objects.size() < MAX_OBJECTS || box.Size().x <= MIN_SIZE)
 	{
@@ -55,7 +55,7 @@ void QuadtreeNode::Insert(GameObject* toInsert)
 }
 
 //TODO: Change function to an iterative one.
-void QuadtreeNode::Remove(GameObject* toRemove)
+void OctreeNode::Remove(GameObject* toRemove)
 {
 	for (std::list<GameObject*>::iterator it = objects.begin(); it != objects.end(); it++)
 	{
@@ -67,14 +67,14 @@ void QuadtreeNode::Remove(GameObject* toRemove)
 	}
 	if (IsLeaf() == false)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			childs[i]->Remove(toRemove);
 		}
 	}
 }
 
-void QuadtreeNode::CreateChilds()
+void OctreeNode::CreateChilds()
 {
 	AABB childBox;
 
@@ -84,39 +84,62 @@ void QuadtreeNode::CreateChilds()
 
 	//Child 0
 	childBox.minPoint = float3(boxMin.x, boxMin.y, boxMin.z);
-	childBox.maxPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y, boxMax.z - boxSize.z * 0.5f);
+	childBox.maxPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y - boxSize.y *0.5, boxMax.z - boxSize.z * 0.5f);
 
-	childs[0] = new QuadtreeNode(childBox);
+	childs[0] = new OctreeNode(childBox);
 
 	//Child 1
 	childBox.minPoint = float3(boxMin.x + boxSize.x * 0.5f, boxMin.y, boxMin.z);
-	childBox.maxPoint = float3(boxMax.x, boxMax.y, boxMax.z - boxSize.z * 0.5f);
+	childBox.maxPoint = float3(boxMax.x, boxMax.y - boxSize.y *0.5, boxMax.z - boxSize.z * 0.5f);
 
-	childs[1] = new QuadtreeNode(childBox);
+	childs[1] = new OctreeNode(childBox);
 
 	//Child 2
 	childBox.minPoint = float3(boxMin.x, boxMin.y, boxMin.z + boxSize.z * 0.5f);
-	childBox.maxPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y, boxMax.z);
+	childBox.maxPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y - boxSize.y *0.5, boxMax.z);
 
-	childs[2] = new QuadtreeNode(childBox);
+	childs[2] = new OctreeNode(childBox);
 
 	//Child 3
-	childBox.minPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y, boxMax.z - boxSize.z * 0.5f);
+	childBox.minPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMin.y, boxMax.z - boxSize.z * 0.5f);
+	childBox.maxPoint = float3(boxMax.x, boxMax.y - boxSize.y *0.5, boxMax.z);
+
+	childs[3] = new OctreeNode(childBox);
+
+	//Child 4
+	childBox.minPoint = float3(boxMin.x, boxMax.y - boxSize.y *0.5, boxMin.z);
+	childBox.maxPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y, boxMax.z - boxSize.z * 0.5f);
+
+	childs[4] = new OctreeNode(childBox);
+
+	//Child 5
+	childBox.minPoint = float3(boxMin.x + boxSize.x * 0.5f, boxMax.y - boxSize.y *0.5, boxMin.z);
+	childBox.maxPoint = float3(boxMax.x, boxMax.y, boxMax.z - boxSize.z * 0.5f);
+
+	childs[5] = new OctreeNode(childBox);
+
+	//Child 6
+	childBox.minPoint = float3(boxMin.x, boxMax.y - boxSize.y *0.5, boxMin.z + boxSize.z * 0.5f);
+	childBox.maxPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y , boxMax.z);
+
+	childs[6] = new OctreeNode(childBox);
+
+	//Child 7
+	childBox.minPoint = float3(boxMax.x - boxSize.x * 0.5f, boxMax.y - boxSize.y *0.5, boxMax.z - boxSize.z * 0.5f);
 	childBox.maxPoint = float3(boxMax.x, boxMax.y, boxMax.z);
 
-	childs[3] = new QuadtreeNode(childBox);
-
-	for (int i = 0; i < 4; i++)
+	childs[7] = new OctreeNode(childBox);
+	for (int i = 0; i < 8; i++)
 	{
 		childs[i]->parent = this;
 	}
 }
 
-void QuadtreeNode::RedistributeChilds()
+void OctreeNode::RedistributeChilds()
 {
 	for (std::list<GameObject*>::iterator it = objects.begin(); it != objects.end();)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			CompMesh* tmp = (CompMesh*)(*it)->FindComponent(Component_Mesh);
 			if (tmp != nullptr)
@@ -131,7 +154,7 @@ void QuadtreeNode::RedistributeChilds()
 	}
 }
 
-void QuadtreeNode::DrawDebug(Color color) const
+void OctreeNode::DrawDebug(Color color) const
 {
 	if (IsLeaf() == true)
 	{
@@ -139,7 +162,7 @@ void QuadtreeNode::DrawDebug(Color color) const
 	}
 	else
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			childs[i]->DrawDebug(color);
 		}
@@ -147,7 +170,7 @@ void QuadtreeNode::DrawDebug(Color color) const
 }
 
 template<typename TYPE>
-void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive) const
+void OctreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive) const
 {
 	if (primitive.Intersects(box))
 	{
@@ -162,22 +185,22 @@ void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const
 				}
 			}
 		}
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < 8; ++i)
 			if (childs[i] != nullptr) childs[i]->CollectIntersections(objects, primitive);
 	}
 }
 
-Quadtree::Quadtree(const AABB& box)
+Octree::Octree(const AABB& box)
 {
-	root = new QuadtreeNode(box);
+	root = new OctreeNode(box);
 }
 
-Quadtree::~Quadtree()
+Octree::~Octree()
 {
 	Clear();
 }
 
-void Quadtree::Insert(GameObject* toInsert)
+void Octree::Insert(GameObject* toInsert)
 {
 	CompMesh* tmp = (CompMesh*)toInsert->FindComponent(Component_Mesh);
 	if (root != nullptr && root->box.Contains(tmp->enclosingBox))
@@ -186,7 +209,7 @@ void Quadtree::Insert(GameObject* toInsert)
 	}
 }
 
-void Quadtree::Remove(GameObject* toRemove)
+void Octree::Remove(GameObject* toRemove)
 {
 	CompMesh* tmp = (CompMesh*)toRemove->FindComponent(Component_Mesh);
 	if (root != nullptr && root->box.Contains(tmp->enclosingBox))
@@ -195,13 +218,13 @@ void Quadtree::Remove(GameObject* toRemove)
 	}
 }
 
-void Quadtree::Clear()
+void Octree::Clear()
 {
 	delete root;
 	root = nullptr;
 }
 
-void Quadtree::DrawDebug(Color color) const
+void Octree::DrawDebug(Color color) const
 {
 	root->DrawDebug(color);
 }

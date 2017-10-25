@@ -2,11 +2,11 @@
 
 #include <list>
 
-class QuadtreeNode
+class OctreeNode
 {
 public:
-	QuadtreeNode(const AABB& box);
-	virtual ~QuadtreeNode();
+	OctreeNode(const AABB& box);
+	virtual ~OctreeNode();
 
 	bool IsLeaf() const;
 
@@ -21,15 +21,15 @@ public:
 public:
 	AABB box;
 	std::list<GameObject*> objects;
-	QuadtreeNode* parent;
-	QuadtreeNode* childs[4];
+	OctreeNode* parent;
+	OctreeNode* childs[8];
 };
 
-class Quadtree
+class Octree
 {
 public:
-	Quadtree(const AABB& box);
-	virtual ~Quadtree();
+	Octree(const AABB& box);
+	virtual ~Octree();
 
 	void Insert(GameObject* toInsert);
 	void Remove(GameObject* toRemove);
@@ -38,6 +38,6 @@ public:
 	void DrawDebug(Color color) const;
 
 public:
-	QuadtreeNode* root = nullptr;
+	OctreeNode* root = nullptr;
 };
 

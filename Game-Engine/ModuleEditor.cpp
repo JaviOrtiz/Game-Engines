@@ -25,7 +25,7 @@ bool ModuleEditor::Start()
 	root->SetName("Root");
 	CompCamera* cam = new CompCamera();
 	root->AddComponent(cam);
-	Quadroot = new Quadtree(AABB(float3(-100, -5, -100), float3(100, 5, 100)));
+	Quadroot = new Octree(AABB(float3(-100, -20, -100), float3(100, 120, 100)));
 
 	return true;
 }
@@ -48,6 +48,11 @@ void ModuleEditor::Render()
 	root->Update();
 	Quadroot->DrawDebug(Orange);
 
+	if (selected != nullptr)
+	{
+		selected->ShowInspector();
+	}
+
 }
 
 void ModuleEditor::ShowEditor()
@@ -60,7 +65,7 @@ GameObject * ModuleEditor::GetRoot()
 	return root;
 }
 
-Quadtree * ModuleEditor::GetQuadtree()
+Octree * ModuleEditor::GetQuadtree()
 {
 	return Quadroot;
 }
@@ -80,4 +85,22 @@ GameObject * ModuleEditor::CreateNewGameObject(const char * path)
 	}
 
 	return ret;
+}
+
+void ModuleEditor::SelectGameObject(GameObject * Selected)
+{
+	if (this->selected != Selected)
+	{
+		if (this->selected != nullptr)
+		{
+			this->selected->selected = false;
+		}
+		Selected->selected = true;
+		this->selected = Selected;
+	}
+	else
+	{
+		this->selected->selected = false;
+		this->selected = nullptr;
+	}
 }

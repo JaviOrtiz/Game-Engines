@@ -19,6 +19,7 @@ public:
 	void SetParent(GameObject* parent);
 	GameObject* GetParent();
 	void OnEditor();
+	void ShowInspector();
 
 	void Move(float3 lastpos,float3 newPos);
 
@@ -26,7 +27,11 @@ public:
 
 	std::vector<Component*> components;
 	std::vector<GameObject*> childs;
+
 protected:
+	
 	GameObject* parent;
 	std::string name;
+public:
+	bool selected = false;
 };

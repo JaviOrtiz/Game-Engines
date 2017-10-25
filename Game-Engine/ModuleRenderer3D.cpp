@@ -382,7 +382,7 @@ void ModuleRenderer3D::FrustumCulling(GameObject * ObjecttoDraw)
 	glPushMatrix();
 	if (tmpTrans != nullptr)
 	{
-		glMultMatrixf((GLfloat*)tmpTrans->GetPositionMatrix());
+		glMultMatrixf((GLfloat*)tmpTrans->GetTransMatrix().Transposed().ptr());
 	}
 
 	for (int i = 0; i < ObjecttoDraw->components.size(); i++)
