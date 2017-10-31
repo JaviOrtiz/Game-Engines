@@ -96,6 +96,7 @@ GameObject * GeometryLoader::AddGameObjectChild(aiNode * node, const aiScene * s
 		newObject->SetName(node->mName.C_Str());
 		LoadMesh(mesh ,node, scene, newObject);
 		App->editor->GetQuadtree()->Insert(newObject);
+		App->editor->Static_Vector.push_back(newObject);
 		return newObject;
 	}
 	for (uint i = 0; i < node->mNumChildren; i++)

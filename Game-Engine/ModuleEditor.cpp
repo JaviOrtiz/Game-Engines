@@ -4,6 +4,8 @@
 #include "ModuleRenderer3D.h"
 #include "mmgr\mmgr.h"
 #include "CompCamera.h"
+#include "CompMesh.h"
+#include "CompTransform.h"
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	name = "Editor";
@@ -76,7 +78,20 @@ GameObject * ModuleEditor::CreateNewGameObject(const char * path)
 	if (ret != nullptr)
 	{
 		//root->DeleteChilds();
+		delete Quadroot;
 		root->AddChild(ret);
+		AABB Enclosing_Box;
+		Enclosing_Box.SetNegativeInfinity();
+		for (std::vector<GameObject*>::const_iterator tmp = Static_Vector.begin(); tmp != Static_Vector.end(); tmp++)
+		{
+			CompMesh* tmpmesh = (CompMesh*)(*tmp)->FindComponent(Component_Mesh);
+			CompTransform* tmptransf = (CompTransform*)(*tmp)->FindComponent(Component_Transform);
+			//Enclosing_Box.TransformAsAABB(tmptransf->GetTransMatrix());
+			Enclosing_Box.Enclose((float3*)tmpmesh->vertices, tmpmesh->numVertices);
+
+		}
+
+		Quadroot = new Octree(Enclosing_Box);
 		//App->camera->CenterToGO(ret);
 	}
 	else

@@ -2,8 +2,10 @@
 #include "Quadtree.h"
 #include "GameObject.h"
 #include "CompMesh.h"
+#include "CompTransform.h"
 #include "MathGeoLib\MathGeoLib.h"
 #include "MathGeoLib\Geometry\AABB.h"
+
 
 #define MAX_OBJECTS 4
 #define MIN_SIZE 1
@@ -142,9 +144,12 @@ void OctreeNode::RedistributeChilds()
 		for (int i = 0; i < 8; i++)
 		{
 			CompMesh* tmp = (CompMesh*)(*it)->FindComponent(Component_Mesh);
+			CompTransform* transf = (CompTransform*)(*it)->FindComponent(Component_Transform);
 			if (tmp != nullptr)
 			{
-				if (childs[i]->box.Intersects(tmp->enclosingBox))
+				AABB Enclosing_Box = tmp->enclosingBox;
+				Enclosing_Box.TransformAsAABB(transf->GetTransMatrix());
+				if (childs[i]->box.Intersects(Enclosing_Box));
 				{
 					childs[i]->Insert((*it));
 				}
@@ -172,14 +177,18 @@ void OctreeNode::DrawDebug(Color color) const
 template<typename TYPE>
 void OctreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive) const
 {
+
 	if (primitive.Intersects(box))
 	{
 		for (std::list<GameObject*>::const_iterator it = this->objects.begin(); it != this->objects.end(); ++it)
 		{
-			ComponentMesh* tmp = (ComponentMesh*)(*it)->FindComponent(Component_Mesh);
+			CompMesh* tmp = (CompMesh*)(*it)->FindComponent(Component_Mesh);
+			CompTransform* transf = (CompTransform*)(*it)->FindComponent(Component_Transform);
+			AABB Enclosing_Box = tmp->enclosingBox;
+			Enclosing_Box.TransformAsAABB(transf->GetTransMatrix());
 			if (tmp != nullptr)
 			{
-				if (primitive.Intersects(tmp->enclosingBox))
+				if (primitive.Intersects(Enclosing_Box))
 				{
 					objects.push_back(*it);
 				}
@@ -202,8 +211,12 @@ Octree::~Octree()
 
 void Octree::Insert(GameObject* toInsert)
 {
+	
 	CompMesh* tmp = (CompMesh*)toInsert->FindComponent(Component_Mesh);
-	if (root != nullptr && root->box.Contains(tmp->enclosingBox))
+	CompTransform* transf = (CompTransform*)toInsert->FindComponent(Component_Transform);
+	AABB Enclosing_Box = tmp->enclosingBox;
+	Enclosing_Box.TransformAsAABB(transf->GetTransMatrix());
+	if (root != nullptr && root->box.Contains(Enclosing_Box))
 	{
 		root->Insert(toInsert);
 	}
@@ -212,7 +225,10 @@ void Octree::Insert(GameObject* toInsert)
 void Octree::Remove(GameObject* toRemove)
 {
 	CompMesh* tmp = (CompMesh*)toRemove->FindComponent(Component_Mesh);
-	if (root != nullptr && root->box.Contains(tmp->enclosingBox))
+	CompTransform* transf = (CompTransform*)toRemove->FindComponent(Component_Transform);
+	AABB Enclosing_Box = tmp->enclosingBox;
+	Enclosing_Box.TransformAsAABB(transf->GetTransMatrix());
+	if (root != nullptr && root->box.Contains(Enclosing_Box))
 	{
 		root->Remove(toRemove);
 	}

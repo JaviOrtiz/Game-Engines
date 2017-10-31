@@ -33,5 +33,6 @@ public:
 	Octree* Quadroot;
 	GameObject* root = nullptr;
 	GameObject* selected = nullptr;
+	std::vector<GameObject*> Static_Vector;
 
 };

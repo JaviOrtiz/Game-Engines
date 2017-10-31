@@ -34,4 +34,5 @@ protected:
 	std::string name;
 public:
 	bool selected = false;
+	bool Static = true;
 };
