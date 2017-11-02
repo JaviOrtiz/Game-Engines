@@ -27,8 +27,10 @@ public:
 	GameObject* GetRoot();
 	Octree* GetQuadtree();
 	GameObject* CreateNewGameObject(const char* path);
+	GameObject* CastRay(const LineSegment& Segment, float Distance);
 
 	void SelectGameObject(GameObject* selected);
+	void TestRay(const LineSegment& Segment, float* Distance, GameObject* &Select);
 public:
 	Octree* Quadroot;
 	GameObject* root = nullptr;

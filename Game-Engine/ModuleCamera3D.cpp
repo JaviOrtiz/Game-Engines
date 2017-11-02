@@ -61,7 +61,7 @@ update_status ModuleCamera3D::Update(float dt)
 	if (!zoomed)
 		Reference += New_Position;
 
-	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT) 
+	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT) 
 	{
 		Reference = Position;
 		int dx = -App->input->GetMouseXMotion();
@@ -115,7 +115,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 	// Mouse motion ----------------
 
-	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_LALT)== KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LALT)== KEY_REPEAT) //App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT &&// 
 	{
 
 		int dx = -App->input->GetMouseXMotion();
@@ -151,7 +151,15 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	{
+		GameObject* ObjectPick = MousePicking();
+		if (ObjectPick != nullptr)
+			App->editor->SelectGameObject(ObjectPick);
 
+
+
+	}
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 		RecentreCameraToGeometry();
 	
@@ -235,4 +243,30 @@ void ModuleCamera3D::CenterCameraToGeometry(const AABB* meshAABB)
 void ModuleCamera3D::RecentreCameraToGeometry()
 {
 	CenterCameraToGeometry(LastCentreGeometry);
+
+}
+
+GameObject*  ModuleCamera3D::MousePicking(float3* HitPoint) const
+{
+	float height = App->window->Window_Height;
+	float width = App->window->Window_Height;
+	float distance=0;
+	float2 MousePos;
+	GameObject* Hit;
+
+	MousePos.x = App->input->GetMouseX();		//we get the mouse position//
+	MousePos.y = App->input->GetMouseY();
+
+	float NormalX = -(1.0f - (MousePos.x*2.0f) / width);		//normalize the vector//
+	float NormalY = 1.0f - (MousePos.y*2.0f) / height;
+
+	CompCamera* Cam = (CompCamera*)App->editor->GetRoot()->FindComponent(Component_Camera);
+	LineSegment Picking =  Cam->frustum.UnProjectLineSegment(NormalX, NormalY);
+
+	Hit = App->editor->CastRay(Picking, distance);
+	if (HitPoint != nullptr && Hit != nullptr)
+	{
+		HitPoint = &Picking.GetPoint(distance);
+	}
+	return Hit;
 }
